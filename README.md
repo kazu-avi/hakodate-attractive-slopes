@@ -1,2 +1,1 @@
-# docker-laravel-handson
-docker-laravelの練習
+# laravel2
