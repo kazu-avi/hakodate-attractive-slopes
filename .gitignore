@@ -1,0 +1,4 @@
+/.env
+
+/backend/vendor/.env
+/backend/vendor/.env.example
