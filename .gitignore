@@ -1,4 +1,4 @@
 /.env
 
-/backend/vendor/.env
-/backend/vendor/.env.example
+/backend/.env
+/backend/.env.example
