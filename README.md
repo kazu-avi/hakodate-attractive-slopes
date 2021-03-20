@@ -20,3 +20,6 @@
 自分が「行きたい」を付けた写真を表示する（マイページ）  
 自分が「行ったよ」を付けた写真を「行きたい」から外し、訪問済みとして表示する（マイページ）  
 投稿された写真をシェアする  
+
+# ER図
+![Entity Relationship Diagram](https://user-images.githubusercontent.com/80322369/111872021-83a89b00-89d0-11eb-94c2-e70278aacf1f.png)
