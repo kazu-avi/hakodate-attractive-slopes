@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const App = () => {
     return(
-        <p>テストテスト</p>
+        <p>テストテストテスト</p>
     )
 }
 
