@@ -14,3 +14,24 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .react()
     .sass('resources/sass/app.scss', 'public/css');
+
+
+//本番環境ではESLintは使用しません
+if (!mix.inProduction()) {
+    mix.webpackConfig({
+        module: {
+            rules: [
+                {
+                    enforce: 'pre',
+                    exclude: /node_modules/,
+                    loader: 'eslint-loader',
+                    test: /\.(js|jsx)?$/,
+                    options: {
+                        fix: true,
+                        cache: false,
+                    }
+                }
+            ]
+        }
+    })
+};
