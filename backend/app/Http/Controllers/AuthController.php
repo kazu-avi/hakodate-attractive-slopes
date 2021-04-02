@@ -37,4 +37,15 @@ class AuthController extends Controller
             'expires_in' => 3600
         ]);
     }
+
+    // トークンを再発行する
+    public function refresh() {
+        return $this->respondWithToken(Auth::refresh());
+    }
+
+    public function logout() {
+        Auth::logout();
+
+        return response()->json(['message' => 'ログアウト成功']);
+    }
 }

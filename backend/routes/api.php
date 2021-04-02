@@ -27,10 +27,12 @@ Route::middleware(['guest:api'])->group(function () {
     Route::post('/v1/users', [UserController::class, 'register'])->name('register');
 });
 
+// トークンの再発行
+Route::post('/v1/refresh', [AuthController::class, 'refresh'])->name('refresh');
+
 Route::middleware(['auth:api'])->group(function () {
     // 認証ユーザーを返却する
     Route::post('/v1/me', [AuthController::class, 'me'])->name('me');
+    // ログアウト
+    Route::post('/v1/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
-
-
