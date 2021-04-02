@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['guest:api'])->group(function () {
+    // ログイン（トークン返却）
+    Route::post('/v1/login', [AuthController::class, 'login'])->name('login');
+    // 登録ユーザー全件取得
+    Route::get('/v1/users', [UserController::class, 'getUsers'])->name('getUsers');
+    // 個別ユーザー取得
+    Route::get('/v1/users/{id}', [UserController::class, 'getTheUser'])->name('getTheUser');
+    // 新規ユーザー登録
+    Route::post('/v1/users', [UserController::class, 'register'])->name('register');
+});
+
+// トークンの再発行
+Route::post('/v1/refresh', [AuthController::class, 'refresh'])->name('refresh');
+
+Route::middleware(['auth:api'])->group(function () {
+    // 認証ユーザーを返却する
+    Route::post('/v1/me', [AuthController::class, 'me'])->name('me');
+    // ログアウト
+    Route::post('/v1/logout', [AuthController::class, 'logout'])->name('logout');
 });

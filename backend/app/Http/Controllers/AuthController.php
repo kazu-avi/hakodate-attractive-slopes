@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginPostRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\JWTGuard;
+
 
 class AuthController extends Controller
 {
     // email, passwordで認証してトークンを発行する
-    public function login() {
-        $credentials = request(['email', 'password']);
+    public function login(LoginPostRequest $request) {
+        $credentials = $request->only(['email', 'password']);
 
         //認証エラーの場合401エラーを返す
-        if (!$token = Auth::attempt([$credentials])) {
+        if (! $token = Auth::attempt($credentials) ) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -33,5 +36,16 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => 3600
         ]);
+    }
+
+    // トークンを再発行する
+    public function refresh() {
+        return $this->respondWithToken(Auth::refresh());
+    }
+
+    public function logout() {
+        Auth::logout();
+
+        return response()->json(['message' => 'ログアウト成功']);
     }
 }
