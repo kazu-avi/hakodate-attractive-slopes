@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginPostRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\JWTGuard;
+
 
 class AuthController extends Controller
 {
     // email, passwordで認証してトークンを発行する
-    public function login() {
-        $credentials = request(['email', 'password']);
+    public function login(LoginPostRequest $request) {
+        $credentials = $request->only(['email', 'password']);
 
         //認証エラーの場合401エラーを返す
-        if (!$token = Auth::attempt([$credentials])) {
+        if (! $token = Auth::attempt($credentials) ) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
