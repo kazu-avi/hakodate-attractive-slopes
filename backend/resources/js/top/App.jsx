@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Register } from '../templates/index';
+import '../../css/app.css';
 
 const App = () => {
-    return <p>テ ストテストテスト</p>;
+    return (
+        <>
+            <Register />
+        </>
+    );
 };
 
 if (document.getElementById('app')) {
