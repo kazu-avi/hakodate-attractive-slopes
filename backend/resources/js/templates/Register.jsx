@@ -1,7 +1,11 @@
 import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { TextInput, PrimaryButton, OutlinedButton } from '../components/UIKit';
+import { push } from 'connected-react-router';
 
 const Register = () => {
+    const dispatch = useDispatch();
+
     const [username, setUsername] = useState(''),
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
@@ -81,7 +85,7 @@ const Register = () => {
             />
             <div className={'spacer-medium'}></div>
             <div className="center">
-                <OutlinedButton label={'キャンセル'} onClick={console.log('clicked!')} />
+                <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />
                 <span className={'margin-20'}></span>
                 <PrimaryButton label={'登録する'} onClick={console.log('clicked!')} />
             </div>
