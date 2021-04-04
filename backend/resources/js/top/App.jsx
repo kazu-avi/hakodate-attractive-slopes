@@ -1,16 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Register } from '../templates/index';
 import '../../css/app.css';
+import Router from '../Router';
 
 const App = () => {
     return (
-        <>
-            <Register />
-        </>
+        <main>
+            <Router />
+        </main>
     );
 };
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<App />, document.getElementById('app'));
-}
+export default App;

@@ -12,4 +12,4 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./top/App.jsx');
+require('./index.js');
