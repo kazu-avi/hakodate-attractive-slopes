@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextInput, PrimaryButton, OutlinedButton } from '../components/UIKit';
 import { push } from 'connected-react-router';
+import { register } from '../reducks/users/operations';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -87,7 +88,10 @@ const Register = () => {
             <div className="center">
                 <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />
                 <span className={'margin-20'}></span>
-                <PrimaryButton label={'登録する'} onClick={console.log('clicked!')} />
+                <PrimaryButton
+                    label={'登録する'}
+                    onClick={() => dispatch(register(username, email, password, confirmPassword))}
+                />
             </div>
         </div>
     );
