@@ -1,7 +1,14 @@
 import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { push } from 'connected-react-router';
 import { TextInput, PrimaryButton, OutlinedButton } from '../components/UIKit';
+import { login } from '../reducks/users/operations';
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const selector = useSelector((state) => state);
+    console.log(selector);
+
     const [email, setEmail] = useState(''),
         [password, setPassword] = useState('');
 
@@ -44,9 +51,9 @@ const Login = () => {
             />
             <div className={'spacer-medium'}></div>
             <div className="center">
-                <OutlinedButton label={'キャンセル'} onClick={console.log('clicked!')} />
+                <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />
                 <span className={'margin-20'}></span>
-                <PrimaryButton label={'ログインする'} onClick={console.log('clicked!')} />
+                <PrimaryButton label={'ログインする'} onClick={() => dispatch(login(email, password))} />
             </div>
         </div>
     );

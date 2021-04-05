@@ -15867,11 +15867,13 @@ var loginAction = function loginAction(userState) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "register": () => (/* binding */ register)
+/* harmony export */   "register": () => (/* binding */ register),
+/* harmony export */   "login": () => (/* binding */ login)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./resources/js/reducks/users/actions.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -15880,6 +15882,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 // コンポーネント内での変更（イベントの発生）後、operationで処理を行い
 // Actionsにデータを渡す
+
 
 var register = function register(username, email, password, confirmPassword) {
   return /*#__PURE__*/function () {
@@ -15924,13 +15927,12 @@ var register = function register(username, email, password, confirmPassword) {
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   console.log('登録に失敗しました');
-                  return false;
                 }
 
                 return response.json();
               }).then(function (responseJson) {
                 console.log(responseJson);
-                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_1__.push)('/'));
+                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
               });
 
             case 11:
@@ -15943,6 +15945,71 @@ var register = function register(username, email, password, confirmPassword) {
 
     return function (_x) {
       return _ref.apply(this, arguments);
+    };
+  }();
+};
+var login = function login(email, password) {
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(dispatch) {
+      var url, data, option;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!(email === '' || password === '')) {
+                _context2.next = 3;
+                break;
+              }
+
+              alert('必須項目が未入力です。再度入力してください。');
+              return _context2.abrupt("return", false);
+
+            case 3:
+              url = 'http://localhost:30080/api/v1/login';
+              data = {
+                email: email,
+                password: password
+              };
+              option = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+              };
+              _context2.next = 8;
+              return fetch(url, option).then(function (response) {
+                if (!response.ok) {
+                  console.log('認証に失敗しました');
+                  alert('ログインに失敗しました。新規登録するか、再度入力してお試しください。');
+                } else {
+                  return response.json().then(function (responseJson) {
+                    // 発行されたトークンをローカルストレージに保存
+                    var token = responseJson['access_token'];
+                    localStorage.setItem('access_token', token);
+                    console.log(responseJson);
+                    dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.loginAction)({
+                      isSignedIn: 'true',
+                      uid: responseJson['uid'],
+                      username: responseJson['username']
+                    }));
+                    dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+                  });
+                }
+              })["catch"](function (error) {
+                console.error(error);
+              });
+
+            case 8:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
     };
   }();
 };
@@ -15988,6 +16055,34 @@ var UsersReducer = function UsersReducer() {
 
 /***/ }),
 
+/***/ "./resources/js/reducks/users/selector.js":
+/*!************************************************!*\
+  !*** ./resources/js/reducks/users/selector.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getUserId": () => (/* binding */ getUserId),
+/* harmony export */   "getUsername": () => (/* binding */ getUsername)
+/* harmony export */ });
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+ // state(users)を受け取る
+
+var userSelector = function userSelector(state) {
+  return state.users;
+};
+
+var getUserId = (0,reselect__WEBPACK_IMPORTED_MODULE_0__.createSelector)([userSelector], function (state) {
+  return state.uid;
+});
+var getUsername = (0,reselect__WEBPACK_IMPORTED_MODULE_0__.createSelector)([userSelector], function (state) {
+  return state.username;
+});
+
+/***/ }),
+
 /***/ "./resources/js/templates/Home.jsx":
 /*!*****************************************!*\
   !*** ./resources/js/templates/Home.jsx ***!
@@ -16000,13 +16095,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducks/users/selector */ "./resources/js/reducks/users/selector.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
 
 
 
 var Home = function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-    children: "\u3053\u3093\u306B\u3061\u306F\uFF01"
+  var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state;
+  });
+  console.log(selector);
+  var uid = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getUserId)(selector);
+  var username = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getUsername)(selector);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+      children: ["\u3053\u3093\u306B\u3061\u306F", username, "\u3055\u3093"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+      children: ["\u30E6\u30FC\u30B6\u30FCID:", uid]
+    })]
   });
 };
 
@@ -16026,8 +16136,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
+/* harmony import */ var _reducks_users_operations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducks/users/operations */ "./resources/js/reducks/users/operations.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -16045,7 +16158,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var Login = function Login() {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state;
+  });
+  console.log(selector);
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       email = _useState2[0],
@@ -16061,12 +16183,12 @@ var Login = function Login() {
   var inputPassword = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (event) {
     setPassword(event.target.value);
   }, [inputPassword]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: 'small-container',
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
       className: 'center',
       children: "\u30ED\u30B0\u30A4\u30F3"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.TextInput, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_2__.TextInput, {
       fullWidth: true,
       label: 'メールアドレス（必須）',
       multiline: false,
@@ -16075,7 +16197,7 @@ var Login = function Login() {
       type: 'email',
       value: email,
       onChange: inputEmail
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.TextInput, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_2__.TextInput, {
       fullWidth: true,
       label: 'パスワード（必須）',
       multiline: false,
@@ -16084,18 +16206,22 @@ var Login = function Login() {
       type: 'password',
       value: password,
       onChange: inputPassword
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: 'spacer-medium'
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "center",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.OutlinedButton, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_2__.OutlinedButton, {
         label: 'キャンセル',
-        onClick: console.log('clicked!')
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        onClick: function onClick() {
+          return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/'));
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
         className: 'margin-20'
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.PrimaryButton, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_2__.PrimaryButton, {
         label: 'ログインする',
-        onClick: console.log('clicked!')
+        onClick: function onClick() {
+          return dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_3__.login)(email, password));
+        }
       })]
     })]
   });
@@ -93743,6 +93869,143 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/reselect/es/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/reselect/es/index.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "defaultMemoize": () => (/* binding */ defaultMemoize),
+/* harmony export */   "createSelectorCreator": () => (/* binding */ createSelectorCreator),
+/* harmony export */   "createSelector": () => (/* binding */ createSelector),
+/* harmony export */   "createStructuredSelector": () => (/* binding */ createStructuredSelector)
+/* harmony export */ });
+function defaultEqualityCheck(a, b) {
+  return a === b;
+}
+
+function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
+  if (prev === null || next === null || prev.length !== next.length) {
+    return false;
+  }
+
+  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+  var length = prev.length;
+  for (var i = 0; i < length; i++) {
+    if (!equalityCheck(prev[i], next[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function defaultMemoize(func) {
+  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
+
+  var lastArgs = null;
+  var lastResult = null;
+  // we reference arguments instead of spreading them for performance reasons
+  return function () {
+    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
+      // apply arguments instead of spreading for performance.
+      lastResult = func.apply(null, arguments);
+    }
+
+    lastArgs = arguments;
+    return lastResult;
+  };
+}
+
+function getDependencies(funcs) {
+  var dependencies = Array.isArray(funcs[0]) ? funcs[0] : funcs;
+
+  if (!dependencies.every(function (dep) {
+    return typeof dep === 'function';
+  })) {
+    var dependencyTypes = dependencies.map(function (dep) {
+      return typeof dep;
+    }).join(', ');
+    throw new Error('Selector creators expect all input-selectors to be functions, ' + ('instead received the following types: [' + dependencyTypes + ']'));
+  }
+
+  return dependencies;
+}
+
+function createSelectorCreator(memoize) {
+  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    memoizeOptions[_key - 1] = arguments[_key];
+  }
+
+  return function () {
+    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      funcs[_key2] = arguments[_key2];
+    }
+
+    var recomputations = 0;
+    var resultFunc = funcs.pop();
+    var dependencies = getDependencies(funcs);
+
+    var memoizedResultFunc = memoize.apply(undefined, [function () {
+      recomputations++;
+      // apply arguments instead of spreading for performance.
+      return resultFunc.apply(null, arguments);
+    }].concat(memoizeOptions));
+
+    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
+    var selector = memoize(function () {
+      var params = [];
+      var length = dependencies.length;
+
+      for (var i = 0; i < length; i++) {
+        // apply arguments instead of spreading and mutate a local list of params for performance.
+        params.push(dependencies[i].apply(null, arguments));
+      }
+
+      // apply arguments instead of spreading for performance.
+      return memoizedResultFunc.apply(null, params);
+    });
+
+    selector.resultFunc = resultFunc;
+    selector.dependencies = dependencies;
+    selector.recomputations = function () {
+      return recomputations;
+    };
+    selector.resetRecomputations = function () {
+      return recomputations = 0;
+    };
+    return selector;
+  };
+}
+
+var createSelector = createSelectorCreator(defaultMemoize);
+
+function createStructuredSelector(selectors) {
+  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
+
+  if (typeof selectors !== 'object') {
+    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
+  }
+  var objectKeys = Object.keys(selectors);
+  return selectorCreator(objectKeys.map(function (key) {
+    return selectors[key];
+  }), function () {
+    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      values[_key3] = arguments[_key3];
+    }
+
+    return values.reduce(function (composition, value, index) {
+      composition[objectKeys[index]] = value;
+      return composition;
+    }, {});
+  });
+}
 
 /***/ }),
 
