@@ -15897,7 +15897,9 @@ var createStore = function createStore(history) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LOGIN": () => (/* binding */ LOGIN),
-/* harmony export */   "loginAction": () => (/* binding */ loginAction)
+/* harmony export */   "loginAction": () => (/* binding */ loginAction),
+/* harmony export */   "LOGOUT": () => (/* binding */ LOGOUT),
+/* harmony export */   "logoutAction": () => (/* binding */ logoutAction)
 /* harmony export */ });
 // Reducerに状態（データだけ）を渡して処理してもらう
 var LOGIN = 'LOGIN';
@@ -15908,6 +15910,17 @@ var loginAction = function loginAction(userState) {
       isSignedIn: true,
       uid: userState.uid,
       username: userState.username
+    }
+  };
+};
+var LOGOUT = 'LOGOUT';
+var logoutAction = function logoutAction() {
+  return {
+    type: 'LOGIN',
+    payload: {
+      isSignedIn: false,
+      uid: '',
+      username: ''
     }
   };
 };
@@ -15924,8 +15937,10 @@ var loginAction = function loginAction(userState) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "checkAuth": () => (/* binding */ checkAuth),
+/* harmony export */   "checkAuthAtHome": () => (/* binding */ checkAuthAtHome),
 /* harmony export */   "register": () => (/* binding */ register),
-/* harmony export */   "login": () => (/* binding */ login)
+/* harmony export */   "login": () => (/* binding */ login),
+/* harmony export */   "logout": () => (/* binding */ logout)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -15940,7 +15955,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // コンポーネント内での変更（イベントの発生）後、operationで処理を行い
 // Actionsにデータを渡す
 
- // 認証のチェック
+ // 認証のチェック(Authコンポーネント)
 
 var checkAuth = function checkAuth() {
   return /*#__PURE__*/function () {
@@ -15966,7 +15981,7 @@ var checkAuth = function checkAuth() {
               }
 
               alert('ログインが必要です。');
-              dispatch('/login');
+              dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/login'));
               _context.next = 10;
               break;
 
@@ -15975,7 +15990,7 @@ var checkAuth = function checkAuth() {
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   alert('ログインが必要です。');
-                  dispatch('/login');
+                  dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/login'));
                 } else {
                   return response.json().then(function (responseJson) {
                     var resToken = responseJson['access_token'];
@@ -16002,31 +16017,91 @@ var checkAuth = function checkAuth() {
       return _ref.apply(this, arguments);
     };
   }();
-};
-var register = function register(username, email, password, confirmPassword) {
+}; // 認証のチェック(Home)
+
+var checkAuthAtHome = function checkAuthAtHome() {
   return /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(dispatch) {
-      var url, data, option;
+      var url, token, option;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              url = 'http://localhost:30080/api/v1/refresh';
+              token = localStorage.getItem('access_token');
+              option = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: 'Bearer ' + token
+                }
+              };
+
+              if (token) {
+                _context2.next = 7;
+                break;
+              }
+
+              dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+              _context2.next = 9;
+              break;
+
+            case 7:
+              _context2.next = 9;
+              return fetch(url, option).then(function (response) {
+                if (!response.ok) {
+                  dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+                } else {
+                  return response.json().then(function (responseJson) {
+                    var resToken = responseJson['access_token'];
+                    localStorage.setItem('access_token', resToken);
+                    console.log(responseJson);
+                    dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.loginAction)({
+                      isSignedIn: 'true',
+                      uid: responseJson['uid'],
+                      username: responseJson['username']
+                    }));
+                  });
+                }
+              });
+
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+var register = function register(username, email, password, confirmPassword) {
+  return /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(dispatch) {
+      var url, data, option;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
               if (!(username === '' || email === '' || password === '' || confirmPassword === '')) {
-                _context2.next = 3;
+                _context3.next = 3;
                 break;
               }
 
               alert('必須項目が未入力です。再度入力してください。');
-              return _context2.abrupt("return", false);
+              return _context3.abrupt("return", false);
 
             case 3:
               if (!(password !== confirmPassword)) {
-                _context2.next = 6;
+                _context3.next = 6;
                 break;
               }
 
               alert('確認用パスワードが一致しません。再度入力してください。');
-              return _context2.abrupt("return", false);
+              return _context3.abrupt("return", false);
 
             case 6:
               url = 'http://localhost:30080/api/v1/users';
@@ -16042,7 +16117,7 @@ var register = function register(username, email, password, confirmPassword) {
                 },
                 body: JSON.stringify(data)
               };
-              _context2.next = 11;
+              _context3.next = 11;
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   console.log('登録に失敗しました');
@@ -16051,37 +16126,37 @@ var register = function register(username, email, password, confirmPassword) {
                 return response.json();
               }).then(function (responseJson) {
                 console.log(responseJson);
-                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/login'));
               });
 
             case 11:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
 
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
     };
   }();
 };
 var login = function login(email, password) {
   return /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(dispatch) {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(dispatch) {
       var url, data, option;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               if (!(email === '' || password === '')) {
-                _context3.next = 3;
+                _context4.next = 3;
                 break;
               }
 
               alert('必須項目が未入力です。再度入力してください。');
-              return _context3.abrupt("return", false);
+              return _context4.abrupt("return", false);
 
             case 3:
               url = 'http://localhost:30080/api/v1/login';
@@ -16096,7 +16171,7 @@ var login = function login(email, password) {
                 },
                 body: JSON.stringify(data)
               };
-              _context3.next = 8;
+              _context4.next = 8;
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   console.log('認証に失敗しました');
@@ -16121,14 +16196,52 @@ var login = function login(email, password) {
 
             case 8:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }));
 
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+var logout = function logout() {
+  return /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(dispatch) {
+      var url, token, option;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              url = 'http://localhost:30080/api/v1/logout';
+              token = localStorage.getItem('access_token');
+              option = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: 'Bearer ' + token
+                }
+              };
+              _context5.next = 5;
+              return fetch(url, option).then(function () {
+                localStorage.removeItem('access_token');
+                dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.logoutAction)());
+                alert('ログアウトしました');
+                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+              });
+
+            case 5:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
     };
   }();
 };
@@ -16166,6 +16279,9 @@ var UsersReducer = function UsersReducer() {
   switch (action.type) {
     case _actions__WEBPACK_IMPORTED_MODULE_0__.LOGIN:
       return _objectSpread(_objectSpread({}, state), action.payload);
+
+    case _actions__WEBPACK_IMPORTED_MODULE_0__.LOGOUT:
+      return _objectSpread({}, action.payload);
 
     default:
       return state;
@@ -16245,7 +16361,7 @@ var Home = function Home() {
   var isSignedIn = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getIsSignedIn)(selector);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!isSignedIn) {
-      dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.checkAuth)());
+      dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.checkAuthAtHome)());
     }
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
@@ -16267,6 +16383,11 @@ var Home = function Home() {
       label: 'マイページ',
       onClick: function onClick() {
         return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/mypage'));
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+      label: 'ログアウト',
+      onClick: function onClick() {
+        return dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.logout)());
       }
     })]
   });
@@ -16398,8 +16519,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducks/users/selector */ "./resources/js/reducks/users/selector.js");
 /* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var _reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducks/users/operations */ "./resources/js/reducks/users/operations.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -16417,22 +16540,27 @@ var MyPage = function MyPage() {
   console.log(selector);
   var uid = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getUserId)(selector);
   var username = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getUsername)(selector);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
       children: "\u30DE\u30A4\u30DA\u30FC\u30B8"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
       children: ["\u3053\u3093\u306B\u3061\u306F", username, "\u3055\u3093"]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
       children: ["\u30E6\u30FC\u30B6\u30FCID:", uid]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
       label: 'ログイン',
       onClick: function onClick() {
-        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/login'));
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/login'));
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
       label: '新規登録',
       onClick: function onClick() {
-        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/register'));
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/register'));
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+      label: 'ログアウト',
+      onClick: function onClick() {
+        return dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.logout)());
       }
     })]
   });

@@ -2,9 +2,9 @@
 // Actionsにデータを渡す
 
 import { push } from 'connected-react-router';
-import { loginAction } from './actions';
+import { loginAction, logoutAction } from './actions';
 
-// 認証のチェック
+// 認証のチェック(Authコンポーネント)
 export const checkAuth = () => {
     return async (dispatch) => {
         const url = 'http://localhost:30080/api/v1/refresh';
@@ -20,12 +20,52 @@ export const checkAuth = () => {
 
         if (!token) {
             alert('ログインが必要です。');
-            dispatch('/login');
+            dispatch(push('/login'));
         } else {
             await fetch(url, option).then((response) => {
                 if (!response.ok) {
                     alert('ログインが必要です。');
-                    dispatch('/login');
+                    dispatch(push('/login'));
+                } else {
+                    return response.json().then((responseJson) => {
+                        const resToken = responseJson['access_token'];
+                        localStorage.setItem('access_token', resToken);
+                        console.log(responseJson);
+
+                        dispatch(
+                            loginAction({
+                                isSignedIn: 'true',
+                                uid: responseJson['uid'],
+                                username: responseJson['username'],
+                            })
+                        );
+                    });
+                }
+            });
+        }
+    };
+};
+
+// 認証のチェック(Home)
+export const checkAuthAtHome = () => {
+    return async (dispatch) => {
+        const url = 'http://localhost:30080/api/v1/refresh';
+        const token = localStorage.getItem('access_token');
+
+        const option = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+            },
+        };
+
+        if (!token) {
+            dispatch(push('/'));
+        } else {
+            await fetch(url, option).then((response) => {
+                if (!response.ok) {
+                    dispatch(push('/'));
                 } else {
                     return response.json().then((responseJson) => {
                         const resToken = responseJson['access_token'];
@@ -83,7 +123,7 @@ export const register = (username, email, password, confirmPassword) => {
             })
             .then((responseJson) => {
                 console.log(responseJson);
-                dispatch(push('/'));
+                dispatch(push('/login'));
             });
     };
 };
@@ -138,5 +178,27 @@ export const login = (email, password) => {
             .catch((error) => {
                 console.error(error);
             });
+    };
+};
+
+export const logout = () => {
+    return async (dispatch) => {
+        const url = 'http://localhost:30080/api/v1/logout';
+        const token = localStorage.getItem('access_token');
+
+        const option = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+            },
+        };
+
+        await fetch(url, option).then(() => {
+            localStorage.removeItem('access_token');
+            dispatch(logoutAction());
+            alert('ログアウトしました');
+            dispatch(push('/'));
+        });
     };
 };

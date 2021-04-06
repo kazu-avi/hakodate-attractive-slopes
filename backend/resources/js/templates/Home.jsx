@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIsSignedIn, getUserId, getUsername } from '../reducks/users/selector';
 import { OutlinedButton } from '../components/UIKit';
 import { push } from 'connected-react-router';
-import { checkAuth } from '../reducks/users/operations';
+import { checkAuthAtHome, logout } from '../reducks/users/operations';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Home = () => {
 
     useEffect(() => {
         if (!isSignedIn) {
-            dispatch(checkAuth());
+            dispatch(checkAuthAtHome());
         }
     }, []);
 
@@ -26,6 +26,7 @@ const Home = () => {
             <OutlinedButton label={'ログイン'} onClick={() => dispatch(push('/login'))} />
             <OutlinedButton label={'新規登録'} onClick={() => dispatch(push('/register'))} />
             <OutlinedButton label={'マイページ'} onClick={() => dispatch(push('/mypage'))} />
+            <OutlinedButton label={'ログアウト'} onClick={() => dispatch(logout())} />
         </>
     );
 };

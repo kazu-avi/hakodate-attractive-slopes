@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserId, getUsername } from '../reducks/users/selector';
 import { OutlinedButton } from '../components/UIKit';
 import { push } from 'connected-react-router';
+import { logout } from '../reducks/users/operations';
 
 const MyPage = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const MyPage = () => {
             <p>ユーザーID:{uid}</p>
             <OutlinedButton label={'ログイン'} onClick={() => dispatch(push('/login'))} />
             <OutlinedButton label={'新規登録'} onClick={() => dispatch(push('/register'))} />
+            <OutlinedButton label={'ログアウト'} onClick={() => dispatch(logout())} />
         </>
     );
 };
