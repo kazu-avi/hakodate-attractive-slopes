@@ -11,3 +11,16 @@ export const loginAction = (userState) => {
         },
     };
 };
+
+export const LOGOUT = 'LOGOUT';
+
+export const logoutAction = () => {
+    return {
+        type: 'LOGIN',
+        payload: {
+            isSignedIn: false,
+            uid: '',
+            username: '',
+        },
+    };
+};
