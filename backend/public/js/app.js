@@ -15497,6 +15497,54 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/Auth.jsx":
+/*!*******************************!*\
+  !*** ./resources/js/Auth.jsx ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducks/users/selector */ "./resources/js/reducks/users/selector.js");
+/* harmony import */ var _reducks_users_operations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducks/users/operations */ "./resources/js/reducks/users/operations.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+// Authコンポーネントの子要素コンポーネントには、認証済みユーザーのみアクセスできるようにする
+
+
+
+
+
+
+
+var Auth = function Auth(_ref) {
+  var children = _ref.children;
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state;
+  });
+  var isSignedIn = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getIsSignedIn)(selector);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!isSignedIn) {
+      dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_3__.checkAuth)());
+    }
+  }, []);
+
+  if (!isSignedIn) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {});
+  } else {
+    return children;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Auth);
+
+/***/ }),
+
 /***/ "./resources/js/Router.jsx":
 /*!*********************************!*\
   !*** ./resources/js/Router.jsx ***!
@@ -15509,9 +15557,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _templates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./templates */ "./resources/js/templates/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Auth */ "./resources/js/Auth.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -15519,19 +15569,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Router = function Router() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_router__WEBPACK_IMPORTED_MODULE_3__.Switch, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_3__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_router__WEBPACK_IMPORTED_MODULE_4__.Switch, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_4__.Route, {
       exact: true,
       path: "(/)?",
       component: _templates__WEBPACK_IMPORTED_MODULE_1__.Home
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_3__.Route, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_4__.Route, {
       exact: true,
       path: "/register",
       component: _templates__WEBPACK_IMPORTED_MODULE_1__.Register
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_3__.Route, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_4__.Route, {
       exact: true,
       path: "/login",
       component: _templates__WEBPACK_IMPORTED_MODULE_1__.Login
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Auth__WEBPACK_IMPORTED_MODULE_2__.default, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router__WEBPACK_IMPORTED_MODULE_4__.Route, {
+        exact: true,
+        path: "/mypage",
+        component: _templates__WEBPACK_IMPORTED_MODULE_1__.MyPage
+      })
     })]
   });
 };
@@ -15867,6 +15923,7 @@ var loginAction = function loginAction(userState) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "checkAuth": () => (/* binding */ checkAuth),
 /* harmony export */   "register": () => (/* binding */ register),
 /* harmony export */   "login": () => (/* binding */ login)
 /* harmony export */ });
@@ -15883,31 +15940,93 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 // コンポーネント内での変更（イベントの発生）後、operationで処理を行い
 // Actionsにデータを渡す
 
+ // 認証のチェック
 
-var register = function register(username, email, password, confirmPassword) {
+var checkAuth = function checkAuth() {
   return /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(dispatch) {
-      var url, data, option;
+      var url, token, option;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              url = 'http://localhost:30080/api/v1/refresh';
+              token = localStorage.getItem('access_token');
+              option = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: 'Bearer ' + token
+                }
+              };
+
+              if (token) {
+                _context.next = 8;
+                break;
+              }
+
+              alert('ログインが必要です。');
+              dispatch('/login');
+              _context.next = 10;
+              break;
+
+            case 8:
+              _context.next = 10;
+              return fetch(url, option).then(function (response) {
+                if (!response.ok) {
+                  alert('ログインが必要です。');
+                  dispatch('/login');
+                } else {
+                  return response.json().then(function (responseJson) {
+                    var resToken = responseJson['access_token'];
+                    localStorage.setItem('access_token', resToken);
+                    console.log(responseJson);
+                    dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.loginAction)({
+                      isSignedIn: 'true',
+                      uid: responseJson['uid'],
+                      username: responseJson['username']
+                    }));
+                  });
+                }
+              });
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+};
+var register = function register(username, email, password, confirmPassword) {
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(dispatch) {
+      var url, data, option;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
               if (!(username === '' || email === '' || password === '' || confirmPassword === '')) {
-                _context.next = 3;
+                _context2.next = 3;
                 break;
               }
 
               alert('必須項目が未入力です。再度入力してください。');
-              return _context.abrupt("return", false);
+              return _context2.abrupt("return", false);
 
             case 3:
               if (!(password !== confirmPassword)) {
-                _context.next = 6;
+                _context2.next = 6;
                 break;
               }
 
               alert('確認用パスワードが一致しません。再度入力してください。');
-              return _context.abrupt("return", false);
+              return _context2.abrupt("return", false);
 
             case 6:
               url = 'http://localhost:30080/api/v1/users';
@@ -15923,7 +16042,7 @@ var register = function register(username, email, password, confirmPassword) {
                 },
                 body: JSON.stringify(data)
               };
-              _context.next = 11;
+              _context2.next = 11;
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   console.log('登録に失敗しました');
@@ -15937,32 +16056,32 @@ var register = function register(username, email, password, confirmPassword) {
 
             case 11:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
-    return function (_x) {
-      return _ref.apply(this, arguments);
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
     };
   }();
 };
 var login = function login(email, password) {
   return /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(dispatch) {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(dispatch) {
       var url, data, option;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               if (!(email === '' || password === '')) {
-                _context2.next = 3;
+                _context3.next = 3;
                 break;
               }
 
               alert('必須項目が未入力です。再度入力してください。');
-              return _context2.abrupt("return", false);
+              return _context3.abrupt("return", false);
 
             case 3:
               url = 'http://localhost:30080/api/v1/login';
@@ -15977,7 +16096,7 @@ var login = function login(email, password) {
                 },
                 body: JSON.stringify(data)
               };
-              _context2.next = 8;
+              _context3.next = 8;
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   console.log('認証に失敗しました');
@@ -16002,14 +16121,14 @@ var login = function login(email, password) {
 
             case 8:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
 
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
     };
   }();
 };
@@ -16065,7 +16184,8 @@ var UsersReducer = function UsersReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getUserId": () => (/* binding */ getUserId),
-/* harmony export */   "getUsername": () => (/* binding */ getUsername)
+/* harmony export */   "getUsername": () => (/* binding */ getUsername),
+/* harmony export */   "getIsSignedIn": () => (/* binding */ getIsSignedIn)
 /* harmony export */ });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
  // state(users)を受け取る
@@ -16079,6 +16199,9 @@ var getUserId = (0,reselect__WEBPACK_IMPORTED_MODULE_0__.createSelector)([userSe
 });
 var getUsername = (0,reselect__WEBPACK_IMPORTED_MODULE_0__.createSelector)([userSelector], function (state) {
   return state.username;
+});
+var getIsSignedIn = (0,reselect__WEBPACK_IMPORTED_MODULE_0__.createSelector)([userSelector], function (state) {
+  return state.isSignedIn;
 });
 
 /***/ }),
@@ -16097,7 +16220,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducks/users/selector */ "./resources/js/reducks/users/selector.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var _reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducks/users/operations */ "./resources/js/reducks/users/operations.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
 
 
 
@@ -16105,17 +16235,39 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Home = function Home() {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state;
   });
   console.log(selector);
   var uid = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getUserId)(selector);
   var username = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getUsername)(selector);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+  var isSignedIn = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getIsSignedIn)(selector);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!isSignedIn) {
+      dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.checkAuth)());
+    }
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
       children: ["\u3053\u3093\u306B\u3061\u306F", username, "\u3055\u3093"]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
       children: ["\u30E6\u30FC\u30B6\u30FCID:", uid]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+      label: 'ログイン',
+      onClick: function onClick() {
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/login'));
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+      label: '新規登録',
+      onClick: function onClick() {
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/register'));
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+      label: 'マイページ',
+      onClick: function onClick() {
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/mypage'));
+      }
     })]
   });
 };
@@ -16228,6 +16380,65 @@ var Login = function Login() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
+
+/***/ }),
+
+/***/ "./resources/js/templates/MyPage.jsx":
+/*!*******************************************!*\
+  !*** ./resources/js/templates/MyPage.jsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducks/users/selector */ "./resources/js/reducks/users/selector.js");
+/* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+var MyPage = function MyPage() {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state;
+  });
+  console.log(selector);
+  var uid = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getUserId)(selector);
+  var username = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__.getUsername)(selector);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+      children: "\u30DE\u30A4\u30DA\u30FC\u30B8"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+      children: ["\u3053\u3093\u306B\u3061\u306F", username, "\u3055\u3093"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+      children: ["\u30E6\u30FC\u30B6\u30FCID:", uid]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+      label: 'ログイン',
+      onClick: function onClick() {
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/login'));
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+      label: '新規登録',
+      onClick: function onClick() {
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/register'));
+      }
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MyPage);
 
 /***/ }),
 
@@ -16378,11 +16589,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Register": () => (/* reexport safe */ _Register__WEBPACK_IMPORTED_MODULE_0__.default),
 /* harmony export */   "Login": () => (/* reexport safe */ _Login__WEBPACK_IMPORTED_MODULE_1__.default),
-/* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_2__.default)
+/* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_2__.default),
+/* harmony export */   "MyPage": () => (/* reexport safe */ _MyPage__WEBPACK_IMPORTED_MODULE_3__.default)
 /* harmony export */ });
 /* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Register */ "./resources/js/templates/Register.jsx");
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Login */ "./resources/js/templates/Login.jsx");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./resources/js/templates/Home.jsx");
+/* harmony import */ var _MyPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MyPage */ "./resources/js/templates/MyPage.jsx");
+
 
 
 
