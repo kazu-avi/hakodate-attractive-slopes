@@ -1,0 +1,28 @@
+body {
+    background-color: #f2f4fb;
+}
+
+.small-container {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.center {
+    text-align: center;
+}
+
+.margin-20 {
+    margin-left: 20px;
+}
+
+.spacer-medium {
+    height: 60px;
+}
+
+.header {
+    height: 190px;
+}
+
+.header-img {
+    height: 100%;
+}
