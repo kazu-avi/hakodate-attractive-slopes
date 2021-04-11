@@ -20,7 +20,7 @@ class PostController extends Controller
         $image = $input['file'];
 
         // S3に画像を保存し、パスを代入
-        $path = Storage::disk('s3')->put('image', $image, 'public');
+        $path = Storage::disk('s3')->put('images', $image, 'public');
 
         // データセット
         $post->file_path = Storage::disk('s3')->url($path);
@@ -31,10 +31,15 @@ class PostController extends Controller
 
         try {
             $post->save();
+            DB::commit();
         } catch (Throwable $e) {
-            return response()->json([$e]);
+            DB::rollBack();
+            // エラーがあった場合、DBと一致しないことを防ぐため、ストレージから画像を削除
             Storage::disk('s3')->delete($path);
+            return response()->json([$e],401);
         }
+
+        return response($post, 201);
 
     }
 }
