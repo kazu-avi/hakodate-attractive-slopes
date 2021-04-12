@@ -5,6 +5,7 @@ body {
 .small-container {
     max-width: 480px;
     margin: 0 auto;
+    padding: 1rem;
 }
 
 .center {
@@ -25,4 +26,12 @@ body {
 
 .header-img {
     height: 100%;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.display-none {
+    display: none;
 }
