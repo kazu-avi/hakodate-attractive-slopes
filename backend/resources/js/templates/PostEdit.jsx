@@ -1,8 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { TextInput, SelectBox } from '../components/UIKit';
 import { ImageArea } from '../components/Posts';
+import { useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
+import { OutlinedButton, PrimaryButton } from '../components/UIKit';
 
 const PostEdit = () => {
+    const dispatch = useDispatch();
+
     const [file, setFile] = useState(''),
         [category, setCategory] = useState(''),
         [text, setText] = useState('');
@@ -18,8 +23,6 @@ const PostEdit = () => {
         { id: 1, name: '八幡坂' },
         { id: 2, name: '弥生坂' },
     ];
-
-    console.log(file);
 
     return (
         <div className="small-container">
@@ -42,6 +45,12 @@ const PostEdit = () => {
                 value={text}
                 onChange={inputText}
             />
+            <div className="spacer-medium"></div>
+            <div className="center">
+                <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />
+                <span className="margin-20"></span>
+                <PrimaryButton label={'投稿する'} onClick={() => dispatch(push('/'))} />
+            </div>
         </div>
     );
 };

@@ -26,6 +26,7 @@ const Home = () => {
             <OutlinedButton label={'ログイン'} onClick={() => dispatch(push('/login'))} />
             <OutlinedButton label={'新規登録'} onClick={() => dispatch(push('/register'))} />
             <OutlinedButton label={'マイページ'} onClick={() => dispatch(push('/mypage'))} />
+            <OutlinedButton label={'投稿する'} onClick={() => dispatch(push('/edit'))} />
             <OutlinedButton label={'ログアウト'} onClick={() => dispatch(logout())} />
         </>
     );

@@ -16801,17 +16801,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/IconButton/IconButton.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
-/* harmony import */ var _material_ui_icons_AddAPhotoTwoTone__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/AddAPhotoTwoTone */ "./node_modules/@material-ui/icons/AddAPhotoTwoTone.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/IconButton/IconButton.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
+/* harmony import */ var _material_ui_icons_AddAPhotoTwoTone__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/AddAPhotoTwoTone */ "./node_modules/@material-ui/icons/AddAPhotoTwoTone.js");
+/* harmony import */ var _ImagePreview__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImagePreview */ "./resources/js/components/Posts/ImagePreview.jsx");
+/* harmony import */ var _public_img_noimage_jpeg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../public/img/noimage.jpeg */ "./public/img/noimage.jpeg");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
 
-var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__.default)({
+
+
+
+
+var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__.default)({
   icon: {
     width: 48,
     height: 48
@@ -16819,27 +16836,88 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__.default
 });
 
 var ImageArea = function ImageArea(props) {
-  var classes = useStyles();
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "text-right",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-      children: "\u753B\u50CF\u3092\u767B\u9332\u3059\u308B"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, {
-      className: classes.icon,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_icons_AddAPhotoTwoTone__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-          className: "display-none",
-          type: "file",
-          onChange: function onChange(event) {
-            return props.select(event.target.files);
-          }
-        })]
-      })
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      previewFile = _useState2[0],
+      setPreviewFile = _useState2[1];
+
+  var classes = useStyles(); // 投稿画像のプレビュー表示
+
+  var inputPreviewFile = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function () {
+      setPreviewFile(reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      // 画像の選択が解除された場合、stateを空にする
+      setPreviewFile('');
+    }
+  }, [inputPreviewFile]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "text-right",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+        children: "\u753B\u50CF\u3092\u767B\u9332\u3059\u308B"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
+        className: classes.icon,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_icons_AddAPhotoTwoTone__WEBPACK_IMPORTED_MODULE_6__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            accept: "image/*",
+            className: "display-none",
+            type: "file",
+            onChange: function onChange(event) {
+              props.select(event.target.files);
+              inputPreviewFile();
+            }
+          })]
+        })
+      })]
+    }), previewFile ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ImagePreview__WEBPACK_IMPORTED_MODULE_1__.default, {
+      previewFile: previewFile
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+      className: "w100",
+      alt: "noimage",
+      src: _public_img_noimage_jpeg__WEBPACK_IMPORTED_MODULE_2__.default
     })]
   });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImageArea);
+
+/***/ }),
+
+/***/ "./resources/js/components/Posts/ImagePreview.jsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Posts/ImagePreview.jsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var ImagePreview = function ImagePreview(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "image-thumb",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+      src: props.previewFile,
+      alt: "\u30D7\u30EC\u30D3\u30E5\u30FC\u753B\u50CF"
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImagePreview);
 
 /***/ }),
 
@@ -17692,6 +17770,11 @@ var Home = function Home() {
         return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/mypage'));
       }
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+      label: '投稿する',
+      onClick: function onClick() {
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/edit'));
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
       label: 'ログアウト',
       onClick: function onClick() {
         return dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.logout)());
@@ -17891,7 +17974,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
 /* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Posts */ "./resources/js/components/Posts/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -17910,7 +17995,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var PostEdit = function PostEdit() {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       file = _useState2[0],
@@ -17934,22 +18024,21 @@ var PostEdit = function PostEdit() {
     id: 2,
     name: '弥生坂'
   }];
-  console.log(file);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "small-container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
       className: "center",
       children: "\u6295\u7A3F\u4F5C\u6210\u30D5\u30A9\u30FC\u30E0"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_2__.ImageArea, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_2__.ImageArea, {
       file: file,
       select: setFile
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.SelectBox, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.SelectBox, {
       label: '坂道名を選んでね！（必須）',
       required: true,
       value: category,
       select: setCategory,
       options: categories
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.TextInput, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.TextInput, {
       fullWidth: true,
       label: '写真の説明を入力してね！(必須)',
       multiline: true,
@@ -17958,6 +18047,23 @@ var PostEdit = function PostEdit() {
       type: 'text',
       value: text,
       onChange: inputText
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "spacer-medium"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "center",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.OutlinedButton, {
+        label: 'キャンセル',
+        onClick: function onClick() {
+          return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/'));
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+        className: "margin-20"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.PrimaryButton, {
+        label: '投稿する',
+        onClick: function onClick() {
+          return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/'));
+        }
+      })]
     })]
   });
 };
@@ -23360,7 +23466,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\n    background-color: #f2f4fb;\n}\n\n.small-container {\n    max-width: 480px;\n    margin: 0 auto;\n    padding: 1rem;\n}\n\n.center {\n    text-align: center;\n}\n\n.margin-20 {\n    margin-left: 20px;\n}\n\n.spacer-medium {\n    height: 60px;\n}\n\n.header {\n    height: 190px;\n}\n\n.header-img {\n    height: 100%;\n}\n\n.text-right {\n    text-align: right;\n}\n\n.display-none {\n    display: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n    background-color: #f2f4fb;\n}\n\n.small-container {\n    max-width: 480px;\n    margin: 0 auto;\n    padding: 1rem;\n}\n\n.center {\n    text-align: center;\n}\n\n.margin-20 {\n    margin-left: 20px;\n}\n\n.spacer-medium {\n    height: 60px;\n}\n\n.header {\n    height: 190px;\n}\n\n.header-img {\n    height: 100%;\n}\n\n.text-right {\n    text-align: right;\n}\n\n.display-none {\n    display: none;\n}\n\n.w100 {\n    width: 100%;\n}\n\n.image-thumb {\n    position: relative;\n    overflow: hidden;\n    width: 100%\n}\n\n.image-thumb::before {\n    content: \"\";\n    display: block;\n    padding-top: 100%;\n}\n\n.image-thumb > img {\n    position: absolute;\n    -o-object-fit: cover;\n       object-fit: cover;\n    -o-object-position: center;\n       object-position: center;\n    top: 0;\n    left: 0;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24048,6 +24154,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/logo.png?85478b41049f0c9f1ed73e85495b42a1");
+
+/***/ }),
+
+/***/ "./public/img/noimage.jpeg":
+/*!*********************************!*\
+  !*** ./public/img/noimage.jpeg ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/noimage.jpeg?dbd317288990167bd9c018a326e128ab");
 
 /***/ }),
 
