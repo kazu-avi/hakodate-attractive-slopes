@@ -35,3 +35,28 @@ body {
 .display-none {
     display: none;
 }
+
+.w100 {
+    width: 100%;
+}
+
+.image-thumb {
+    position: relative;
+    overflow: hidden;
+    width: 100%
+}
+
+.image-thumb::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.image-thumb > img {
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    top: 0;
+    left: 0;
+    height: auto;
+}
