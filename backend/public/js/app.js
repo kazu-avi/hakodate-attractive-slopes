@@ -16807,18 +16807,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ImagePreview__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImagePreview */ "./resources/js/components/Posts/ImagePreview.jsx");
 /* harmony import */ var _public_img_noimage_jpeg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../public/img/noimage.jpeg */ "./public/img/noimage.jpeg");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -16836,28 +16824,25 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__.default
 });
 
 var ImageArea = function ImageArea(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      previewFile = _useState2[0],
-      setPreviewFile = _useState2[1];
-
   var classes = useStyles(); // 投稿画像のプレビュー表示
 
-  var inputPreviewFile = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+  var inputEncodedFile = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     var file = event.target.files[0];
     var reader = new FileReader();
 
     reader.onload = function () {
-      setPreviewFile(reader.result);
+      props.select(reader.result);
     };
 
     if (file) {
+      props.setFile(file);
       reader.readAsDataURL(file);
     } else {
       // 画像の選択が解除された場合、stateを空にする
-      setPreviewFile('');
+      props.select('');
+      props.setFile('');
     }
-  }, [inputPreviewFile]);
+  }, [inputEncodedFile]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "text-right",
@@ -16871,14 +16856,13 @@ var ImageArea = function ImageArea(props) {
             className: "display-none",
             type: "file",
             onChange: function onChange(event) {
-              props.select(event.target.files);
-              inputPreviewFile();
+              inputEncodedFile(event);
             }
           })]
         })
       })]
-    }), previewFile ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ImagePreview__WEBPACK_IMPORTED_MODULE_1__.default, {
-      previewFile: previewFile
+    }), props.encodedFile ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ImagePreview__WEBPACK_IMPORTED_MODULE_1__.default, {
+      encodedFile: props.encodedFile
     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
       className: "w100",
       alt: "noimage",
@@ -16911,7 +16895,7 @@ var ImagePreview = function ImagePreview(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     className: "image-thumb",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-      src: props.previewFile,
+      src: props.encodedFile,
       alt: "\u30D7\u30EC\u30D3\u30E5\u30FC\u753B\u50CF"
     })
   });
@@ -16934,6 +16918,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Posts_ImageArea__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Posts/ImageArea */ "./resources/js/components/Posts/ImageArea.jsx");
 
+
+/***/ }),
+
+/***/ "./resources/js/components/Posts/postRegister.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Posts/postRegister.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var postRegister = function postRegister(uid, file, text) {
+  return /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(dispatch) {
+      var url, token, data, option;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (uid === '' || file === '' || text === '') {
+                alert('必須項目が未入力です');
+              }
+
+              url = 'http://localhost:30080/api/v1/posts';
+              token = localStorage.getItem('access_token');
+              data = new FormData();
+              data.append('user_id', uid);
+              data.append('file', file);
+              data.append('text', text);
+              option = {
+                method: 'POST',
+                headers: {
+                  Authorization: 'Bearer ' + token
+                },
+                body: data
+              };
+              console.log(option);
+              _context.next = 11;
+              return fetch(url, option).then(function (response) {
+                if (!response.ok) {
+                  alert('投稿に失敗しました');
+                }
+
+                return response.json();
+              }).then(function (responseJson) {
+                console.log(responseJson);
+                alert('写真を投稿しました！');
+                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_1__.push)('/'));
+              })["catch"](function (error) {
+                console.error(error);
+                alert('投稿に失敗しました');
+                return null;
+              });
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (postRegister);
 
 /***/ }),
 
@@ -17388,6 +17455,9 @@ var checkAuth = function checkAuth() {
                     }));
                   });
                 }
+              })["catch"](function (error) {
+                console.error(error);
+                return null;
               });
 
             case 10:
@@ -17448,6 +17518,9 @@ var checkAuthAtHome = function checkAuthAtHome() {
                     }));
                   });
                 }
+              })["catch"](function (error) {
+                console.error(error);
+                return null;
               });
 
             case 9:
@@ -17512,6 +17585,9 @@ var register = function register(username, email, password, confirmPassword) {
               }).then(function (responseJson) {
                 console.log(responseJson);
                 dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/login'));
+              })["catch"](function (error) {
+                console.error(error);
+                return null;
               });
 
             case 11:
@@ -17577,6 +17653,7 @@ var login = function login(email, password) {
                 }
               })["catch"](function (error) {
                 console.error(error);
+                return null;
               });
 
             case 8:
@@ -17975,8 +18052,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
 /* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Posts */ "./resources/js/components/Posts/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var _components_Posts_postRegister__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Posts/postRegister */ "./resources/js/components/Posts/postRegister.js");
+/* harmony import */ var _reducks_users_selector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducks/users/selector */ "./resources/js/reducks/users/selector.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -17998,22 +18077,32 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var PostEdit = function PostEdit() {
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
 
+
+var PostEdit = function PostEdit() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       file = _useState2[0],
       setFile = _useState2[1],
       _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      category = _useState4[0],
-      setCategory = _useState4[1],
+      encodedFile = _useState4[0],
+      setEncodedFile = _useState4[1],
       _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      text = _useState6[0],
-      setText = _useState6[1];
+      category = _useState6[0],
+      setCategory = _useState6[1],
+      _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      text = _useState8[0],
+      setText = _useState8[1];
 
+  console.log(encodedFile);
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
+  var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
+    return state;
+  });
+  var uid = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_5__.getUserId)(selector);
   var inputText = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (event) {
     setText(event.target.value);
   }, [inputText]);
@@ -18024,21 +18113,23 @@ var PostEdit = function PostEdit() {
     id: 2,
     name: '弥生坂'
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "small-container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
       className: "center",
       children: "\u6295\u7A3F\u4F5C\u6210\u30D5\u30A9\u30FC\u30E0"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_2__.ImageArea, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_2__.ImageArea, {
+      encodedFile: encodedFile,
+      select: setEncodedFile,
       file: file,
-      select: setFile
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.SelectBox, {
+      setFile: setFile
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.SelectBox, {
       label: '坂道名を選んでね！（必須）',
       required: true,
       value: category,
       select: setCategory,
       options: categories
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.TextInput, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.TextInput, {
       fullWidth: true,
       label: '写真の説明を入力してね！(必須)',
       multiline: true,
@@ -18047,21 +18138,21 @@ var PostEdit = function PostEdit() {
       type: 'text',
       value: text,
       onChange: inputText
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "spacer-medium"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "center",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.OutlinedButton, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.OutlinedButton, {
         label: 'キャンセル',
         onClick: function onClick() {
-          return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/'));
+          return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_7__.push)('/'));
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
         className: "margin-20"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.PrimaryButton, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_1__.PrimaryButton, {
         label: '投稿する',
         onClick: function onClick() {
-          return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.push)('/'));
+          return dispatch((0,_components_Posts_postRegister__WEBPACK_IMPORTED_MODULE_4__.default)(uid, file, text));
         }
       })]
     })]
