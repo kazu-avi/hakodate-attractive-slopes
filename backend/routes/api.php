@@ -35,6 +35,9 @@ Route::post('/v1/refresh', [AuthController::class, 'refresh'])->name('refresh');
 //　カテゴリーの取得
 Route::get('/v1/categories', [CategoryController::class, 'getAllCategories'])->name('getAllCategories');
 
+//投稿一覧の取得
+Route::get('/v1/posts', [PostController::class, 'getAllPosts'])->name('getAllPosts');
+
 Route::middleware(['auth:api'])->group(function () {
     // 認証ユーザーを返却する
     Route::post('/v1/me', [AuthController::class, 'me'])->name('me');

@@ -39,8 +39,27 @@ class PostController extends Controller
             Storage::disk('s3')->delete($path);
             return response()->json([$e],401);
         }
-
         return response($post, 201);
+    }
 
+    // 投稿一覧を取得
+    public function getAllPosts() {
+        $data = array();
+        $posts = Post::all();
+
+        // 必要部分のみ抜き出してresponse
+        foreach ($posts as $post) {
+            $json = [
+                'id' => $post->id,
+                'user_name' => $post->user->name,
+                'file_path' => $post->file_path,
+                'category' => $post->category->name,
+                'updated_at' => $post->updated_at,
+                'text' => $post->text
+            ];
+            array_push($data, $json);
+        };
+
+        return response()->json($data);
     }
 }

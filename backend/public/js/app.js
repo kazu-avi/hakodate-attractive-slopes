@@ -16974,7 +16974,7 @@ var postRegister = function postRegister(uid, category, file, text) {
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   alert('投稿に失敗しました');
-                  throw new Error("".concat(res.status, " ").concat(res.statusText));
+                  throw new Error("".concat(response.status, " ").concat(response.statusText));
                 } else {
                   return response.json();
                 }

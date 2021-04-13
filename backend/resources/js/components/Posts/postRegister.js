@@ -29,7 +29,7 @@ const postRegister = (uid, category, file, text) => {
             .then((response) => {
                 if (!response.ok) {
                     alert('投稿に失敗しました');
-                    throw new Error(`${res.status} ${res.statusText}`);
+                    throw new Error(`${response.status} ${response.statusText}`);
                 } else {
                     return response.json();
                 }
