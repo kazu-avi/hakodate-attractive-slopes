@@ -22,26 +22,31 @@ export const checkAuth = () => {
             alert('ログインが必要です。');
             dispatch(push('/login'));
         } else {
-            await fetch(url, option).then((response) => {
-                if (!response.ok) {
-                    alert('ログインが必要です。');
-                    dispatch(push('/login'));
-                } else {
-                    return response.json().then((responseJson) => {
-                        const resToken = responseJson['access_token'];
-                        localStorage.setItem('access_token', resToken);
-                        console.log(responseJson);
+            await fetch(url, option)
+                .then((response) => {
+                    if (!response.ok) {
+                        alert('ログインが必要です。');
+                        dispatch(push('/login'));
+                    } else {
+                        return response.json().then((responseJson) => {
+                            const resToken = responseJson['access_token'];
+                            localStorage.setItem('access_token', resToken);
+                            console.log(responseJson);
 
-                        dispatch(
-                            loginAction({
-                                isSignedIn: 'true',
-                                uid: responseJson['uid'],
-                                username: responseJson['username'],
-                            })
-                        );
-                    });
-                }
-            });
+                            dispatch(
+                                loginAction({
+                                    isSignedIn: 'true',
+                                    uid: responseJson['uid'],
+                                    username: responseJson['username'],
+                                })
+                            );
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    return null;
+                });
         }
     };
 };
@@ -63,25 +68,30 @@ export const checkAuthAtHome = () => {
         if (!token) {
             dispatch(push('/'));
         } else {
-            await fetch(url, option).then((response) => {
-                if (!response.ok) {
-                    dispatch(push('/'));
-                } else {
-                    return response.json().then((responseJson) => {
-                        const resToken = responseJson['access_token'];
-                        localStorage.setItem('access_token', resToken);
-                        console.log(responseJson);
+            await fetch(url, option)
+                .then((response) => {
+                    if (!response.ok) {
+                        dispatch(push('/'));
+                    } else {
+                        return response.json().then((responseJson) => {
+                            const resToken = responseJson['access_token'];
+                            localStorage.setItem('access_token', resToken);
+                            console.log(responseJson);
 
-                        dispatch(
-                            loginAction({
-                                isSignedIn: 'true',
-                                uid: responseJson['uid'],
-                                username: responseJson['username'],
-                            })
-                        );
-                    });
-                }
-            });
+                            dispatch(
+                                loginAction({
+                                    isSignedIn: 'true',
+                                    uid: responseJson['uid'],
+                                    username: responseJson['username'],
+                                })
+                            );
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                    return null;
+                });
         }
     };
 };
@@ -124,6 +134,10 @@ export const register = (username, email, password, confirmPassword) => {
             .then((responseJson) => {
                 console.log(responseJson);
                 dispatch(push('/login'));
+            })
+            .catch((error) => {
+                console.error(error);
+                return null;
             });
     };
 };
@@ -177,6 +191,7 @@ export const login = (email, password) => {
             })
             .catch((error) => {
                 console.error(error);
+                return null;
             });
     };
 };

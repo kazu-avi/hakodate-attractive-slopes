@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddAPhotoTwoToneIcon from '@material-ui/icons/AddAPhotoTwoTone';
@@ -13,25 +13,26 @@ const useStyles = makeStyles({
 });
 
 const ImageArea = (props) => {
-    const [previewFile, setPreviewFile] = useState('');
     const classes = useStyles();
 
     // 投稿画像のプレビュー表示
-    const inputPreviewFile = useCallback(() => {
+    const inputEncodedFile = useCallback(() => {
         const file = event.target.files[0];
         const reader = new FileReader();
 
         reader.onload = () => {
-            setPreviewFile(reader.result);
+            props.select(reader.result);
         };
 
         if (file) {
+            props.setFile(file);
             reader.readAsDataURL(file);
         } else {
             // 画像の選択が解除された場合、stateを空にする
-            setPreviewFile('');
+            props.select('');
+            props.setFile('');
         }
-    }, [inputPreviewFile]);
+    }, [inputEncodedFile]);
 
     return (
         <>
@@ -45,15 +46,14 @@ const ImageArea = (props) => {
                             className="display-none"
                             type="file"
                             onChange={(event) => {
-                                props.select(event.target.files);
-                                inputPreviewFile();
+                                inputEncodedFile(event);
                             }}
                         />
                     </label>
                 </IconButton>
             </div>
-            {previewFile ? (
-                <ImagePreview previewFile={previewFile} />
+            {props.encodedFile ? (
+                <ImagePreview encodedFile={props.encodedFile} />
             ) : (
                 <img className="w100" alt="noimage" src={noimage} />
             )}
