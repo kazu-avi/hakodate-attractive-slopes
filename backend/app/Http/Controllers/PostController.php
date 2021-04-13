@@ -26,6 +26,7 @@ class PostController extends Controller
         $post->file_path = Storage::disk('s3')->url($path);
         $post->text = $input['text'];
         $post->user_id = $input['user_id'];
+        $post->category_id = $input['category_id'];
 
         DB::beginTransaction();
 

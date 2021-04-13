@@ -1,8 +1,8 @@
 import { push } from 'connected-react-router';
 
-const postRegister = (uid, file, text) => {
+const postRegister = (uid, category, file, text) => {
     return async (dispatch) => {
-        if (uid === '' || file === '' || text === '') {
+        if (uid === '' || category === '' || file === '' || text === '') {
             alert('必須項目が未入力です');
         }
 
@@ -11,6 +11,7 @@ const postRegister = (uid, file, text) => {
 
         const data = new FormData();
         data.append('user_id', uid);
+        data.append('category_id', category);
         data.append('file', file);
         data.append('text', text);
 
@@ -28,8 +29,10 @@ const postRegister = (uid, file, text) => {
             .then((response) => {
                 if (!response.ok) {
                     alert('投稿に失敗しました');
+                    throw new Error(`${res.status} ${res.statusText}`);
+                } else {
+                    return response.json();
                 }
-                return response.json();
             })
             .then((responseJson) => {
                 console.log(responseJson);
