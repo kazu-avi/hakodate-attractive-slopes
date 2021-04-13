@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { TextInput, SelectBox } from '../components/UIKit';
 import { ImageArea } from '../components/Posts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,9 +11,8 @@ const PostEdit = () => {
     const [file, setFile] = useState(''),
         [encodedFile, setEncodedFile] = useState(''),
         [category, setCategory] = useState(''),
+        [categories, setCategories] = useState([]),
         [text, setText] = useState('');
-
-    console.log(encodedFile);
 
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
@@ -26,15 +25,28 @@ const PostEdit = () => {
         [inputText]
     );
 
-    const categories = [
-        { id: 1, name: '八幡坂' },
-        { id: 2, name: '弥生坂' },
-    ];
+    // mount時にDB(API)よりカテゴリー一覧を取得しセット
+    useEffect(() => {
+        const getCategories = async () => {
+            const url = 'http://localhost:30080/api/v1/categories/';
+
+            await fetch(url)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    setCategories(responseJson);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+        getCategories();
+    }, []);
 
     return (
         <div className="small-container">
             <h2 className="center">投稿作成フォーム</h2>
             <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
+            <div className="spacer-small"></div>
             <SelectBox
                 label={'坂道名を選んでね！（必須）'}
                 required={true}
