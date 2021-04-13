@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -30,6 +31,9 @@ Route::middleware(['guest:api'])->group(function () {
 
 // トークンの再発行
 Route::post('/v1/refresh', [AuthController::class, 'refresh'])->name('refresh');
+
+//　カテゴリーの取得
+Route::get('/v1/categories', [CategoryController::class, 'getAllCategories'])->name('getAllCategories');
 
 Route::middleware(['auth:api'])->group(function () {
     // 認証ユーザーを返却する
