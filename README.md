@@ -25,4 +25,4 @@
 投稿された写真をシェアする  
 
 # ER図
-![Entity Relationship Diagram (1)](https://user-images.githubusercontent.com/80322369/114489111-8902a980-9c4d-11eb-867d-5558ed12b772.png)
+![Entity Relationship Diagram (2)](https://user-images.githubusercontent.com/80322369/114523050-e6631e80-9c7e-11eb-92ca-be7d0ebe526c.png)

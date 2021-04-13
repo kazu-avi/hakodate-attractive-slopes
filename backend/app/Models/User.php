@@ -44,6 +44,15 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     /**
+     * リレーションの設定
+     *
+     */
+
+    public function post() {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

@@ -12,4 +12,11 @@ class Category extends Model
     protected $fillable = [
         'name'
     ];
+
+    /**
+     * リレーションの設定
+     */
+    public function post() {
+        return $this->hasMany(Post::class);
+    }
 }
