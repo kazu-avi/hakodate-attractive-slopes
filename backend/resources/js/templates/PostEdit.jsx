@@ -68,7 +68,7 @@ const PostEdit = () => {
             <div className="center">
                 <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />
                 <span className="margin-20"></span>
-                <PrimaryButton label={'投稿する'} onClick={() => dispatch(postRegister(uid, file, text))} />
+                <PrimaryButton label={'投稿する'} onClick={() => dispatch(postRegister(uid, category, file, text))} />
             </div>
         </div>
     );

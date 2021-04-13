@@ -16943,7 +16943,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var postRegister = function postRegister(uid, file, text) {
+var postRegister = function postRegister(uid, category, file, text) {
   return /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(dispatch) {
       var url, token, data, option;
@@ -16951,7 +16951,7 @@ var postRegister = function postRegister(uid, file, text) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (uid === '' || file === '' || text === '') {
+              if (uid === '' || category === '' || file === '' || text === '') {
                 alert('必須項目が未入力です');
               }
 
@@ -16959,6 +16959,7 @@ var postRegister = function postRegister(uid, file, text) {
               token = localStorage.getItem('access_token');
               data = new FormData();
               data.append('user_id', uid);
+              data.append('category_id', category);
               data.append('file', file);
               data.append('text', text);
               option = {
@@ -16969,13 +16970,14 @@ var postRegister = function postRegister(uid, file, text) {
                 body: data
               };
               console.log(option);
-              _context.next = 11;
+              _context.next = 12;
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   alert('投稿に失敗しました');
+                  throw new Error("".concat(res.status, " ").concat(res.statusText));
+                } else {
+                  return response.json();
                 }
-
-                return response.json();
               }).then(function (responseJson) {
                 console.log(responseJson);
                 alert('写真を投稿しました！');
@@ -16986,7 +16988,7 @@ var postRegister = function postRegister(uid, file, text) {
                 return null;
               });
 
-            case 11:
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -18192,7 +18194,7 @@ var PostEdit = function PostEdit() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_2__.PrimaryButton, {
         label: '投稿する',
         onClick: function onClick() {
-          return dispatch((0,_components_Posts_postRegister__WEBPACK_IMPORTED_MODULE_5__.default)(uid, file, text));
+          return dispatch((0,_components_Posts_postRegister__WEBPACK_IMPORTED_MODULE_5__.default)(uid, category, file, text));
         }
       })]
     })]
