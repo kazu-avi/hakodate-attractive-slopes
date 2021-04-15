@@ -4,6 +4,7 @@ import { getIsSignedIn, getUserId, getUsername } from '../reducks/users/selector
 import { OutlinedButton } from '../components/UIKit';
 import { push } from 'connected-react-router';
 import { checkAuthAtHome, logout } from '../reducks/users/operations';
+import PostList from './PostList';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const Home = () => {
             <OutlinedButton label={'マイページ'} onClick={() => dispatch(push('/mypage'))} />
             <OutlinedButton label={'投稿する'} onClick={() => dispatch(push('/edit'))} />
             <OutlinedButton label={'ログアウト'} onClick={() => dispatch(logout())} />
+            <PostList />
         </>
     );
 };
