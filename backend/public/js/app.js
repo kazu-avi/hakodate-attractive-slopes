@@ -611,6 +611,275 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/esm/Avatar/Avatar.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Avatar/Avatar.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/chainPropTypes.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _internal_svg_icons_Person__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../internal/svg-icons/Person */ "./node_modules/@material-ui/core/esm/internal/svg-icons/Person.js");
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexShrink: 0,
+      width: 40,
+      height: 40,
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.pxToRem(20),
+      lineHeight: 1,
+      borderRadius: '50%',
+      overflow: 'hidden',
+      userSelect: 'none'
+    },
+
+    /* Styles applied to the root element if not `src` or `srcSet`. */
+    colorDefault: {
+      color: theme.palette.background.default,
+      backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[600]
+    },
+
+    /* Styles applied to the root element if `variant="circle"`. */
+    circle: {},
+
+    /* Styles applied to the root element if `variant="circular"`. */
+    circular: {},
+
+    /* Styles applied to the root element if `variant="rounded"`. */
+    rounded: {
+      borderRadius: theme.shape.borderRadius
+    },
+
+    /* Styles applied to the root element if `variant="square"`. */
+    square: {
+      borderRadius: 0
+    },
+
+    /* Styles applied to the img element if either `src` or `srcSet` is defined. */
+    img: {
+      width: '100%',
+      height: '100%',
+      textAlign: 'center',
+      // Handle non-square image. The property isn't supported by IE 11.
+      objectFit: 'cover',
+      // Hide alt text.
+      color: 'transparent',
+      // Hide the image broken icon, only works on Chrome.
+      textIndent: 10000
+    },
+
+    /* Styles applied to the fallback icon */
+    fallback: {
+      width: '75%',
+      height: '75%'
+    }
+  };
+};
+
+function useLoaded(_ref) {
+  var src = _ref.src,
+      srcSet = _ref.srcSet;
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_2__.useState(false),
+      loaded = _React$useState[0],
+      setLoaded = _React$useState[1];
+
+  react__WEBPACK_IMPORTED_MODULE_2__.useEffect(function () {
+    if (!src && !srcSet) {
+      return undefined;
+    }
+
+    setLoaded(false);
+    var active = true;
+    var image = new Image();
+    image.src = src;
+    image.srcSet = srcSet;
+
+    image.onload = function () {
+      if (!active) {
+        return;
+      }
+
+      setLoaded('loaded');
+    };
+
+    image.onerror = function () {
+      if (!active) {
+        return;
+      }
+
+      setLoaded('error');
+    };
+
+    return function () {
+      active = false;
+    };
+  }, [src, srcSet]);
+  return loaded;
+}
+
+var Avatar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function Avatar(props, ref) {
+  var alt = props.alt,
+      childrenProp = props.children,
+      classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? 'div' : _props$component,
+      imgProps = props.imgProps,
+      sizes = props.sizes,
+      src = props.src,
+      srcSet = props.srcSet,
+      _props$variant = props.variant,
+      variant = _props$variant === void 0 ? 'circle' : _props$variant,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["alt", "children", "classes", "className", "component", "imgProps", "sizes", "src", "srcSet", "variant"]);
+
+  var children = null; // Use a hook instead of onError on the img element to support server-side rendering.
+
+  var loaded = useLoaded({
+    src: src,
+    srcSet: srcSet
+  });
+  var hasImg = src || srcSet;
+  var hasImgNotFailing = hasImg && loaded !== 'error';
+
+  if (hasImgNotFailing) {
+    children = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("img", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+      alt: alt,
+      src: src,
+      srcSet: srcSet,
+      sizes: sizes,
+      className: classes.img
+    }, imgProps));
+  } else if (childrenProp != null) {
+    children = childrenProp;
+  } else if (hasImg && alt) {
+    children = alt[0];
+  } else {
+    children = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_internal_svg_icons_Person__WEBPACK_IMPORTED_MODULE_5__.default, {
+      className: classes.fallback
+    });
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, classes.system, classes[variant], className, !hasImgNotFailing && classes.colorDefault),
+    ref: ref
+  }, other), children);
+});
+ true ? Avatar.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * Used in combination with `src` or `srcSet` to
+   * provide an alt attribute for the rendered `img` element.
+   */
+  alt: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * Used to render icon or text elements inside the Avatar if `src` is not set.
+   * This can be an element, or just a string.
+   */
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (0,_material_ui_utils__WEBPACK_IMPORTED_MODULE_6__.default)((prop_types__WEBPACK_IMPORTED_MODULE_3___default().object), function (props) {
+    var classes = props.classes;
+
+    if (classes == null) {
+      return null;
+    }
+
+    if (classes.circle != null && // 2 classnames? one from withStyles the other must be custom
+    classes.circle.split(' ').length > 1) {
+      throw new Error("Material-UI: The `circle` class was deprecated. Use `circular` instead.");
+    }
+
+    return null;
+  }),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().elementType),
+
+  /**
+   * Attributes applied to the `img` element if the component is used to display an image.
+   * It can be used to listen for the loading error event.
+   */
+  imgProps: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * The `sizes` attribute for the `img` element.
+   */
+  sizes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The `src` attribute for the `img` element.
+   */
+  src: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The `srcSet` attribute for the `img` element.
+   * Use this attribute for responsive image display.
+   */
+  srcSet: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The shape of the avatar.
+   */
+  variant: (0,_material_ui_utils__WEBPACK_IMPORTED_MODULE_6__.default)(prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['circle', 'circular', 'rounded', 'square']), function (props) {
+    var variant = props.variant;
+
+    if (variant === 'circle') {
+      throw new Error('Material-UI: `variant="circle"` was deprecated. Use `variant="circular"` instead.');
+    }
+
+    return null;
+  })
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_7__.default)(styles, {
+  name: 'MuiAvatar'
+})(Avatar));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/esm/Button/Button.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/Button/Button.js ***!
@@ -2049,6 +2318,1110 @@ var TouchRipple = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.forwardRef(fun
   flip: false,
   name: 'MuiTouchRipple'
 })( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.memo(TouchRipple)));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/Card/Card.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Card/Card.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _Paper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Paper */ "./node_modules/@material-ui/core/esm/Paper/Paper.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+
+
+
+
+
+
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    overflow: 'hidden'
+  }
+};
+var Card = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function Card(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$raised = props.raised,
+      raised = _props$raised === void 0 ? false : _props$raised,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["classes", "className", "raised"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_Paper__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className),
+    elevation: raised ? 8 : 1,
+    ref: ref
+  }, other));
+});
+ true ? Card.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The content of the component.
+   */
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * If `true`, the card will use raised styling.
+   */
+  raised: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool)
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_6__.default)(styles, {
+  name: 'MuiCard'
+})(Card));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/CardActions/CardActions.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/CardActions/CardActions.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+
+
+
+
+
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: 8
+  },
+
+  /* Styles applied to the root element if `disableSpacing={false}`. */
+  spacing: {
+    '& > :not(:first-child)': {
+      marginLeft: 8
+    }
+  }
+};
+var CardActions = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function CardActions(props, ref) {
+  var _props$disableSpacing = props.disableSpacing,
+      disableSpacing = _props$disableSpacing === void 0 ? false : _props$disableSpacing,
+      classes = props.classes,
+      className = props.className,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["disableSpacing", "classes", "className"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className, !disableSpacing && classes.spacing),
+    ref: ref
+  }, other));
+});
+ true ? CardActions.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The content of the component.
+   */
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * If `true`, the actions do not have additional margin.
+   */
+  disableSpacing: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool)
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_5__.default)(styles, {
+  name: 'MuiCardActions'
+})(CardActions));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/CardContent/CardContent.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/CardContent/CardContent.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+
+
+
+
+
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    padding: 16,
+    '&:last-child': {
+      paddingBottom: 24
+    }
+  }
+};
+var CardContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function CardContent(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? 'div' : _props$component,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["classes", "className", "component"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className),
+    ref: ref
+  }, other));
+});
+ true ? CardContent.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The content of the component.
+   */
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().elementType)
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_5__.default)(styles, {
+  name: 'MuiCardContent'
+})(CardContent));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/CardHeader/CardHeader.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/CardHeader/CardHeader.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _Typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Typography */ "./node_modules/@material-ui/core/esm/Typography/Typography.js");
+
+
+
+
+
+
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: 16
+  },
+
+  /* Styles applied to the avatar element. */
+  avatar: {
+    flex: '0 0 auto',
+    marginRight: 16
+  },
+
+  /* Styles applied to the action element. */
+  action: {
+    flex: '0 0 auto',
+    alignSelf: 'flex-start',
+    marginTop: -8,
+    marginRight: -8
+  },
+
+  /* Styles applied to the content wrapper element. */
+  content: {
+    flex: '1 1 auto'
+  },
+
+  /* Styles applied to the title Typography element. */
+  title: {},
+
+  /* Styles applied to the subheader Typography element. */
+  subheader: {}
+};
+var CardHeader = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function CardHeader(props, ref) {
+  var action = props.action,
+      avatar = props.avatar,
+      classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? 'div' : _props$component,
+      _props$disableTypogra = props.disableTypography,
+      disableTypography = _props$disableTypogra === void 0 ? false : _props$disableTypogra,
+      subheaderProp = props.subheader,
+      subheaderTypographyProps = props.subheaderTypographyProps,
+      titleProp = props.title,
+      titleTypographyProps = props.titleTypographyProps,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["action", "avatar", "classes", "className", "component", "disableTypography", "subheader", "subheaderTypographyProps", "title", "titleTypographyProps"]);
+
+  var title = titleProp;
+
+  if (title != null && title.type !== _Typography__WEBPACK_IMPORTED_MODULE_5__.default && !disableTypography) {
+    title = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_Typography__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+      variant: avatar ? 'body2' : 'h5',
+      className: classes.title,
+      component: "span",
+      display: "block"
+    }, titleTypographyProps), title);
+  }
+
+  var subheader = subheaderProp;
+
+  if (subheader != null && subheader.type !== _Typography__WEBPACK_IMPORTED_MODULE_5__.default && !disableTypography) {
+    subheader = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_Typography__WEBPACK_IMPORTED_MODULE_5__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+      variant: avatar ? 'body2' : 'body1',
+      className: classes.subheader,
+      color: "textSecondary",
+      component: "span",
+      display: "block"
+    }, subheaderTypographyProps), subheader);
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className),
+    ref: ref
+  }, other), avatar && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+    className: classes.avatar
+  }, avatar), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+    className: classes.content
+  }, title, subheader), action && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+    className: classes.action
+  }, action));
+});
+ true ? CardHeader.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The action to display in the card header.
+   */
+  action: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * The Avatar for the Card Header.
+   */
+  avatar: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * @ignore
+   */
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().elementType),
+
+  /**
+   * If `true`, `subheader` and `title` won't be wrapped by a Typography component.
+   * This can be useful to render an alternative Typography variant by wrapping
+   * the `title` text, and optional `subheader` text
+   * with the Typography component.
+   */
+  disableTypography: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * The content of the component.
+   */
+  subheader: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * These props will be forwarded to the subheader
+   * (as long as disableTypography is not `true`).
+   */
+  subheaderTypographyProps: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * The content of the Card Title.
+   */
+  title: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * These props will be forwarded to the title
+   * (as long as disableTypography is not `true`).
+   */
+  titleTypographyProps: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object)
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_6__.default)(styles, {
+  name: 'MuiCardHeader'
+})(CardHeader));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/CardMedia/CardMedia.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/CardMedia/CardMedia.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/chainPropTypes.js");
+
+
+
+
+
+
+
+var styles = {
+  /* Styles applied to the root element. */
+  root: {
+    display: 'block',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center'
+  },
+
+  /* Styles applied to the root element if `component="video, audio, picture, iframe, or img"`. */
+  media: {
+    width: '100%'
+  },
+
+  /* Styles applied to the root element if `component="picture or img"`. */
+  img: {
+    // ⚠️ object-fit is not supported by IE 11.
+    objectFit: 'cover'
+  }
+};
+var MEDIA_COMPONENTS = ['video', 'audio', 'picture', 'iframe', 'img'];
+var CardMedia = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function CardMedia(props, ref) {
+  var children = props.children,
+      classes = props.classes,
+      className = props.className,
+      _props$component = props.component,
+      Component = _props$component === void 0 ? 'div' : _props$component,
+      image = props.image,
+      src = props.src,
+      style = props.style,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["children", "classes", "className", "component", "image", "src", "style"]);
+
+  var isMediaComponent = MEDIA_COMPONENTS.indexOf(Component) !== -1;
+  var composedStyle = !isMediaComponent && image ? (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    backgroundImage: "url(\"".concat(image, "\")")
+  }, style) : style;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className, isMediaComponent && classes.media, "picture img".indexOf(Component) !== -1 && classes.img),
+    ref: ref,
+    style: composedStyle,
+    src: isMediaComponent ? image || src : undefined
+  }, other), children);
+});
+ true ? CardMedia.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The content of the component.
+   */
+  children: (0,_material_ui_utils__WEBPACK_IMPORTED_MODULE_5__.default)((prop_types__WEBPACK_IMPORTED_MODULE_3___default().node), function (props) {
+    if (!props.children && !props.image && !props.src && !props.component) {
+      return new Error('Material-UI: Either `children`, `image`, `src` or `component` prop must be specified.');
+    }
+
+    return null;
+  }),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().elementType),
+
+  /**
+   * Image to be displayed as a background image.
+   * Either `image` or `src` prop must be specified.
+   * Note that caller must specify height otherwise the image will not be visible.
+   */
+  image: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * An alias for `image` property.
+   * Available only with media components.
+   * Media components: `video`, `audio`, `picture`, `iframe`, `img`.
+   */
+  src: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * @ignore
+   */
+  style: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object)
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_6__.default)(styles, {
+  name: 'MuiCardMedia'
+})(CardMedia));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/Chip/Chip.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Chip/Chip.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _internal_svg_icons_Cancel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../internal/svg-icons/Cancel */ "./node_modules/@material-ui/core/esm/internal/svg-icons/Cancel.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles/colorManipulator */ "./node_modules/@material-ui/core/esm/styles/colorManipulator.js");
+/* harmony import */ var _utils_useForkRef__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/useForkRef */ "./node_modules/@material-ui/core/esm/utils/useForkRef.js");
+/* harmony import */ var _utils_unsupportedProp__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/unsupportedProp */ "./node_modules/@material-ui/core/esm/utils/unsupportedProp.js");
+/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@material-ui/core/esm/utils/capitalize.js");
+/* harmony import */ var _ButtonBase__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../ButtonBase */ "./node_modules/@material-ui/core/esm/ButtonBase/ButtonBase.js");
+
+
+
+
+
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  var backgroundColor = theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[700];
+  var deleteIconColor = (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(theme.palette.text.primary, 0.26);
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.pxToRem(13),
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 32,
+      color: theme.palette.getContrastText(backgroundColor),
+      backgroundColor: backgroundColor,
+      borderRadius: 32 / 2,
+      whiteSpace: 'nowrap',
+      transition: theme.transitions.create(['background-color', 'box-shadow']),
+      // label will inherit this from root, then `clickable` class overrides this for both
+      cursor: 'default',
+      // We disable the focus ring for mouse, touch and keyboard users.
+      outline: 0,
+      textDecoration: 'none',
+      border: 'none',
+      // Remove `button` border
+      padding: 0,
+      // Remove `button` padding
+      verticalAlign: 'middle',
+      boxSizing: 'border-box',
+      '&$disabled': {
+        opacity: 0.5,
+        pointerEvents: 'none'
+      },
+      '& $avatar': {
+        marginLeft: 5,
+        marginRight: -6,
+        width: 24,
+        height: 24,
+        color: theme.palette.type === 'light' ? theme.palette.grey[700] : theme.palette.grey[300],
+        fontSize: theme.typography.pxToRem(12)
+      },
+      '& $avatarColorPrimary': {
+        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.primary.dark
+      },
+      '& $avatarColorSecondary': {
+        color: theme.palette.secondary.contrastText,
+        backgroundColor: theme.palette.secondary.dark
+      },
+      '& $avatarSmall': {
+        marginLeft: 4,
+        marginRight: -4,
+        width: 18,
+        height: 18,
+        fontSize: theme.typography.pxToRem(10)
+      }
+    },
+
+    /* Styles applied to the root element if `size="small"`. */
+    sizeSmall: {
+      height: 24
+    },
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText
+    },
+
+    /* Pseudo-class applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Styles applied to the root element if `onClick` is defined or `clickable={true}`. */
+    clickable: {
+      userSelect: 'none',
+      WebkitTapHighlightColor: 'transparent',
+      cursor: 'pointer',
+      '&:hover, &:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.emphasize)(backgroundColor, 0.08)
+      },
+      '&:active': {
+        boxShadow: theme.shadows[1]
+      }
+    },
+
+    /* Styles applied to the root element if `onClick` and `color="primary"` is defined or `clickable={true}`. */
+    clickableColorPrimary: {
+      '&:hover, &:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.emphasize)(theme.palette.primary.main, 0.08)
+      }
+    },
+
+    /* Styles applied to the root element if `onClick` and `color="secondary"` is defined or `clickable={true}`. */
+    clickableColorSecondary: {
+      '&:hover, &:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.emphasize)(theme.palette.secondary.main, 0.08)
+      }
+    },
+
+    /* Styles applied to the root element if `onDelete` is defined. */
+    deletable: {
+      '&:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.emphasize)(backgroundColor, 0.08)
+      }
+    },
+
+    /* Styles applied to the root element if `onDelete` and `color="primary"` is defined. */
+    deletableColorPrimary: {
+      '&:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.emphasize)(theme.palette.primary.main, 0.2)
+      }
+    },
+
+    /* Styles applied to the root element if `onDelete` and `color="secondary"` is defined. */
+    deletableColorSecondary: {
+      '&:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.emphasize)(theme.palette.secondary.main, 0.2)
+      }
+    },
+
+    /* Styles applied to the root element if `variant="outlined"`. */
+    outlined: {
+      backgroundColor: 'transparent',
+      border: "1px solid ".concat(theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)'),
+      '$clickable&:hover, $clickable&:focus, $deletable&:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(theme.palette.text.primary, theme.palette.action.hoverOpacity)
+      },
+      '& $avatar': {
+        marginLeft: 4
+      },
+      '& $avatarSmall': {
+        marginLeft: 2
+      },
+      '& $icon': {
+        marginLeft: 4
+      },
+      '& $iconSmall': {
+        marginLeft: 2
+      },
+      '& $deleteIcon': {
+        marginRight: 5
+      },
+      '& $deleteIconSmall': {
+        marginRight: 3
+      }
+    },
+
+    /* Styles applied to the root element if `variant="outlined"` and `color="primary"`. */
+    outlinedPrimary: {
+      color: theme.palette.primary.main,
+      border: "1px solid ".concat(theme.palette.primary.main),
+      '$clickable&:hover, $clickable&:focus, $deletable&:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(theme.palette.primary.main, theme.palette.action.hoverOpacity)
+      }
+    },
+
+    /* Styles applied to the root element if `variant="outlined"` and `color="secondary"`. */
+    outlinedSecondary: {
+      color: theme.palette.secondary.main,
+      border: "1px solid ".concat(theme.palette.secondary.main),
+      '$clickable&:hover, $clickable&:focus, $deletable&:focus': {
+        backgroundColor: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(theme.palette.secondary.main, theme.palette.action.hoverOpacity)
+      }
+    },
+    // TODO v5: remove
+
+    /* Styles applied to the `avatar` element. */
+    avatar: {},
+
+    /* Styles applied to the `avatar` element if `size="small"`. */
+    avatarSmall: {},
+
+    /* Styles applied to the `avatar` element if `color="primary"`. */
+    avatarColorPrimary: {},
+
+    /* Styles applied to the `avatar` element if `color="secondary"`. */
+    avatarColorSecondary: {},
+
+    /* Styles applied to the `icon` element. */
+    icon: {
+      color: theme.palette.type === 'light' ? theme.palette.grey[700] : theme.palette.grey[300],
+      marginLeft: 5,
+      marginRight: -6
+    },
+
+    /* Styles applied to the `icon` element if `size="small"`. */
+    iconSmall: {
+      width: 18,
+      height: 18,
+      marginLeft: 4,
+      marginRight: -4
+    },
+
+    /* Styles applied to the `icon` element if `color="primary"`. */
+    iconColorPrimary: {
+      color: 'inherit'
+    },
+
+    /* Styles applied to the `icon` element if `color="secondary"`. */
+    iconColorSecondary: {
+      color: 'inherit'
+    },
+
+    /* Styles applied to the label `span` element. */
+    label: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      paddingLeft: 12,
+      paddingRight: 12,
+      whiteSpace: 'nowrap'
+    },
+
+    /* Styles applied to the label `span` element if `size="small"`. */
+    labelSmall: {
+      paddingLeft: 8,
+      paddingRight: 8
+    },
+
+    /* Styles applied to the `deleteIcon` element. */
+    deleteIcon: {
+      WebkitTapHighlightColor: 'transparent',
+      color: deleteIconColor,
+      height: 22,
+      width: 22,
+      cursor: 'pointer',
+      margin: '0 5px 0 -6px',
+      '&:hover': {
+        color: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(deleteIconColor, 0.4)
+      }
+    },
+
+    /* Styles applied to the `deleteIcon` element if `size="small"`. */
+    deleteIconSmall: {
+      height: 16,
+      width: 16,
+      marginRight: 4,
+      marginLeft: -4
+    },
+
+    /* Styles applied to the deleteIcon element if `color="primary"` and `variant="default"`. */
+    deleteIconColorPrimary: {
+      color: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(theme.palette.primary.contrastText, 0.7),
+      '&:hover, &:active': {
+        color: theme.palette.primary.contrastText
+      }
+    },
+
+    /* Styles applied to the deleteIcon element if `color="secondary"` and `variant="default"`. */
+    deleteIconColorSecondary: {
+      color: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(theme.palette.secondary.contrastText, 0.7),
+      '&:hover, &:active': {
+        color: theme.palette.secondary.contrastText
+      }
+    },
+
+    /* Styles applied to the deleteIcon element if `color="primary"` and `variant="outlined"`. */
+    deleteIconOutlinedColorPrimary: {
+      color: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(theme.palette.primary.main, 0.7),
+      '&:hover, &:active': {
+        color: theme.palette.primary.main
+      }
+    },
+
+    /* Styles applied to the deleteIcon element if `color="secondary"` and `variant="outlined"`. */
+    deleteIconOutlinedColorSecondary: {
+      color: (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_5__.fade)(theme.palette.secondary.main, 0.7),
+      '&:hover, &:active': {
+        color: theme.palette.secondary.main
+      }
+    }
+  };
+};
+
+function isDeleteKeyboardEvent(keyboardEvent) {
+  return keyboardEvent.key === 'Backspace' || keyboardEvent.key === 'Delete';
+}
+/**
+ * Chips represent complex entities in small blocks, such as a contact.
+ */
+
+
+var Chip = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function Chip(props, ref) {
+  var avatarProp = props.avatar,
+      classes = props.classes,
+      className = props.className,
+      clickableProp = props.clickable,
+      _props$color = props.color,
+      color = _props$color === void 0 ? 'default' : _props$color,
+      ComponentProp = props.component,
+      deleteIconProp = props.deleteIcon,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
+      iconProp = props.icon,
+      label = props.label,
+      onClick = props.onClick,
+      onDelete = props.onDelete,
+      onKeyDown = props.onKeyDown,
+      onKeyUp = props.onKeyUp,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 'medium' : _props$size,
+      _props$variant = props.variant,
+      variant = _props$variant === void 0 ? 'default' : _props$variant,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["avatar", "classes", "className", "clickable", "color", "component", "deleteIcon", "disabled", "icon", "label", "onClick", "onDelete", "onKeyDown", "onKeyUp", "size", "variant"]);
+
+  var chipRef = react__WEBPACK_IMPORTED_MODULE_2__.useRef(null);
+  var handleRef = (0,_utils_useForkRef__WEBPACK_IMPORTED_MODULE_6__.default)(chipRef, ref);
+
+  var handleDeleteIconClick = function handleDeleteIconClick(event) {
+    // Stop the event from bubbling up to the `Chip`
+    event.stopPropagation();
+
+    if (onDelete) {
+      onDelete(event);
+    }
+  };
+
+  var handleKeyDown = function handleKeyDown(event) {
+    // Ignore events from children of `Chip`.
+    if (event.currentTarget === event.target && isDeleteKeyboardEvent(event)) {
+      // will be handled in keyUp, otherwise some browsers
+      // might init navigation
+      event.preventDefault();
+    }
+
+    if (onKeyDown) {
+      onKeyDown(event);
+    }
+  };
+
+  var handleKeyUp = function handleKeyUp(event) {
+    // Ignore events from children of `Chip`.
+    if (event.currentTarget === event.target) {
+      if (onDelete && isDeleteKeyboardEvent(event)) {
+        onDelete(event);
+      } else if (event.key === 'Escape' && chipRef.current) {
+        chipRef.current.blur();
+      }
+    }
+
+    if (onKeyUp) {
+      onKeyUp(event);
+    }
+  };
+
+  var clickable = clickableProp !== false && onClick ? true : clickableProp;
+  var small = size === 'small';
+  var Component = ComponentProp || (clickable ? _ButtonBase__WEBPACK_IMPORTED_MODULE_7__.default : 'div');
+  var moreProps = Component === _ButtonBase__WEBPACK_IMPORTED_MODULE_7__.default ? {
+    component: 'div'
+  } : {};
+  var deleteIcon = null;
+
+  if (onDelete) {
+    var customClasses = (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(color !== 'default' && (variant === "default" ? classes["deleteIconColor".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_8__.default)(color))] : classes["deleteIconOutlinedColor".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_8__.default)(color))]), small && classes.deleteIconSmall);
+    deleteIcon = deleteIconProp && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.isValidElement(deleteIconProp) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.cloneElement(deleteIconProp, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(deleteIconProp.props.className, classes.deleteIcon, customClasses),
+      onClick: handleDeleteIconClick
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_internal_svg_icons_Cancel__WEBPACK_IMPORTED_MODULE_9__.default, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.deleteIcon, customClasses),
+      onClick: handleDeleteIconClick
+    });
+  }
+
+  var avatar = null;
+
+  if (avatarProp && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.isValidElement(avatarProp)) {
+    avatar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.cloneElement(avatarProp, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.avatar, avatarProp.props.className, small && classes.avatarSmall, color !== 'default' && classes["avatarColor".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_8__.default)(color))])
+    });
+  }
+
+  var icon = null;
+
+  if (iconProp && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.isValidElement(iconProp)) {
+    icon = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.cloneElement(iconProp, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.icon, iconProp.props.className, small && classes.iconSmall, color !== 'default' && classes["iconColor".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_8__.default)(color))])
+    });
+  }
+
+  if (true) {
+    if (avatar && icon) {
+      console.error('Material-UI: The Chip component can not handle the avatar ' + 'and the icon prop at the same time. Pick one.');
+    }
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    role: clickable || onDelete ? 'button' : undefined,
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className, color !== 'default' && [classes["color".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_8__.default)(color))], clickable && classes["clickableColor".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_8__.default)(color))], onDelete && classes["deletableColor".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_8__.default)(color))]], variant !== "default" && [classes.outlined, {
+      'primary': classes.outlinedPrimary,
+      'secondary': classes.outlinedSecondary
+    }[color]], disabled && classes.disabled, small && classes.sizeSmall, clickable && classes.clickable, onDelete && classes.deletable),
+    "aria-disabled": disabled ? true : undefined,
+    tabIndex: clickable || onDelete ? 0 : undefined,
+    onClick: onClick,
+    onKeyDown: handleKeyDown,
+    onKeyUp: handleKeyUp,
+    ref: handleRef
+  }, moreProps, other), avatar || icon, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.label, small && classes.labelSmall)
+  }, label), deleteIcon);
+});
+ true ? Chip.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * Avatar element.
+   */
+  avatar: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().element),
+
+  /**
+   * This prop isn't supported.
+   * Use the `component` prop if you need to change the children structure.
+   */
+  children: _utils_unsupportedProp__WEBPACK_IMPORTED_MODULE_10__.default,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * If `true`, the chip will appear clickable, and will raise when pressed,
+   * even if the onClick prop is not defined.
+   * If false, the chip will not be clickable, even if onClick prop is defined.
+   * This can be used, for example,
+   * along with the component prop to indicate an anchor Chip is clickable.
+   */
+  clickable: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['default', 'primary', 'secondary']),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().elementType),
+
+  /**
+   * Override the default delete icon element. Shown only if `onDelete` is set.
+   */
+  deleteIcon: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().element),
+
+  /**
+   * If `true`, the chip should be displayed in a disabled state.
+   */
+  disabled: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * Icon element.
+   */
+  icon: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().element),
+
+  /**
+   * The content of the label.
+   */
+  label: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * @ignore
+   */
+  onClick: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * Callback function fired when the delete icon is clicked.
+   * If set, the delete icon will be shown.
+   */
+  onDelete: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * @ignore
+   */
+  onKeyDown: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * @ignore
+   */
+  onKeyUp: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * The size of the chip.
+   */
+  size: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['medium', 'small']),
+
+  /**
+   * The variant to use.
+   */
+  variant: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['default', 'outlined'])
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_11__.default)(styles, {
+  name: 'MuiChip'
+})(Chip));
 
 /***/ }),
 
@@ -10405,6 +11778,281 @@ var TextareaAutosize = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRe
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/esm/Typography/Typography.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Typography/Typography.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@material-ui/core/esm/utils/capitalize.js");
+
+
+
+
+
+
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      margin: 0
+    },
+
+    /* Styles applied to the root element if `variant="body2"`. */
+    body2: theme.typography.body2,
+
+    /* Styles applied to the root element if `variant="body1"`. */
+    body1: theme.typography.body1,
+
+    /* Styles applied to the root element if `variant="caption"`. */
+    caption: theme.typography.caption,
+
+    /* Styles applied to the root element if `variant="button"`. */
+    button: theme.typography.button,
+
+    /* Styles applied to the root element if `variant="h1"`. */
+    h1: theme.typography.h1,
+
+    /* Styles applied to the root element if `variant="h2"`. */
+    h2: theme.typography.h2,
+
+    /* Styles applied to the root element if `variant="h3"`. */
+    h3: theme.typography.h3,
+
+    /* Styles applied to the root element if `variant="h4"`. */
+    h4: theme.typography.h4,
+
+    /* Styles applied to the root element if `variant="h5"`. */
+    h5: theme.typography.h5,
+
+    /* Styles applied to the root element if `variant="h6"`. */
+    h6: theme.typography.h6,
+
+    /* Styles applied to the root element if `variant="subtitle1"`. */
+    subtitle1: theme.typography.subtitle1,
+
+    /* Styles applied to the root element if `variant="subtitle2"`. */
+    subtitle2: theme.typography.subtitle2,
+
+    /* Styles applied to the root element if `variant="overline"`. */
+    overline: theme.typography.overline,
+
+    /* Styles applied to the root element if `variant="srOnly"`. Only accessible to screen readers. */
+    srOnly: {
+      position: 'absolute',
+      height: 1,
+      width: 1,
+      overflow: 'hidden'
+    },
+
+    /* Styles applied to the root element if `align="left"`. */
+    alignLeft: {
+      textAlign: 'left'
+    },
+
+    /* Styles applied to the root element if `align="center"`. */
+    alignCenter: {
+      textAlign: 'center'
+    },
+
+    /* Styles applied to the root element if `align="right"`. */
+    alignRight: {
+      textAlign: 'right'
+    },
+
+    /* Styles applied to the root element if `align="justify"`. */
+    alignJustify: {
+      textAlign: 'justify'
+    },
+
+    /* Styles applied to the root element if `nowrap={true}`. */
+    noWrap: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    },
+
+    /* Styles applied to the root element if `gutterBottom={true}`. */
+    gutterBottom: {
+      marginBottom: '0.35em'
+    },
+
+    /* Styles applied to the root element if `paragraph={true}`. */
+    paragraph: {
+      marginBottom: 16
+    },
+
+    /* Styles applied to the root element if `color="inherit"`. */
+    colorInherit: {
+      color: 'inherit'
+    },
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      color: theme.palette.primary.main
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      color: theme.palette.secondary.main
+    },
+
+    /* Styles applied to the root element if `color="textPrimary"`. */
+    colorTextPrimary: {
+      color: theme.palette.text.primary
+    },
+
+    /* Styles applied to the root element if `color="textSecondary"`. */
+    colorTextSecondary: {
+      color: theme.palette.text.secondary
+    },
+
+    /* Styles applied to the root element if `color="error"`. */
+    colorError: {
+      color: theme.palette.error.main
+    },
+
+    /* Styles applied to the root element if `display="inline"`. */
+    displayInline: {
+      display: 'inline'
+    },
+
+    /* Styles applied to the root element if `display="block"`. */
+    displayBlock: {
+      display: 'block'
+    }
+  };
+};
+var defaultVariantMapping = {
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
+  h6: 'h6',
+  subtitle1: 'h6',
+  subtitle2: 'h6',
+  body1: 'p',
+  body2: 'p'
+};
+var Typography = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function Typography(props, ref) {
+  var _props$align = props.align,
+      align = _props$align === void 0 ? 'inherit' : _props$align,
+      classes = props.classes,
+      className = props.className,
+      _props$color = props.color,
+      color = _props$color === void 0 ? 'initial' : _props$color,
+      component = props.component,
+      _props$display = props.display,
+      display = _props$display === void 0 ? 'initial' : _props$display,
+      _props$gutterBottom = props.gutterBottom,
+      gutterBottom = _props$gutterBottom === void 0 ? false : _props$gutterBottom,
+      _props$noWrap = props.noWrap,
+      noWrap = _props$noWrap === void 0 ? false : _props$noWrap,
+      _props$paragraph = props.paragraph,
+      paragraph = _props$paragraph === void 0 ? false : _props$paragraph,
+      _props$variant = props.variant,
+      variant = _props$variant === void 0 ? 'body1' : _props$variant,
+      _props$variantMapping = props.variantMapping,
+      variantMapping = _props$variantMapping === void 0 ? defaultVariantMapping : _props$variantMapping,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["align", "classes", "className", "color", "component", "display", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"]);
+
+  var Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className, variant !== 'inherit' && classes[variant], color !== 'initial' && classes["color".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__.default)(color))], noWrap && classes.noWrap, gutterBottom && classes.gutterBottom, paragraph && classes.paragraph, align !== 'inherit' && classes["align".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__.default)(align))], display !== 'initial' && classes["display".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__.default)(display))]),
+    ref: ref
+  }, other));
+});
+ true ? Typography.propTypes = {
+  /**
+   * Set the text-align on the component.
+   */
+  align: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['inherit', 'left', 'center', 'right', 'justify']),
+
+  /**
+   * The content of the component.
+   */
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object.isRequired),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['initial', 'inherit', 'primary', 'secondary', 'textPrimary', 'textSecondary', 'error']),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   * Overrides the behavior of the `variantMapping` prop.
+   */
+  component: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().elementType),
+
+  /**
+   * Controls the display type
+   */
+  display: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['initial', 'block', 'inline']),
+
+  /**
+   * If `true`, the text will have a bottom margin.
+   */
+  gutterBottom: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
+   *
+   * Note that text overflow can only happen with block or inline-block level elements
+   * (the element needs to have a width in order to overflow).
+   */
+  noWrap: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * If `true`, the text will have a bottom margin.
+   */
+  paragraph: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * Applies the theme typography styles.
+   */
+  variant: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'button', 'overline', 'srOnly', 'inherit']),
+
+  /**
+   * The component maps the variant prop to a range of different HTML element types.
+   * For instance, subtitle1 to `<h6>`.
+   * If you wish to change that mapping, you can provide your own.
+   * Alternatively, you can use the `component` prop.
+   */
+  variantMapping: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object)
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_6__.default)(styles, {
+  name: 'MuiTypography'
+})(Typography));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/esm/Unstable_TrapFocus/Unstable_TrapFocus.js":
 /*!*************************************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/Unstable_TrapFocus/Unstable_TrapFocus.js ***!
@@ -10891,6 +12539,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utils_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__.default)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
   d: "M7 10l5 5 5-5z"
 }), 'ArrowDropDown'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/internal/svg-icons/Cancel.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/Cancel.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utils_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/createSvgIcon */ "./node_modules/@material-ui/core/esm/utils/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utils_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__.default)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+  d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+}), 'Cancel'));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/esm/internal/svg-icons/Person.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/Person.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utils_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/createSvgIcon */ "./node_modules/@material-ui/core/esm/utils/createSvgIcon.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utils_createSvgIcon__WEBPACK_IMPORTED_MODULE_1__.default)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+  d: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+}), 'Person'));
 
 /***/ }),
 
@@ -12993,6 +14691,96 @@ var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement(Rea
 }), /*#__PURE__*/React.createElement("path", {
   d: "M21 6h-3.17L16 4H9v2h6.12l1.83 2H21v12H5V10H3v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM8 14c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5-5 2.24-5 5zm5-3c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zM5 9V6h3V4H5V1H3v3H0v2h3v3z"
 })), 'AddAPhotoTwoTone');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Favorite.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Favorite.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+}), 'Favorite');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/FilterHdr.js":
+/*!******************************************************!*\
+  !*** ./node_modules/@material-ui/icons/FilterHdr.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"
+}), 'FilterHdr');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Share.js":
+/*!**************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Share.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
+}), 'Share');
 
 exports.default = _default;
 
@@ -16905,6 +18693,115 @@ var ImagePreview = function ImagePreview(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Posts/PostCard.jsx":
+/*!****************************************************!*\
+  !*** ./resources/js/components/Posts/PostCard.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Card/Card.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CardMedia/CardMedia.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Chip/Chip.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CardContent/CardContent.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Typography/Typography.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CardActions/CardActions.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/IconButton/IconButton.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CardHeader/CardHeader.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Avatar/Avatar.js");
+/* harmony import */ var _material_ui_icons_Favorite__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/icons/Favorite */ "./node_modules/@material-ui/icons/Favorite.js");
+/* harmony import */ var _material_ui_icons_FilterHdr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/FilterHdr */ "./node_modules/@material-ui/icons/FilterHdr.js");
+/* harmony import */ var _material_ui_icons_Share__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/icons/Share */ "./node_modules/@material-ui/icons/Share.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/makeStyles/makeStyles.js");
+/* harmony import */ var _public_img_noimage_jpeg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../public/img/noimage.jpeg */ "./public/img/noimage.jpeg");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_3__.default)({
+  root: {
+    width: '32%',
+    zIndex: 1,
+    marginBottom: '2rem',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  media: {
+    position: 'absolute',
+    objectFit: 'cover',
+    objectPosition: 'center',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: '100%',
+    zIndex: 10
+  },
+  chip: {
+    zIndex: 99,
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: 'rgba(204, 204, 204, 0.8)'
+  },
+  content: {
+    whiteSpace: 'pre-wrap',
+    flexGrow: 1
+  }
+});
+
+var PostCard = function PostCard(props) {
+  var classes = useStyles();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__.default, {
+    className: classes.root,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "image-thumb",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
+        className: classes.media,
+        image: props.image
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
+        className: classes.chip,
+        variant: "outlined",
+        size: "small",
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_FilterHdr__WEBPACK_IMPORTED_MODULE_7__.default, {}),
+        label: props.category
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+      className: classes.content,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
+        children: props.text
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_Favorite__WEBPACK_IMPORTED_MODULE_12__.default, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_Share__WEBPACK_IMPORTED_MODULE_13__.default, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+        avatar: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_15__.default, {
+          alt: "\u30E6\u30FC\u30B6\u30FC\u753B\u50CF",
+          src: _public_img_noimage_jpeg__WEBPACK_IMPORTED_MODULE_1__.default
+        }),
+        title: props.name,
+        subheader: props.date
+      })]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PostCard);
+
+/***/ }),
+
 /***/ "./resources/js/components/Posts/index.js":
 /*!************************************************!*\
   !*** ./resources/js/components/Posts/index.js ***!
@@ -16914,9 +18811,12 @@ var ImagePreview = function ImagePreview(props) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ImageArea": () => (/* reexport safe */ _Posts_ImageArea__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */   "ImageArea": () => (/* reexport safe */ _ImageArea__WEBPACK_IMPORTED_MODULE_0__.default),
+/* harmony export */   "PostCard": () => (/* reexport safe */ _PostCard__WEBPACK_IMPORTED_MODULE_1__.default)
 /* harmony export */ });
-/* harmony import */ var _Posts_ImageArea__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Posts/ImageArea */ "./resources/js/components/Posts/ImageArea.jsx");
+/* harmony import */ var _ImageArea__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ImageArea */ "./resources/js/components/Posts/ImageArea.jsx");
+/* harmony import */ var _PostCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostCard */ "./resources/js/components/Posts/PostCard.jsx");
+
 
 
 /***/ }),
@@ -17801,9 +19701,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducks_users_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducks/users/selector */ "./resources/js/reducks/users/selector.js");
 /* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
 /* harmony import */ var _reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducks/users/operations */ "./resources/js/reducks/users/operations.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _PostList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PostList */ "./resources/js/templates/PostList.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -17828,37 +19730,37 @@ var Home = function Home() {
       dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.checkAuthAtHome)());
     }
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
       children: ["\u3053\u3093\u306B\u3061\u306F", username, "\u3055\u3093"]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
       children: ["\u30E6\u30FC\u30B6\u30FCID:", uid]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
       label: 'ログイン',
       onClick: function onClick() {
-        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/login'));
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_7__.push)('/login'));
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
       label: '新規登録',
       onClick: function onClick() {
-        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/register'));
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_7__.push)('/register'));
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
       label: 'マイページ',
       onClick: function onClick() {
-        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/mypage'));
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_7__.push)('/mypage'));
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
       label: '投稿する',
       onClick: function onClick() {
-        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/edit'));
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_7__.push)('/edit'));
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.OutlinedButton, {
       label: 'ログアウト',
       onClick: function onClick() {
         return dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.logout)());
       }
-    })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_PostList__WEBPACK_IMPORTED_MODULE_5__.default, {})]
   });
 };
 
@@ -17926,7 +19828,7 @@ var Login = function Login() {
     setPassword(event.target.value);
   }, [inputPassword]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "small-container",
+    className: "small-section",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
       className: 'center',
       children: "\u30ED\u30B0\u30A4\u30F3"
@@ -18154,7 +20056,7 @@ var PostEdit = function PostEdit() {
     getCategories();
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-    className: "small-container",
+    className: "small-section",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
       className: "center",
       children: "\u6295\u7A3F\u4F5C\u6210\u30D5\u30A9\u30FC\u30E0"
@@ -18202,6 +20104,105 @@ var PostEdit = function PostEdit() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PostEdit);
+
+/***/ }),
+
+/***/ "./resources/js/templates/PostList.jsx":
+/*!*********************************************!*\
+  !*** ./resources/js/templates/PostList.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Posts */ "./resources/js/components/Posts/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var PostList = function PostList() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      postList = _useState2[0],
+      setPostList = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    var getPostList = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var url;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                url = 'http://localhost:30080/api/v1/posts/';
+                _context.next = 3;
+                return fetch(url).then(function (response) {
+                  return response.json();
+                }).then(function (responseJson) {
+                  return setPostList(responseJson);
+                })["catch"](function (error) {
+                  return console.error(error);
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function getPostList() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    getPostList();
+  }, []);
+  console.log(postList);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
+    className: "large-section",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "grid-row",
+      children: postList.map(function (post) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_2__.PostCard, {
+          image: post.file_path,
+          text: post.text,
+          category: post.category,
+          name: post.user_name,
+          date: post.updated_at
+        }, post.id);
+      })
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PostList);
 
 /***/ }),
 
@@ -18276,7 +20277,7 @@ var Register = function Register() {
     setconfirmPassword(event.target.value);
   }, [inputConfirmPassword]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: 'small-container',
+    className: 'small-section',
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
       className: 'center',
       children: "\u65B0\u898F\u767B\u9332"
@@ -18354,13 +20355,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Login": () => (/* reexport safe */ _Login__WEBPACK_IMPORTED_MODULE_1__.default),
 /* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_2__.default),
 /* harmony export */   "MyPage": () => (/* reexport safe */ _MyPage__WEBPACK_IMPORTED_MODULE_3__.default),
-/* harmony export */   "PostEdit": () => (/* reexport safe */ _PostEdit__WEBPACK_IMPORTED_MODULE_4__.default)
+/* harmony export */   "PostEdit": () => (/* reexport safe */ _PostEdit__WEBPACK_IMPORTED_MODULE_4__.default),
+/* harmony export */   "PostList": () => (/* reexport safe */ _PostList__WEBPACK_IMPORTED_MODULE_5__.default)
 /* harmony export */ });
 /* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Register */ "./resources/js/templates/Register.jsx");
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Login */ "./resources/js/templates/Login.jsx");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./resources/js/templates/Home.jsx");
 /* harmony import */ var _MyPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MyPage */ "./resources/js/templates/MyPage.jsx");
 /* harmony import */ var _PostEdit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PostEdit */ "./resources/js/templates/PostEdit.jsx");
+/* harmony import */ var _PostList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PostList */ "./resources/js/templates/PostList.jsx");
+
 
 
 
@@ -23599,7 +25603,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\n    background-color: #f2f4fb;\n}\n\n.small-container {\n    max-width: 480px;\n    margin: 0 auto;\n    padding: 1rem;\n}\n\n.center {\n    text-align: center;\n}\n\n.margin-20 {\n    margin-left: 20px;\n}\n\n.spacer-small {\n    height: 30px;\n}\n\n.spacer-medium {\n    height: 60px;\n}\n\n.header {\n    height: 190px;\n}\n\n.header-img {\n    height: 100%;\n}\n\n.text-right {\n    text-align: right;\n}\n\n.display-none {\n    display: none;\n}\n\n.w100 {\n    width: 100%;\n}\n\n.image-thumb {\n    position: relative;\n    overflow: hidden;\n    width: 100%\n}\n\n.image-thumb::before {\n    content: \"\";\n    display: block;\n    padding-top: 100%;\n}\n\n.image-thumb > img {\n    position: absolute;\n    -o-object-fit: cover;\n       object-fit: cover;\n    -o-object-position: center;\n       object-position: center;\n    top: 0;\n    left: 0;\n    height: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n    background-color: #f2f4fb;\n}\n\n\n.center {\n    text-align: center;\n}\n\n.margin-20 {\n    margin-left: 20px;\n}\n\n\n.header {\n    height: 190px;\n}\n\n.header-img {\n    height: 100%;\n}\n\n.text-right {\n    text-align: right;\n}\n\n.display-none {\n    display: none;\n}\n\n.w100 {\n    width: 100%;\n}\n\n.image-thumb {\n    position: relative;\n    overflow: hidden;\n    width: 100%\n}\n\n.image-thumb::before {\n    content: \"\";\n    display: block;\n    padding-top: 100%;\n}\n\n.image-thumb > img {\n    position: absolute;\n    -o-object-fit: cover;\n       object-fit: cover;\n    -o-object-position: center;\n       object-position: center;\n    top: 0;\n    left: 0;\n    height: auto;\n}\n\n/* SECTION系 */\n.small-section {\n    max-width: 480px;\n    margin: 0 auto;\n    padding: 1rem;\n}\n\n.large-section {\n    max-width: 1080px;\n    width: 100%;\n    margin: 0 auto;\n    padding: 1rem;\n}\n\n/* SPACER系 */\n.spacer-small {\n    height: 30px;\n}\n\n.spacer-medium {\n    height: 60px;\n}\n\n/* FLEX系 */\n.grid-row {\n    display: flex;\n    flex-flow: row wrap;\n    justify-content: space-between;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

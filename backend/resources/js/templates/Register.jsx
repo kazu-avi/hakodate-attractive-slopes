@@ -42,7 +42,7 @@ const Register = () => {
         [inputConfirmPassword]
     );
     return (
-        <div className={'small-container'}>
+        <div className={'small-section'}>
             <h2 className={'center'}>新規登録</h2>
             <TextInput
                 fullWidth={true}

@@ -1,1 +1,2 @@
-export { default as ImageArea } from '../Posts/ImageArea';
+export { default as ImageArea } from './ImageArea';
+export { default as PostCard } from './PostCard';

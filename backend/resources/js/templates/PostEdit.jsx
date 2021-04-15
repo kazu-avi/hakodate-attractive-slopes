@@ -43,7 +43,7 @@ const PostEdit = () => {
     }, []);
 
     return (
-        <div className="small-container">
+        <div className="small-section">
             <h2 className="center">投稿作成フォーム</h2>
             <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
             <div className="spacer-small"></div>

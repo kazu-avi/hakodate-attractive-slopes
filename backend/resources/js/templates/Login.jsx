@@ -27,7 +27,7 @@ const Login = () => {
     );
 
     return (
-        <div className="small-container">
+        <div className="small-section">
             <h2 className={'center'}>ログイン</h2>
             <TextInput
                 fullWidth={true}

@@ -2,11 +2,6 @@ body {
     background-color: #f2f4fb;
 }
 
-.small-container {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 1rem;
-}
 
 .center {
     text-align: center;
@@ -16,13 +11,6 @@ body {
     margin-left: 20px;
 }
 
-.spacer-small {
-    height: 30px;
-}
-
-.spacer-medium {
-    height: 60px;
-}
 
 .header {
     height: 190px;
@@ -63,4 +51,34 @@ body {
     top: 0;
     left: 0;
     height: auto;
+}
+
+/* SECTION系 */
+.small-section {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.large-section {
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* SPACER系 */
+.spacer-small {
+    height: 30px;
+}
+
+.spacer-medium {
+    height: 60px;
+}
+
+/* FLEX系 */
+.grid-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
 }
