@@ -45,7 +45,7 @@ class PostController extends Controller
     // 投稿一覧を取得
     public function getAllPosts() {
         $data = array();
-        $posts = Post::with('user', 'category')->orderBy('updated_at','desc')->get();
+        $posts = Post::with('user', 'category')->orderBy('updated_at','desc')->paginate(9);
 
         // 必要部分のみ抜き出してresponse
         foreach ($posts as $post) {
@@ -60,6 +60,6 @@ class PostController extends Controller
             array_push($data, $json);
         };
 
-        return response()->json($data);
+        return response()->json($posts);
     }
 }
