@@ -59,6 +59,7 @@ const PostCard = (props) => {
                     size="small"
                     icon={<FilterHdrIcon />}
                     label={props.category}
+                    onClick={() => props.chipClick()}
                 />
             </div>
             <CardContent className={classes.content}>

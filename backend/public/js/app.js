@@ -19585,7 +19585,10 @@ var PostCard = function PostCard(props) {
         variant: "outlined",
         size: "small",
         icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_FilterHdr__WEBPACK_IMPORTED_MODULE_7__.default, {}),
-        label: props.category
+        label: props.category,
+        onClick: function onClick() {
+          return props.chipClick();
+        }
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
       className: classes.content,
@@ -20974,7 +20977,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Posts */ "./resources/js/components/Posts/index.js");
 /* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -20999,6 +21004,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var PostList = function PostList() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -21013,62 +21020,88 @@ var PostList = function PostList() {
       totalPage = _useState6[0],
       setTotalPage = _useState6[1];
 
-  console.log(page, totalPage); // 初期値のセット
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useDispatch)();
+  var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useSelector)(function (state) {
+    return state;
+  });
+  var query = selector.router.location.search; // 取得したクエリが<?category=>の形と一致するか確認し、category_idを取得
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    var getPostList = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var url;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                url = 'http://localhost:30080/api/v1/posts/';
-                _context.next = 3;
-                return fetch(url).then(function (response) {
-                  return response.json();
-                }).then(function (responseJson) {
-                  setPostList(responseJson.data);
-                  setTotalPage(responseJson.last_page);
-                })["catch"](function (error) {
-                  return console.error(error);
-                });
+  var category = /^\?category=/.test(query) ? query.split('?category=')[1] : '';
+  var getPostList = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)( /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(page) {
+      var url, _url;
 
-              case 3:
-              case "end":
-                return _context.stop();
-            }
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (category) {
+                _context.next = 7;
+                break;
+              }
+
+              setPage(page);
+              url = 'http://localhost:30080/api/v1/posts?page=' + page;
+              _context.next = 5;
+              return fetch(url).then(function (response) {
+                return response.json();
+              }).then(function (responseJson) {
+                setPostList(responseJson.data);
+                setTotalPage(responseJson.last_page);
+              })["catch"](function (error) {
+                return console.error(error);
+              });
+
+            case 5:
+              _context.next = 11;
+              break;
+
+            case 7:
+              setPage(page);
+              _url = 'http://localhost:30080/api/v1/categories/' + category + '?page=' + page;
+              _context.next = 11;
+              return fetch(_url).then(function (response) {
+                return response.json();
+              }).then(function (responseJson) {
+                setPostList(responseJson.data);
+                setTotalPage(responseJson.last_page);
+              })["catch"](function (error) {
+                return console.error(error);
+              });
+
+            case 11:
+            case "end":
+              return _context.stop();
           }
-        }, _callee);
-      }));
+        }
+      }, _callee);
+    }));
 
-      return function getPostList() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    getPostList();
-  }, []); // ページネーション実行の関数
-
-  var pageSwitched = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)( /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(page) {
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }(), [getPostList]);
+  var chipClickHandler = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)( /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(id) {
       var url;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_6__.push)('/?category=' + id));
               setPage(page);
-              url = 'http://localhost:30080/api/v1/posts?page=' + page;
-              _context2.next = 4;
+              url = 'http://localhost:30080/api/v1/categories/' + id + '?page=' + page;
+              _context2.next = 5;
               return fetch(url).then(function (response) {
                 return response.json();
               }).then(function (responseJson) {
                 setPostList(responseJson.data);
+                setTotalPage(responseJson.last_page);
               })["catch"](function (error) {
                 return console.error(error);
               });
 
-            case 4:
+            case 5:
             case "end":
               return _context2.stop();
           }
@@ -21076,28 +21109,34 @@ var PostList = function PostList() {
       }, _callee2);
     }));
 
-    return function (_x) {
+    return function (_x2) {
       return _ref2.apply(this, arguments);
     };
-  }(), [pageSwitched]);
-  console.log(postList);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("section", {
+  }(), [chipClickHandler]); // 初期値のセット
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    getPostList(page);
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("section", {
     className: "large-section",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "grid-row",
       children: postList.map(function (post) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_2__.PostCard, {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_2__.PostCard, {
           image: post.file_path,
           text: post.text,
           category: post.category.name,
           name: post.user.name,
-          date: post.updated_at
+          date: post.updated_at,
+          chipClick: function chipClick() {
+            return chipClickHandler(post.category_id);
+          }
         }, post.id);
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.Pagination, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_3__.Pagination, {
       count: totalPage,
       disabled: false,
-      onChange: pageSwitched,
+      onChange: getPostList,
       page: page
     })]
   });

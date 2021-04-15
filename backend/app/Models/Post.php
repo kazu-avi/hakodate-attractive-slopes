@@ -21,6 +21,11 @@ class Post extends Model
         return  $date->format('Y-m-d H:i');
     }
 
+    // レスポンスの際に不必要なカラムを除く
+    protected $hidden = [
+        'created_at'
+    ];
+
     /**
      * リレーションの設定
      *
