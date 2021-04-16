@@ -3,6 +3,7 @@
 
 import { push } from 'connected-react-router';
 import { loginAction, logoutAction } from './actions';
+import { showLoadingAction, hideLoadingAction } from '../loading/actions';
 
 // 認証のチェック(Authコンポーネント)
 export const checkAuth = () => {
@@ -124,8 +125,11 @@ export const register = (username, email, password, confirmPassword) => {
             body: JSON.stringify(data),
         };
 
+        console.log(option);
+
         await fetch(url, option)
             .then((response) => {
+                dispatch(showLoadingAction('登録しています・・・'));
                 if (!response.ok) {
                     console.log('登録に失敗しました');
                 }
@@ -133,9 +137,11 @@ export const register = (username, email, password, confirmPassword) => {
             })
             .then((responseJson) => {
                 console.log(responseJson);
+                dispatch(hideLoadingAction());
                 dispatch(push('/login'));
             })
             .catch((error) => {
+                dispatch(hideLoadingAction());
                 console.error(error);
                 return null;
             });
@@ -167,7 +173,9 @@ export const login = (email, password) => {
 
         await fetch(url, option)
             .then((response) => {
+                dispatch(showLoadingAction('ログインしています・・・'));
                 if (!response.ok) {
+                    dispatch(hideLoadingAction());
                     console.log('認証に失敗しました');
                     alert('ログインに失敗しました。新規登録するか、再度入力してお試しください。');
                 } else {
@@ -185,6 +193,7 @@ export const login = (email, password) => {
                             })
                         );
 
+                        dispatch(hideLoadingAction());
                         dispatch(push('/'));
                     });
                 }

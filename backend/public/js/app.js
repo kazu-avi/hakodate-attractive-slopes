@@ -3425,6 +3425,274 @@ var Chip = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function C
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/esm/CircularProgress/CircularProgress.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/CircularProgress/CircularProgress.js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "styles": () => (/* binding */ styles),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/chainPropTypes.js");
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@material-ui/core/esm/utils/capitalize.js");
+
+
+
+
+
+
+
+
+var SIZE = 44;
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      display: 'inline-block'
+    },
+
+    /* Styles applied to the root element if `variant="static"`. */
+    static: {
+      transition: theme.transitions.create('transform')
+    },
+
+    /* Styles applied to the root element if `variant="indeterminate"`. */
+    indeterminate: {
+      animation: '$circular-rotate 1.4s linear infinite'
+    },
+
+    /* Styles applied to the root element if `variant="determinate"`. */
+    determinate: {
+      transition: theme.transitions.create('transform')
+    },
+
+    /* Styles applied to the root element if `color="primary"`. */
+    colorPrimary: {
+      color: theme.palette.primary.main
+    },
+
+    /* Styles applied to the root element if `color="secondary"`. */
+    colorSecondary: {
+      color: theme.palette.secondary.main
+    },
+
+    /* Styles applied to the `svg` element. */
+    svg: {
+      display: 'block' // Keeps the progress centered
+
+    },
+
+    /* Styles applied to the `circle` svg path. */
+    circle: {
+      stroke: 'currentColor' // Use butt to follow the specification, by chance, it's already the default CSS value.
+      // strokeLinecap: 'butt',
+
+    },
+
+    /* Styles applied to the `circle` svg path if `variant="static"`. */
+    circleStatic: {
+      transition: theme.transitions.create('stroke-dashoffset')
+    },
+
+    /* Styles applied to the `circle` svg path if `variant="indeterminate"`. */
+    circleIndeterminate: {
+      animation: '$circular-dash 1.4s ease-in-out infinite',
+      // Some default value that looks fine waiting for the animation to kicks in.
+      strokeDasharray: '80px, 200px',
+      strokeDashoffset: '0px' // Add the unit to fix a Edge 16 and below bug.
+
+    },
+
+    /* Styles applied to the `circle` svg path if `variant="determinate"`. */
+    circleDeterminate: {
+      transition: theme.transitions.create('stroke-dashoffset')
+    },
+    '@keyframes circular-rotate': {
+      '0%': {
+        // Fix IE 11 wobbly
+        transformOrigin: '50% 50%'
+      },
+      '100%': {
+        transform: 'rotate(360deg)'
+      }
+    },
+    '@keyframes circular-dash': {
+      '0%': {
+        strokeDasharray: '1px, 200px',
+        strokeDashoffset: '0px'
+      },
+      '50%': {
+        strokeDasharray: '100px, 200px',
+        strokeDashoffset: '-15px'
+      },
+      '100%': {
+        strokeDasharray: '100px, 200px',
+        strokeDashoffset: '-125px'
+      }
+    },
+
+    /* Styles applied to the `circle` svg path if `disableShrink={true}`. */
+    circleDisableShrink: {
+      animation: 'none'
+    }
+  };
+};
+/**
+ * ## ARIA
+ *
+ * If the progress bar is describing the loading progress of a particular region of a page,
+ * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
+ * attribute to `true` on that region until it has finished loading.
+ */
+
+var CircularProgress = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function CircularProgress(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$color = props.color,
+      color = _props$color === void 0 ? 'primary' : _props$color,
+      _props$disableShrink = props.disableShrink,
+      disableShrink = _props$disableShrink === void 0 ? false : _props$disableShrink,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 40 : _props$size,
+      style = props.style,
+      _props$thickness = props.thickness,
+      thickness = _props$thickness === void 0 ? 3.6 : _props$thickness,
+      _props$value = props.value,
+      value = _props$value === void 0 ? 0 : _props$value,
+      _props$variant = props.variant,
+      variant = _props$variant === void 0 ? 'indeterminate' : _props$variant,
+      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["classes", "className", "color", "disableShrink", "size", "style", "thickness", "value", "variant"]);
+
+  var circleStyle = {};
+  var rootStyle = {};
+  var rootProps = {};
+
+  if (variant === 'determinate' || variant === 'static') {
+    var circumference = 2 * Math.PI * ((SIZE - thickness) / 2);
+    circleStyle.strokeDasharray = circumference.toFixed(3);
+    rootProps['aria-valuenow'] = Math.round(value);
+    circleStyle.strokeDashoffset = "".concat(((100 - value) / 100 * circumference).toFixed(3), "px");
+    rootStyle.transform = 'rotate(-90deg)';
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className, color !== 'inherit' && classes["color".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_5__.default)(color))], {
+      'determinate': classes.determinate,
+      'indeterminate': classes.indeterminate,
+      'static': classes.static
+    }[variant]),
+    style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+      width: size,
+      height: size
+    }, rootStyle, style),
+    ref: ref,
+    role: "progressbar"
+  }, rootProps, other), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("svg", {
+    className: classes.svg,
+    viewBox: "".concat(SIZE / 2, " ").concat(SIZE / 2, " ").concat(SIZE, " ").concat(SIZE)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("circle", {
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.circle, disableShrink && classes.circleDisableShrink, {
+      'determinate': classes.circleDeterminate,
+      'indeterminate': classes.circleIndeterminate,
+      'static': classes.circleStatic
+    }[variant]),
+    style: circleStyle,
+    cx: SIZE,
+    cy: SIZE,
+    r: (SIZE - thickness) / 2,
+    fill: "none",
+    strokeWidth: thickness
+  })));
+});
+ true ? CircularProgress.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   */
+  color: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['inherit', 'primary', 'secondary']),
+
+  /**
+   * If `true`, the shrink animation is disabled.
+   * This only works if variant is `indeterminate`.
+   */
+  disableShrink: (0,_material_ui_utils__WEBPACK_IMPORTED_MODULE_6__.default)((prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool), function (props) {
+    if (props.disableShrink && props.variant && props.variant !== 'indeterminate') {
+      return new Error('Material-UI: You have provided the `disableShrink` prop ' + 'with a variant other than `indeterminate`. This will have no effect.');
+    }
+
+    return null;
+  }),
+
+  /**
+   * The size of the circle.
+   * If using a number, the pixel unit is assumed.
+   * If using a string, you need to provide the CSS unit, e.g '3rem'.
+   */
+  size: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_3___default().number), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string)]),
+
+  /**
+   * @ignore
+   */
+  style: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * The thickness of the circle.
+   */
+  thickness: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().number),
+
+  /**
+   * The value of the progress indicator for the determinate variant.
+   * Value between 0 and 100.
+   */
+  value: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().number),
+
+  /**
+   * The variant to use.
+   * Use indeterminate when there is no progress value.
+   */
+  variant: (0,_material_ui_utils__WEBPACK_IMPORTED_MODULE_6__.default)(prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['determinate', 'indeterminate', 'static']), function (props) {
+    var variant = props.variant;
+
+    if (variant === 'static') {
+      throw new Error('Material-UI: `variant="static"` was deprecated. Use `variant="determinate"` instead.');
+    }
+
+    return null;
+  })
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_7__.default)(styles, {
+  name: 'MuiCircularProgress',
+  flip: false
+})(CircularProgress));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/esm/FilledInput/FilledInput.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/FilledInput/FilledInput.js ***!
@@ -19648,12 +19916,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var _reducks_loading_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../reducks/loading/actions */ "./resources/js/reducks/loading/actions.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -19686,6 +19956,8 @@ var postRegister = function postRegister(uid, category, file, text) {
               console.log(option);
               _context.next = 12;
               return fetch(url, option).then(function (response) {
+                dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_1__.showLoadingAction)('投稿しています・・・'));
+
                 if (!response.ok) {
                   alert('投稿に失敗しました');
                   throw new Error("".concat(response.status, " ").concat(response.statusText));
@@ -19695,9 +19967,11 @@ var postRegister = function postRegister(uid, category, file, text) {
               }).then(function (responseJson) {
                 console.log(responseJson);
                 alert('写真を投稿しました！');
-                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_1__.push)('/'));
+                dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_1__.hideLoadingAction)());
+                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
               })["catch"](function (error) {
                 console.error(error);
+                dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_1__.hideLoadingAction)());
                 alert('投稿に失敗しました');
                 return null;
               });
@@ -19762,6 +20036,52 @@ var BaseFirld = function BaseFirld() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BaseFirld);
+
+/***/ }),
+
+/***/ "./resources/js/components/UIKit/Loading.jsx":
+/*!***************************************************!*\
+  !*** ./resources/js/components/UIKit/Loading.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducks_loading_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducks/loading/selectors */ "./resources/js/reducks/loading/selectors.js");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/CircularProgress.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+var Loading = function Loading(_ref) {
+  var children = _ref.children;
+  var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state;
+  });
+  var isBeingLoaded = (0,_reducks_loading_selectors__WEBPACK_IMPORTED_MODULE_2__.getIsBeingLoaded)(selector);
+  var loadingText = (0,_reducks_loading_selectors__WEBPACK_IMPORTED_MODULE_2__.getLoadingText)(selector);
+  console.log(isBeingLoaded);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: isBeingLoaded ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+      className: "small-section center",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: loadingText
+      })]
+    }) : children
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Loading);
 
 /***/ }),
 
@@ -19979,7 +20299,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "OutlinedButton": () => (/* reexport safe */ _OutlinedButton__WEBPACK_IMPORTED_MODULE_2__.default),
 /* harmony export */   "BaseField": () => (/* reexport safe */ _BaseField__WEBPACK_IMPORTED_MODULE_3__.default),
 /* harmony export */   "SelectBox": () => (/* reexport safe */ _SelectBox__WEBPACK_IMPORTED_MODULE_4__.default),
-/* harmony export */   "Pagination": () => (/* reexport safe */ _Pagination__WEBPACK_IMPORTED_MODULE_5__.default)
+/* harmony export */   "Pagination": () => (/* reexport safe */ _Pagination__WEBPACK_IMPORTED_MODULE_5__.default),
+/* harmony export */   "Loading": () => (/* reexport safe */ _Loading__WEBPACK_IMPORTED_MODULE_6__.default)
 /* harmony export */ });
 /* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextInput */ "./resources/js/components/UIKit/TextInput.jsx");
 /* harmony import */ var _PrimaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PrimaryButton */ "./resources/js/components/UIKit/PrimaryButton.jsx");
@@ -19987,6 +20308,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BaseField__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BaseField */ "./resources/js/components/UIKit/BaseField.jsx");
 /* harmony import */ var _SelectBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SelectBox */ "./resources/js/components/UIKit/SelectBox.jsx");
 /* harmony import */ var _Pagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Pagination */ "./resources/js/components/UIKit/Pagination.jsx");
+/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Loading */ "./resources/js/components/UIKit/Loading.jsx");
+
 
 
 
@@ -20040,6 +20363,111 @@ react_dom__WEBPACK_IMPORTED_MODULE_1__.render(
 
 /***/ }),
 
+/***/ "./resources/js/reducks/loading/actions.js":
+/*!*************************************************!*\
+  !*** ./resources/js/reducks/loading/actions.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SHOW_LOADING": () => (/* binding */ SHOW_LOADING),
+/* harmony export */   "showLoadingAction": () => (/* binding */ showLoadingAction),
+/* harmony export */   "HIDE_LOADING": () => (/* binding */ HIDE_LOADING),
+/* harmony export */   "hideLoadingAction": () => (/* binding */ hideLoadingAction)
+/* harmony export */ });
+var SHOW_LOADING = 'SHOW_LOADING';
+var showLoadingAction = function showLoadingAction() {
+  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Loading...';
+  return {
+    type: 'SHOW_LOADING',
+    payload: {
+      isBeingLoaded: true,
+      text: text
+    }
+  };
+};
+var HIDE_LOADING = 'HIDE_LOADING';
+var hideLoadingAction = function hideLoadingAction() {
+  return {
+    type: 'HIDE_LOADING',
+    payload: {
+      isBeingLoaded: false,
+      text: ''
+    }
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/js/reducks/loading/reducers.js":
+/*!**************************************************!*\
+  !*** ./resources/js/reducks/loading/reducers.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LoadingReducer": () => (/* binding */ LoadingReducer)
+/* harmony export */ });
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/js/reducks/loading/actions.js");
+/* harmony import */ var _store_initialState__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/initialState */ "./resources/js/reducks/store/initialState.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var LoadingReducer = function LoadingReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _store_initialState__WEBPACK_IMPORTED_MODULE_1__.default.loading;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions__WEBPACK_IMPORTED_MODULE_0__.SHOW_LOADING:
+      return _objectSpread(_objectSpread({}, state), action.payload);
+
+    case _actions__WEBPACK_IMPORTED_MODULE_0__.HIDE_LOADING:
+      return _objectSpread(_objectSpread({}, state), action.payload);
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/reducks/loading/selectors.js":
+/*!***************************************************!*\
+  !*** ./resources/js/reducks/loading/selectors.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getIsBeingLoaded": () => (/* binding */ getIsBeingLoaded),
+/* harmony export */   "getLoadingText": () => (/* binding */ getLoadingText)
+/* harmony export */ });
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! reselect */ "./node_modules/reselect/es/index.js");
+
+
+var loadingSelector = function loadingSelector(state) {
+  return state.loading;
+};
+
+var getIsBeingLoaded = (0,reselect__WEBPACK_IMPORTED_MODULE_0__.createSelector)([loadingSelector], function (state) {
+  return state.isBeingLoaded;
+});
+var getLoadingText = (0,reselect__WEBPACK_IMPORTED_MODULE_0__.createSelector)([loadingSelector], function (state) {
+  return state.text;
+});
+
+/***/ }),
+
 /***/ "./resources/js/reducks/store/initialState.js":
 /*!****************************************************!*\
   !*** ./resources/js/reducks/store/initialState.js ***!
@@ -20057,6 +20485,10 @@ var initialState = {
     isSignedIn: false,
     uid: '',
     username: ''
+  },
+  loading: {
+    isBeingLoaded: false,
+    text: ''
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initialState);
@@ -20074,21 +20506,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/index.js");
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/middleware.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/index.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/middleware.js");
 /* harmony import */ var _users_reducers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../users/reducers */ "./resources/js/reducks/users/reducers.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var _loading_reducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../loading/reducers */ "./resources/js/reducks/loading/reducers.js");
+
 
 
 
  //引数：history(pathの履歴の情報を持つ)
 
 var createStore = function createStore(history) {
-  return (0,redux__WEBPACK_IMPORTED_MODULE_2__.createStore)((0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
-    router: (0,connected_react_router__WEBPACK_IMPORTED_MODULE_3__.connectRouter)(history),
-    users: _users_reducers__WEBPACK_IMPORTED_MODULE_0__.UsersReducer
-  }), (0,redux__WEBPACK_IMPORTED_MODULE_2__.applyMiddleware)((0,connected_react_router__WEBPACK_IMPORTED_MODULE_4__.default)(history), redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)((0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+    router: (0,connected_react_router__WEBPACK_IMPORTED_MODULE_4__.connectRouter)(history),
+    users: _users_reducers__WEBPACK_IMPORTED_MODULE_0__.UsersReducer,
+    loading: _loading_reducers__WEBPACK_IMPORTED_MODULE_2__.LoadingReducer
+  }), (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)((0,connected_react_router__WEBPACK_IMPORTED_MODULE_5__.default)(history), redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createStore);
@@ -20152,8 +20587,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./resources/js/reducks/users/actions.js");
+/* harmony import */ var _loading_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../loading/actions */ "./resources/js/reducks/loading/actions.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -20162,6 +20598,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 // コンポーネント内での変更（イベントの発生）後、operationで処理を行い
 // Actionsにデータを渡す
+
 
  // 認証のチェック(Authコンポーネント)
 
@@ -20189,7 +20626,7 @@ var checkAuth = function checkAuth() {
               }
 
               alert('ログインが必要です。');
-              dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/login'));
+              dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_3__.push)('/login'));
               _context.next = 10;
               break;
 
@@ -20198,7 +20635,7 @@ var checkAuth = function checkAuth() {
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
                   alert('ログインが必要です。');
-                  dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/login'));
+                  dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_3__.push)('/login'));
                 } else {
                   return response.json().then(function (responseJson) {
                     var resToken = responseJson['access_token'];
@@ -20253,7 +20690,7 @@ var checkAuthAtHome = function checkAuthAtHome() {
                 break;
               }
 
-              dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+              dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_3__.push)('/'));
               _context2.next = 9;
               break;
 
@@ -20261,7 +20698,7 @@ var checkAuthAtHome = function checkAuthAtHome() {
               _context2.next = 9;
               return fetch(url, option).then(function (response) {
                 if (!response.ok) {
-                  dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+                  dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_3__.push)('/'));
                 } else {
                   return response.json().then(function (responseJson) {
                     var resToken = responseJson['access_token'];
@@ -20331,8 +20768,11 @@ var register = function register(username, email, password, confirmPassword) {
                 },
                 body: JSON.stringify(data)
               };
-              _context3.next = 11;
+              console.log(option);
+              _context3.next = 12;
               return fetch(url, option).then(function (response) {
+                dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_2__.showLoadingAction)('登録しています・・・'));
+
                 if (!response.ok) {
                   console.log('登録に失敗しました');
                 }
@@ -20340,13 +20780,15 @@ var register = function register(username, email, password, confirmPassword) {
                 return response.json();
               }).then(function (responseJson) {
                 console.log(responseJson);
-                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/login'));
+                dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_2__.hideLoadingAction)());
+                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_3__.push)('/login'));
               })["catch"](function (error) {
+                dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_2__.hideLoadingAction)());
                 console.error(error);
                 return null;
               });
 
-            case 11:
+            case 12:
             case "end":
               return _context3.stop();
           }
@@ -20390,7 +20832,10 @@ var login = function login(email, password) {
               };
               _context4.next = 8;
               return fetch(url, option).then(function (response) {
+                dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_2__.showLoadingAction)('ログインしています・・・'));
+
                 if (!response.ok) {
+                  dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_2__.hideLoadingAction)());
                   console.log('認証に失敗しました');
                   alert('ログインに失敗しました。新規登録するか、再度入力してお試しください。');
                 } else {
@@ -20404,7 +20849,8 @@ var login = function login(email, password) {
                       uid: responseJson['uid'],
                       username: responseJson['username']
                     }));
-                    dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+                    dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_2__.hideLoadingAction)());
+                    dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_3__.push)('/'));
                   });
                 }
               })["catch"](function (error) {
@@ -20447,7 +20893,7 @@ var logout = function logout() {
                 localStorage.removeItem('access_token');
                 dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.logoutAction)());
                 alert('ログアウトしました');
-                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_2__.push)('/'));
+                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_3__.push)('/'));
               });
 
             case 5:
@@ -21112,7 +21558,7 @@ var PostList = function PostList() {
     return function (_x2) {
       return _ref2.apply(this, arguments);
     };
-  }(), [chipClickHandler]); // 初期値のセット
+  }(), [chipClickHandler]); //  初期値のセット
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getPostList(page);
@@ -21328,7 +21774,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_app_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css/app.css */ "./resources/css/app.css");
 /* harmony import */ var _components_Header_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Header/Header */ "./resources/js/components/Header/Header.jsx");
 /* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Router */ "./resources/js/Router.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -21338,9 +21786,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Header_Header__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("main", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Router__WEBPACK_IMPORTED_MODULE_3__.default, {})
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Header_Header__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_4__.Loading, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("main", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Router__WEBPACK_IMPORTED_MODULE_3__.default, {})
+      })
     })]
   });
 };

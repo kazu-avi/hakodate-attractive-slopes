@@ -2,14 +2,17 @@ import React from 'react';
 import '../../css/app.css';
 import Header from '../components/Header/Header';
 import Router from '../Router';
+import { Loading } from '../components/UIKit';
 
 const App = () => {
     return (
         <>
             <Header />
-            <main>
-                <Router />
-            </main>
+            <Loading>
+                <main>
+                    <Router />
+                </main>
+            </Loading>
         </>
     );
 };
