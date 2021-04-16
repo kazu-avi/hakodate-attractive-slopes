@@ -1,4 +1,5 @@
 import { push } from 'connected-react-router';
+import { showLoadingAction, hideLoadingAction } from '../../reducks/loading/actions';
 
 const postRegister = (uid, category, file, text) => {
     return async (dispatch) => {
@@ -27,6 +28,7 @@ const postRegister = (uid, category, file, text) => {
 
         await fetch(url, option)
             .then((response) => {
+                dispatch(showLoadingAction('投稿しています・・・'));
                 if (!response.ok) {
                     alert('投稿に失敗しました');
                     throw new Error(`${response.status} ${response.statusText}`);
@@ -37,10 +39,12 @@ const postRegister = (uid, category, file, text) => {
             .then((responseJson) => {
                 console.log(responseJson);
                 alert('写真を投稿しました！');
+                dispatch(hideLoadingAction());
                 dispatch(push('/'));
             })
             .catch((error) => {
                 console.error(error);
+                dispatch(hideLoadingAction());
                 alert('投稿に失敗しました');
                 return null;
             });

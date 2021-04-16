@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { PostCard } from '../components/Posts';
 import { Pagination } from '../components/UIKit';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,9 @@ const PostList = () => {
                 setPage(page);
                 const url = 'http://localhost:30080/api/v1/posts?page=' + page;
                 await fetch(url)
-                    .then((response) => response.json())
+                    .then((response) => {
+                        return response.json();
+                    })
                     .then((responseJson) => {
                         setPostList(responseJson.data);
                         setTotalPage(responseJson.last_page);
@@ -58,7 +60,7 @@ const PostList = () => {
         [chipClickHandler]
     );
 
-    // 初期値のセット
+    //  初期値のセット
     useEffect(() => {
         getPostList(page);
     }, []);
