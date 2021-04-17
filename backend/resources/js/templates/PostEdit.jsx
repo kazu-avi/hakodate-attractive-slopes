@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { TextInput, SelectBox } from '../components/UIKit';
+import { TextInput, SelectBox, InputTags } from '../components/UIKit';
 import { ImageArea } from '../components/Posts';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -12,7 +12,8 @@ const PostEdit = () => {
         [encodedFile, setEncodedFile] = useState(''),
         [category, setCategory] = useState(''),
         [categories, setCategories] = useState([]),
-        [text, setText] = useState('');
+        [text, setText] = useState(''),
+        [tags, setTags] = useState([]);
 
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
@@ -24,6 +25,15 @@ const PostEdit = () => {
         },
         [inputText]
     );
+
+    const inputTags = useCallback(
+        (newTags) => {
+            setTags(newTags);
+        },
+        [inputTags]
+    );
+
+    console.log(tags);
 
     // mount時にDB(API)よりカテゴリー一覧を取得しセット
     useEffect(() => {
@@ -64,11 +74,15 @@ const PostEdit = () => {
                 value={text}
                 onChange={inputText}
             />
+            <InputTags tags={tags} editable={true} onChange={inputTags} placeholder={'タグを入力してね！'} />
             <div className="spacer-medium"></div>
             <div className="center">
                 <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />
                 <span className="margin-20"></span>
-                <PrimaryButton label={'投稿する'} onClick={() => dispatch(postRegister(uid, category, file, text))} />
+                <PrimaryButton
+                    label={'投稿する'}
+                    onClick={() => dispatch(postRegister(uid, category, file, text, tags))}
+                />
             </div>
         </div>
     );

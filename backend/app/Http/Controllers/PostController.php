@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PhotoPostRequest;
@@ -17,9 +18,34 @@ class PostController extends Controller
         $post = new Post();
         $input = $request->all();
 
-        $image = $input['file'];
+        // タグ登録の処理
+        $inputTags = $request['tags'];
 
-        // S3に画像を保存し、パスを代入
+
+        $tags = [];
+        $tags_id = [];
+
+        if ($inputTags !== []) {
+            DB::beginTransaction();
+            try {
+                foreach ($inputTags as $tag) {
+                    $record = Tag::firstOrCreate([
+                        'name' => $tag,
+                    ]);
+                    array_push($tags, $record);
+                }
+                DB::commit();
+                foreach ($tags as $tag) {
+                    array_push($tags_id, $tag->id);
+                }
+            } catch(Throwable $e) {
+                DB::rollBack();
+                return response()->json([$e],401);
+            }
+        }
+
+        // 画像をs3に保存
+        $image = $input['file'];
         $path = Storage::disk('s3')->put('images', $image, 'public');
 
         // データセット
@@ -32,6 +58,7 @@ class PostController extends Controller
 
         try {
             $post->save();
+            $post->tags()->attach($tags_id);
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
