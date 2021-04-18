@@ -3,6 +3,8 @@ import { PostCard, PostListTabs } from '../components/Posts';
 import { Pagination } from '../components/UIKit';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
+import { getAllCategories } from '../reducks/categories/operations';
+import { getCategoriesList } from '../reducks/categories/selectors';
 
 const PostList = () => {
     const [postList, setPostList] = useState([]),
@@ -12,6 +14,7 @@ const PostList = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const query = selector.router.location.search;
+
     // 取得したクエリが<?category=>の形と一致するか確認し、category_idを取得
     const category = /^\?category=/.test(query) ? query.split('?category=')[1] : '';
 
@@ -79,14 +82,15 @@ const PostList = () => {
     //  初期値のセット
     useEffect(() => {
         getPostList(page);
+        dispatch(getAllCategories());
     }, []);
 
-    console.log(postList);
+    const categoriesList = getCategoriesList(selector);
 
     return (
         <>
             <section className="small-section">
-                <PostListTabs />
+                <PostListTabs categories={categoriesList} categoriesClick={categoryClickHandler} />
             </section>
             <section className="large-section">
                 <div className="grid-row">
