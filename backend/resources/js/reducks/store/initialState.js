@@ -10,6 +10,9 @@ const initialState = {
         isBeingLoaded: false,
         text: '',
     },
+    categories: {
+        list: [],
+    },
 };
 
 export default initialState;

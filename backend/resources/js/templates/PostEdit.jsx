@@ -6,18 +6,22 @@ import { push } from 'connected-react-router';
 import { OutlinedButton, PrimaryButton } from '../components/UIKit';
 import postRegister from '../components/Posts/postRegister';
 import { getUserId } from '../reducks/users/selector';
+import { getAllCategories } from '../reducks/categories/operations';
+import { getCategoriesList } from '../reducks/categories/selectors';
 
 const PostEdit = () => {
     const [file, setFile] = useState(''),
         [encodedFile, setEncodedFile] = useState(''),
         [category, setCategory] = useState(''),
-        [categories, setCategories] = useState([]),
         [text, setText] = useState(''),
         [tags, setTags] = useState([]);
 
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
+    const categoriesList = getCategoriesList(selector);
+    console.log(selector);
+    console.log(categoriesList);
 
     const inputText = useCallback(
         (event) => {
@@ -37,19 +41,7 @@ const PostEdit = () => {
 
     // mount時にDB(API)よりカテゴリー一覧を取得しセット
     useEffect(() => {
-        const getCategories = async () => {
-            const url = 'http://localhost:30080/api/v1/categories/';
-
-            await fetch(url)
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    setCategories(responseJson);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        };
-        getCategories();
+        dispatch(getAllCategories());
     }, []);
 
     return (
@@ -62,7 +54,7 @@ const PostEdit = () => {
                 required={true}
                 value={category}
                 select={setCategory}
-                options={categories}
+                options={categoriesList}
             />
             <TextInput
                 fullWidth={true}
