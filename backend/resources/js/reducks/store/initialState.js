@@ -13,6 +13,9 @@ const initialState = {
     categories: {
         list: [],
     },
+    tags: {
+        list: [],
+    },
 };
 
 export default initialState;
