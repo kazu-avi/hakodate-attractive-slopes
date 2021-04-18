@@ -13,6 +13,7 @@ import {
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import ShareIcon from '@material-ui/icons/Share';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { makeStyles } from '@material-ui/styles';
 import noimage from '../../../../public/img/noimage.jpeg';
 
@@ -64,6 +65,16 @@ const PostCard = (props) => {
             </div>
             <CardContent className={classes.content}>
                 <Typography>{props.text}</Typography>
+                {props.tags.map((tag) => (
+                    <Chip
+                        variant="outlined"
+                        size="small"
+                        icon={<LocalOfferIcon />}
+                        label={tag.name}
+                        key={tag.id}
+                        onClick={() => props.tagClick(tag.id)}
+                    />
+                ))}
             </CardContent>
             <CardActions>
                 <IconButton>

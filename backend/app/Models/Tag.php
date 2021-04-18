@@ -13,6 +13,11 @@ class Tag extends Model
         'name'
     ];
 
+    protected $visible = [
+        'id',
+        'name',
+    ];
+
     /**
      * リレーションの設定
      */
