@@ -5,3 +5,4 @@ export { default as BaseField } from './BaseField';
 export { default as SelectBox } from './SelectBox';
 export { default as Pagination } from './Pagination';
 export { default as Loading } from './Loading';
+export { default as InputTags } from './InputTags';

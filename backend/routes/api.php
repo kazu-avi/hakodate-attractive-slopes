@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,14 +32,20 @@ Route::middleware(['guest:api'])->group(function () {
 // トークンの再発行
 Route::post('/v1/refresh', [AuthController::class, 'refresh'])->name('refresh');
 
-//　カテゴリーの取得
+// カテゴリー一覧の取得
 Route::get('/v1/categories', [CategoryController::class, 'getAllCategories'])->name('getAllCategories');
+
+// タグ一覧の取得
+Route::get('/v1/tags', [TagController::class, 'getAllTags'])->name('getAllTags');
 
 //　投稿一覧の取得
 Route::get('/v1/posts', [PostController::class, 'getAllPosts'])->name('getAllPosts');
 
 //　カテゴリー別投稿一覧の取得
 Route::get('/v1/categories/{id}', [PostController::class, 'getPostsWithCategory'])->name('getPostsWithCategory');
+
+// タグ別投稿一覧の取得
+Route::get('/v1/tags/{id}', [PostController::class, 'getPostsWithTag'])->name('getPostsWithTag');
 
 
 Route::middleware(['auth:api'])->group(function () {

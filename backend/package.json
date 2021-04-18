@@ -36,6 +36,7 @@
         "@material-ui/icons": "^4.11.2",
         "@material-ui/lab": "*",
         "@material-ui/styles": "^4.11.3",
+        "@pathofdev/react-tag-input": "^1.0.7",
         "connected-react-router": "^6.9.1",
         "history": "^4.10.1",
         "react-redux": "^7.2.3",

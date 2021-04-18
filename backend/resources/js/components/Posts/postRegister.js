@@ -1,7 +1,7 @@
 import { push } from 'connected-react-router';
 import { showLoadingAction, hideLoadingAction } from '../../reducks/loading/actions';
 
-const postRegister = (uid, category, file, text) => {
+const postRegister = (uid, category, file, text, tags) => {
     return async (dispatch) => {
         if (uid === '' || category === '' || file === '' || text === '') {
             alert('必須項目が未入力です');
@@ -15,6 +15,7 @@ const postRegister = (uid, category, file, text) => {
         data.append('category_id', category);
         data.append('file', file);
         data.append('text', text);
+        tags.forEach((tag) => data.append('tags[]', tag));
 
         const option = {
             method: 'POST',
@@ -24,7 +25,7 @@ const postRegister = (uid, category, file, text) => {
             body: data,
         };
 
-        console.log(option);
+        console.log(data);
 
         await fetch(url, option)
             .then((response) => {

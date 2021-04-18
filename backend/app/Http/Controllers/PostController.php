@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PhotoPostRequest;
 use Illuminate\Support\Facades\Storage;
@@ -17,9 +19,34 @@ class PostController extends Controller
         $post = new Post();
         $input = $request->all();
 
-        $image = $input['file'];
+        // タグ登録の処理
+        $inputTags = $request['tags'];
 
-        // S3に画像を保存し、パスを代入
+
+        $tags = [];
+        $tags_id = [];
+
+        if ($inputTags !== []) {
+            DB::beginTransaction();
+            try {
+                foreach ($inputTags as $tag) {
+                    $record = Tag::firstOrCreate([
+                        'name' => $tag,
+                    ]);
+                    array_push($tags, $record);
+                }
+                DB::commit();
+                foreach ($tags as $tag) {
+                    array_push($tags_id, $tag->id);
+                }
+            } catch(Throwable $e) {
+                DB::rollBack();
+                return response()->json([$e],401);
+            }
+        }
+
+        // 画像をs3に保存
+        $image = $input['file'];
         $path = Storage::disk('s3')->put('images', $image, 'public');
 
         // データセット
@@ -32,6 +59,7 @@ class PostController extends Controller
 
         try {
             $post->save();
+            $post->tags()->attach($tags_id);
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
@@ -44,7 +72,7 @@ class PostController extends Controller
 
     // 投稿一覧を取得
     public function getAllPosts() {
-        $posts = Post::with('user', 'category')
+        $posts = Post::with('user', 'category','tags')
             ->orderBy('updated_at','desc')
             ->paginate(9);
 
@@ -53,8 +81,20 @@ class PostController extends Controller
 
     // カテゴリ別一覧の取得
     public function getPostsWithCategory($id) {
-        $posts = Post::with('user', 'category')
+        $posts = Post::with('user', 'category', 'tags')
             ->where('category_id', $id)
+            ->orderBy('updated_at','desc')
+            ->paginate(9);
+
+        return response()->json($posts);
+    }
+
+    // タグ別一覧の取得
+    public function getPostsWithTag($id) {
+        $posts = Post::with('user', 'category', 'tags')
+            ->whereHas('tags', function(Builder $query) use($id) {
+                $query->where('tag_id', $id);
+            })
             ->orderBy('updated_at','desc')
             ->paginate(9);
 
