@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { getAllCategories } from '../reducks/categories/operations';
 import { getCategoriesList } from '../reducks/categories/selectors';
+import { getAllTags } from '../reducks/tags/operations';
+import { getTagsList } from '../reducks/tags/selectors';
 
 const PostList = () => {
     const [postList, setPostList] = useState([]),
@@ -83,14 +85,23 @@ const PostList = () => {
     useEffect(() => {
         getPostList(page);
         dispatch(getAllCategories());
+        dispatch(getAllTags());
     }, []);
 
     const categoriesList = getCategoriesList(selector);
+    const tagsList = getTagsList(selector);
+
+    console.log(tagsList);
 
     return (
         <>
             <section className="small-section">
-                <PostListTabs categories={categoriesList} categoriesClick={categoryClickHandler} />
+                <PostListTabs
+                    categories={categoriesList}
+                    categoriesClick={categoryClickHandler}
+                    tags={tagsList}
+                    tagsClick={tagClickHandler}
+                />
             </section>
             <section className="large-section">
                 <div className="grid-row">
@@ -108,7 +119,13 @@ const PostList = () => {
                         />
                     ))}
                 </div>
-                <Pagination count={totalPage} disabled={false} onChange={getPostList} page={page} />
+                {(() => {
+                    if (totalPage === 1) {
+                        return <></>;
+                    } else {
+                        return <Pagination count={totalPage} disabled={false} onChange={getPostList} page={page} />;
+                    }
+                })()}
             </section>
         </>
     );

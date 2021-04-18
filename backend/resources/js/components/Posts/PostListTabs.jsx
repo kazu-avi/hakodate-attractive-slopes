@@ -45,6 +45,8 @@ const PostListTabs = (props) => {
         setValue(newValue);
     };
 
+    console.log(props);
+
     return (
         <div>
             <AppBar position="static" color="default">
@@ -73,7 +75,16 @@ const PostListTabs = (props) => {
                 ))}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                {props.tags}
+                {props.tags.map((tag) => (
+                    <Chip
+                        variant="outlined"
+                        size="small"
+                        icon={<LocalOfferIcon />}
+                        label={tag.name}
+                        key={tag.id}
+                        onClick={() => props.tagsClick(tag.id)}
+                    />
+                ))}
             </TabPanel>
         </div>
     );
