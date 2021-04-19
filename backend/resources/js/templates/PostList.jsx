@@ -91,8 +91,6 @@ const PostList = () => {
     const categoriesList = getCategoriesList(selector);
     const tagsList = getTagsList(selector);
 
-    console.log(tagsList);
-
     return (
         <>
             <section className="small-section">

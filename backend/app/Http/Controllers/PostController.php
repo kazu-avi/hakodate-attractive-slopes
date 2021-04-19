@@ -70,6 +70,17 @@ class PostController extends Controller
         return response($post, 201);
     }
 
+        // 投稿削除
+        public function delete($id) {
+            try {
+                $post = Post::find($id);
+                $post->delete();
+            } catch (\Exception $e) {
+                return response()->json(["message" => $e->getMessage()], $e->getCode());
+            }
+            return response()->json(["message" => "投稿削除成功"]);
+        }
+
     // 投稿一覧を取得
     public function getAllPosts() {
         $posts = Post::with('user', 'category','tags')

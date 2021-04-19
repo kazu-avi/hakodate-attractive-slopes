@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('file_path');
             $table->string('text');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('categories');
