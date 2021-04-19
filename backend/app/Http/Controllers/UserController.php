@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterPostRequest;
 use Illuminate\Support\Facades\Hash;
+use League\Flysystem\Exception;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -26,6 +28,17 @@ class UserController extends Controller
             return response()->json(["message" => "ユーザー登録成功"]);
         }
 
+    }
+
+    // 投稿削除
+    public function delete($id) {
+        try {
+            $user = User::find($id);
+            $user->delete();
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], $e->getCode());
+        }
+        return response()->json(["message" => "ユーザー削除成功"]);
     }
 
     // 登録ずみの全てのユーザーを取得する

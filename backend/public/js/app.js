@@ -25120,7 +25120,6 @@ var PostList = function PostList() {
   }, []);
   var categoriesList = (0,_reducks_categories_selectors__WEBPACK_IMPORTED_MODULE_6__.getCategoriesList)(selector);
   var tagsList = (0,_reducks_tags_selectors__WEBPACK_IMPORTED_MODULE_8__.getTagsList)(selector);
-  console.log(tagsList);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("section", {
       className: "small-section",
