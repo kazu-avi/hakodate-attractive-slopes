@@ -11,14 +11,13 @@ const Loading = ({ children }) => {
 
     return (
         <>
-            {isBeingLoaded ? (
-                <section className="small-section center">
+            {isBeingLoaded && (
+                <section className="loading-section">
                     <CircularProgress />
                     <p>{loadingText}</p>
                 </section>
-            ) : (
-                children
             )}
+            {children}
         </>
     );
 };

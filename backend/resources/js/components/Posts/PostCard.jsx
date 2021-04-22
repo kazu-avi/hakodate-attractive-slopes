@@ -53,7 +53,7 @@ const PostCard = (props) => {
     return (
         <Card className={classes.root}>
             <div className="image-thumb">
-                <CardMedia className={classes.media} image={props.image} />
+                <CardMedia className={classes.media} image={props.image} onClick={() => props.onClick()} />
                 <Chip
                     className={classes.chip}
                     variant="outlined"
