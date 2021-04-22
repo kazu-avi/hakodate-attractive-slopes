@@ -41,6 +41,9 @@ Route::get('/v1/tags', [TagController::class, 'getAllTags'])->name('getAllTags')
 //　投稿一覧の取得
 Route::get('/v1/posts', [PostController::class, 'getAllPosts'])->name('getAllPosts');
 
+// 個別投稿の取得
+Route::get('/v1/posts/{id}', [PostController::class, 'getPost'])->name('getPost');
+
 //　カテゴリー別投稿一覧の取得
 Route::get('/v1/categories/{id}', [PostController::class, 'getPostsWithCategory'])->name('getPostsWithCategory');
 

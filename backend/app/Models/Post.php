@@ -23,7 +23,8 @@ class Post extends Model
 
     // レスポンスの際に不必要なカラムを除く
     protected $hidden = [
-        'created_at'
+        'created_at',
+        'deleted_at'
     ];
 
     /**

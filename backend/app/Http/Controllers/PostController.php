@@ -70,16 +70,16 @@ class PostController extends Controller
         return response($post, 201);
     }
 
-        // 投稿削除
-        public function delete($id) {
-            try {
-                $post = Post::find($id);
-                $post->delete();
-            } catch (\Exception $e) {
-                return response()->json(["message" => $e->getMessage()], $e->getCode());
-            }
-            return response()->json(["message" => "投稿削除成功"]);
+    // 投稿削除
+    public function delete($id) {
+        try {
+            $post = Post::find($id);
+            $post->delete();
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], $e->getCode());
         }
+        return response()->json(["message" => "投稿削除成功"]);
+    }
 
     // 投稿一覧を取得
     public function getAllPosts() {
@@ -88,6 +88,16 @@ class PostController extends Controller
             ->paginate(9);
 
         return response()->json($posts);
+    }
+
+    // 個別投稿を取得
+    public function getPost($id) {
+        try {
+            $post = Post::with('user', 'category', 'tags')->find($id);
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], $e->getCode());
+        }
+        return response()->json($post);
     }
 
     // カテゴリ別一覧の取得
