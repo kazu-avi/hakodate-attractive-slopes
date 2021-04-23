@@ -4,10 +4,11 @@ import { Card, Chip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
-import { useDispatch } from 'react-redux';
-import { ShowCategory, ShowComments, ShowTags } from '../components/Posts';
-import { PrimaryButton, TextInput, SharpEdgeButton } from '../components/UIKit';
+import { useDispatch, useSelector } from 'react-redux';
+import { ShowCategory, ShowComments, ShowTags, InputCommentArea } from '../components/Posts';
+import { SharpEdgeButton } from '../components/UIKit';
 import { push } from 'connected-react-router';
+import { getIsSignedIn } from '../reducks/users/selector';
 
 const useStyles = makeStyles({
     icon: {
@@ -18,15 +19,16 @@ const useStyles = makeStyles({
 const PostDetail = () => {
     const [post, setPost] = useState([]);
     const [user, setUser] = useState([]);
-    const [comment, setComment] = useState('');
     const [category, setCategory] = useState('');
     const [tagsList, setTagsList] = useState([]);
+    const [comments, setComments] = useState([]);
 
     const classes = useStyles();
     const dispatch = useDispatch();
+    const selector = useSelector((state) => state);
+    const isSighedIn = getIsSignedIn(selector);
     const param = useParams();
     const id = param.id;
-    console.log(comment);
 
     const getPost = useCallback(async (id) => {
         const url = 'http://localhost:30080/api/v1/posts/' + id;
@@ -38,17 +40,11 @@ const PostDetail = () => {
                 setUser(responseJson.user);
                 setCategory(responseJson.category);
                 setTagsList(responseJson.tags);
+                setComments(responseJson.comments);
                 dispatch(hideLoadingAction());
             })
             .catch((error) => console.error(error));
     });
-
-    const inputComment = useCallback(
-        (event) => {
-            setComment(event.target.value);
-        },
-        [inputComment]
-    );
 
     useEffect(() => {
         getPost(id);
@@ -67,19 +63,8 @@ const PostDetail = () => {
                     <p>Posted By{user.name}</p>
                     <ShowCategory category={category} />
                     <ShowTags tags={tagsList} />
-                    <ShowComments />
-                    <TextInput
-                        fullWidth={true}
-                        label={'コメントを入力してね！'}
-                        multiline={true}
-                        required={false}
-                        rows={3}
-                        type={'text'}
-                        value={comment}
-                        onChange={inputComment}
-                    />
-                    <div className="spacer-small" />
-                    <PrimaryButton label={'コメントを送信する'} onClick={() => console.log('clicked!')} />
+                    <ShowComments comments={comments} />
+                    {isSighedIn ? <InputCommentArea id={id} /> : <p>コメント投稿はログイン後に可能です</p>}
                 </div>
             </section>
             <SharpEdgeButton label={'< Back To Home'} onClick={() => dispatch(push('/'))} />

@@ -7,3 +7,4 @@ export { default as Pagination } from './Pagination';
 export { default as Loading } from './Loading';
 export { default as InputTags } from './/InputTags';
 export { default as SharpEdgeButton } from './SharpEdgeButton';
+export { default as ItemLists } from './ItemLists';

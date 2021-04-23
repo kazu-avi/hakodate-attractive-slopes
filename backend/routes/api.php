@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TagController;
@@ -58,6 +59,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/v1/logout', [AuthController::class, 'logout'])->name('logout');
     // 投稿する
     Route::post('/v1/posts', [PostController::class, 'post'])->name('post');
+    // コメントを投稿する
+    Route::post('/v1/posts/{id}/comments', [CommentController::class, 'postComment'])->name('postComment');
     // ユーザーを削除する
     Route::delete('/v1/users/{id}', [UserController::class, 'delete'])->name('userDelete');
     // 投稿を削除する

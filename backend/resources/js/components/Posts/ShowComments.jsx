@@ -1,15 +1,22 @@
 import React from 'react';
 import CommentIcon from '@material-ui/icons/Comment';
+import { List } from '@material-ui/core';
+import ItemLists from '../UIKit/ItemLists';
 
-const ShowComments = () => {
+const ShowComments = (props) => {
     return (
         <div>
             <h3>
                 <span>
                     <CommentIcon />
                 </span>
-                コメント
+                みんなのコメント
             </h3>
+            <List>
+                {props.comments.map((comment) => (
+                    <ItemLists name={comment.user.name} comment={comment.comment} key={comment.id} />
+                ))}
+            </List>
         </div>
     );
 };
