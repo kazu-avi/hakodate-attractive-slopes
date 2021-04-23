@@ -83,7 +83,7 @@ class PostController extends Controller
 
     // 投稿一覧を取得
     public function getAllPosts() {
-        $posts = Post::with('user', 'category','tags')
+        $posts = Post::with('user', 'category', 'tags')
             ->orderBy('updated_at','desc')
             ->paginate(9);
 
@@ -93,7 +93,7 @@ class PostController extends Controller
     // 個別投稿を取得
     public function getPost($id) {
         try {
-            $post = Post::with('user', 'category', 'tags')->find($id);
+            $post = Post::with('user', 'category', 'tags', 'comments.user')->find($id);
         } catch (\Exception $e) {
             return response()->json(["message" => $e->getMessage()], $e->getCode());
         }
