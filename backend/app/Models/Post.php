@@ -4,6 +4,7 @@ namespace App\Models;
 
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,6 +15,11 @@ class Post extends Model
     protected $fillable = [
         'file_path',
         'text'
+    ];
+
+    protected $appends = [
+        'likes_count',
+        'liked_by_user'
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -48,4 +54,21 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function likes() {
+        return $this->belongsToMany(User::class, 'likes');
+    }
+
+    /**
+     * アクセサ
+     */
+
+     // 「行きたい」数の集計
+     public function getLikesCountAttribute() {
+        return $this->likes->count();
+     }
+
+     // アクセスしたユーザーが「行きたい」済かどうか確認
+     public function getLikedByUserAttribute() {
+        return $this->likes->contains(Auth::user());
+     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -83,7 +84,7 @@ class PostController extends Controller
 
     // 投稿一覧を取得
     public function getAllPosts() {
-        $posts = Post::with('user', 'category', 'tags')
+        $posts = Post::with('user', 'category', 'tags', 'likes')
             ->orderBy('updated_at','desc')
             ->paginate(9);
 
@@ -93,7 +94,7 @@ class PostController extends Controller
     // 個別投稿を取得
     public function getPost($id) {
         try {
-            $post = Post::with('user', 'category', 'tags', 'comments.user')->find($id);
+            $post = Post::with('user', 'category', 'tags', 'comments.user', 'likes')->find($id);
         } catch (\Exception $e) {
             return response()->json(["message" => $e->getMessage()], $e->getCode());
         }
@@ -102,7 +103,7 @@ class PostController extends Controller
 
     // カテゴリ別一覧の取得
     public function getPostsWithCategory($id) {
-        $posts = Post::with('user', 'category', 'tags')
+        $posts = Post::with('user', 'category', 'tags', 'likes')
             ->where('category_id', $id)
             ->orderBy('updated_at','desc')
             ->paginate(9);
@@ -112,7 +113,7 @@ class PostController extends Controller
 
     // タグ別一覧の取得
     public function getPostsWithTag($id) {
-        $posts = Post::with('user', 'category', 'tags')
+        $posts = Post::with('user', 'category', 'tags', 'likes')
             ->whereHas('tags', function(Builder $query) use($id) {
                 $query->where('tag_id', $id);
             })
