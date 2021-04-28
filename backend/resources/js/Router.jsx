@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import { Login, Register, Home, MyPage, PostEdit, PostDetail } from './templates';
+import { Login, Register, MyPage, PostEdit, PostDetail, PostList } from './templates';
 import Auth from './Auth';
 
 const Router = () => {
     return (
         <Switch>
-            <Route exact path="(/)?" component={Home} />
-            <Route path="/posts/?tags=" component={Home} />
-            <Route path="/posts/?categories=" component={Home} />
+            <Route exact path="(/)?" component={PostList} />
+            <Route path="/posts/?tags=" component={PostList} />
+            <Route path="/posts/?categories=" component={PostList} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route path="/posts/:id" component={PostDetail} />

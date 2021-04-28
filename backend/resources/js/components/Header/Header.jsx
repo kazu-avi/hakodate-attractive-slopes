@@ -1,10 +1,12 @@
 import React from 'react';
-import logo from '../../../../public/img/logo.png';
+import { HeaderLogo, HeaderLogin, HeaderNav } from './index';
 
 const Header = () => {
     return (
-        <div className="header center">
-            <img className="header-img" src={logo} alt="logo" />
+        <div className="large-section">
+            <HeaderLogin />
+            <HeaderLogo />
+            <HeaderNav />
         </div>
     );
 };

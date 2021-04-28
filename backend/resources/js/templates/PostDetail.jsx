@@ -45,9 +45,9 @@ const PostDetail = () => {
                 setComments(responseJson.comments);
                 setIsLiked(responseJson.liked_by_user);
                 setLikesCount(responseJson.likes_count);
-                dispatch(hideLoadingAction());
             })
             .catch((error) => console.error(error));
+        dispatch(hideLoadingAction());
     });
 
     useEffect(() => {
