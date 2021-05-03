@@ -66,9 +66,13 @@ Route::middleware(['auth:api'])->group(function () {
     Route::delete('/v1/users/{id}', [UserController::class, 'delete'])->name('userDelete');
     // 投稿を削除する
     Route::delete('v1/posts/{id}', [PostController::class, 'delete'])->name('postDelete');
+    // 自分が「行きたい」した投稿一覧
+    Route::get('/v1/posts/{id}/likes', [PostController::class, 'getMyLikes'])->name('getMyLikes');
     // 行きたい追加
     Route::put('/v1/posts/{id}/likes', [LikeController::class, 'like'])->name('putLike');
     // 行きたい削除
     Route::delete('/v1/posts/{id}/likes', [LikeController::class, 'unlike'])->name('deleteLike');
+    // 自分の投稿一覧
+    Route::get('/v1/posts/users/{id}', [PostController::class, 'getMyPosts'])->name('getMyPosts');
 
 });

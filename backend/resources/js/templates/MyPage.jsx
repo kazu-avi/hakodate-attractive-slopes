@@ -1,25 +1,94 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserId, getUsername } from '../reducks/users/selector';
-import { OutlinedButton } from '../components/UIKit';
-import { push } from 'connected-react-router';
-import { logout } from '../reducks/users/operations';
+import { userDelete } from '../reducks/users/operations';
+import { MyPageAvater, MyPageTabs } from '../components/MyPage';
+import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
+import { PrimaryButton } from '../components/UIKit';
 
 const MyPage = () => {
+    const [myPostList, setMyPostList] = useState([]);
+    const [myLikesList, setMyLikesList] = useState([]);
+    const [totalPage, setTotalPage] = useState(1);
+    const [page, setPage] = useState(1);
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     console.log(selector);
     const uid = getUserId(selector);
     const username = getUsername(selector);
 
+    const getMyPosts = useCallback(async (id) => {
+        dispatch(showLoadingAction());
+        setPage(page);
+        const url = 'http://localhost:30080/api/v1/posts/users/' + id + '?page=' + page;
+        const token = localStorage.getItem('access_token');
+
+        const option = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+            },
+        };
+
+        await fetch(url, option)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                setMyPostList(responseJson.data);
+                setTotalPage(responseJson.last_page);
+                dispatch(hideLoadingAction());
+            })
+            .catch((error) => {
+                console.error(error);
+                dispatch(hideLoadingAction());
+            });
+    }, []);
+
+    const getMyLikes = useCallback(async (id) => {
+        dispatch(showLoadingAction());
+        setPage(page);
+        const url = 'http://localhost:30080/api/v1/posts/' + id + '/likes/?page=' + page;
+        const token = localStorage.getItem('access_token');
+
+        const option = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+            },
+        };
+
+        await fetch(url, option)
+            .then((response) => response.json())
+            .then((responseJson) => {
+                setMyLikesList(responseJson.data);
+                setTotalPage(responseJson.last_page);
+                console.log(responseJson);
+                dispatch(hideLoadingAction());
+            })
+            .catch((error) => {
+                console.error(error);
+                dispatch(hideLoadingAction());
+            });
+    }, []);
+
+    useEffect(() => {
+        getMyPosts(uid);
+        getMyLikes(uid);
+    }, []);
+
     return (
         <>
-            <h2>マイページ</h2>
-            <p>こんにちは{username}さん</p>
-            <p>ユーザーID:{uid}</p>
-            <OutlinedButton label={'ログイン'} onClick={() => dispatch(push('/login'))} />
-            <OutlinedButton label={'新規登録'} onClick={() => dispatch(push('/register'))} />
-            <OutlinedButton label={'ログアウト'} onClick={() => dispatch(logout())} />
+            <section className="small-section center">
+                <MyPageAvater />
+                <h2>{username}さんのマイページ</h2>
+                <PrimaryButton onClick={console.log('clicked')} label={'ユーザー情報を編集する'} />
+                <span className="margin-20" />
+                <PrimaryButton onClick={() => dispatch(userDelete(uid))} label={'アカウントを削除する'} />
+            </section>
+            <section className="large-section">
+                <MyPageTabs myPostList={myPostList} myLikesList={myLikesList} />
+            </section>
         </>
     );
 };

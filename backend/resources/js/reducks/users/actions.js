@@ -24,3 +24,16 @@ export const logoutAction = () => {
         },
     };
 };
+
+export const DELETE = 'DELETE';
+
+export const deleteAction = () => {
+    return {
+        type: 'DELETE',
+        payload: {
+            isSignedIn: false,
+            uid: '',
+            username: '',
+        },
+    };
+};
