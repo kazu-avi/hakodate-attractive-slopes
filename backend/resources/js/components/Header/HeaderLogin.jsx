@@ -14,6 +14,7 @@ const HeaderLogin = () => {
     useEffect(() => {
         if (!isSignedIn) {
             dispatch(checkAuthAtHome());
+            console.log('headereffect');
         }
     }, []);
 

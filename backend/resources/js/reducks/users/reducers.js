@@ -15,6 +15,10 @@ export const UsersReducer = (state = initialState.users, action) => {
             return {
                 ...action.payload,
             };
+        case Actions.DELETE:
+            return {
+                ...action.payload,
+            };
         default:
             return state;
     }

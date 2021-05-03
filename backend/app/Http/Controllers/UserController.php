@@ -30,7 +30,7 @@ class UserController extends Controller
 
     }
 
-    // 投稿削除
+    // ユーザー削除
     public function delete($id) {
         try {
             $user = User::find($id);

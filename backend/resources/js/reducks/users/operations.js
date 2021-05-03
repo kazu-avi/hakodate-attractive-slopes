@@ -226,3 +226,27 @@ export const logout = () => {
         });
     };
 };
+
+export const userDelete = (id) => {
+    return async (dispatch) => {
+        const url = 'http://localhost:30080/api/v1/users/' + id;
+        const token = localStorage.getItem('access_token');
+
+        const option = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+            },
+        };
+
+        await fetch(url, option)
+            .then(() => {
+                localStorage.removeItem('access_token');
+                dispatch(logoutAction());
+                alert('アカウントを削除しました');
+                dispatch(push('/'));
+            })
+            .catch((error) => console.error(error));
+    };
+};

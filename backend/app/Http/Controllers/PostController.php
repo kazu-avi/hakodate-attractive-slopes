@@ -101,7 +101,7 @@ class PostController extends Controller
         return response()->json($post);
     }
 
-    // カテゴリ別一覧の取得
+    // カテゴリ別投稿一覧の取得
     public function getPostsWithCategory($id) {
         $posts = Post::with('user', 'category', 'tags', 'likes')
             ->where('category_id', $id)
@@ -111,7 +111,7 @@ class PostController extends Controller
         return response()->json($posts);
     }
 
-    // タグ別一覧の取得
+    // タグ別投稿一覧の取得
     public function getPostsWithTag($id) {
         $posts = Post::with('user', 'category', 'tags', 'likes')
             ->whereHas('tags', function(Builder $query) use($id) {
@@ -121,5 +121,33 @@ class PostController extends Controller
             ->paginate(9);
 
         return response()->json($posts);
+    }
+
+    // ユーザー別投稿一覧取得
+    public function getMyPosts($id) {
+        try {
+            $posts = Post::with('user', 'category', 'tags', 'likes')
+            ->where('user_id', $id)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(6);
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], $e->getCode());
+        }
+        return response()->json($posts, 200);
+    }
+
+    // ユーザー別「行きたい」した投稿一覧取得
+    public function getMyLikes($id) {
+        try {
+            $posts = Post::with('user', 'category', 'tags', 'likes')
+            ->whereHas('likes', function(Builder $query) use($id) {
+                $query->where('user_id', $id);
+            })
+            ->orderBy('updated_at','desc')
+            ->paginate(6);
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], $e->getCode());
+        }
+        return response()->json($posts, 200);
     }
 }
