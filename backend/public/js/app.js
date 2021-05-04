@@ -27058,15 +27058,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Card/Card.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Card/Card.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CardActions/CardActions.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CardHeader/CardHeader.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Avatar/Avatar.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/CardContent/CardContent.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/makeStyles/makeStyles.js");
 /* harmony import */ var _reducks_loading_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducks/loading/actions */ "./resources/js/reducks/loading/actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_Posts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Posts */ "./resources/js/components/Posts/index.js");
 /* harmony import */ var _components_UIKit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/UIKit */ "./resources/js/components/UIKit/index.js");
-/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
+/* harmony import */ var connected_react_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! connected-react-router */ "./node_modules/connected-react-router/esm/actions.js");
 /* harmony import */ var _reducks_users_selector__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../reducks/users/selector */ "./resources/js/reducks/users/selector.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _public_img_noimage_jpeg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../public/img/noimage.jpeg */ "./public/img/noimage.jpeg");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -27097,6 +27103,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_9__.default)({
+  card: {
+    padding: 8,
+    width: 'calc(35% - 1rem)',
+    borderRadius: 0
+  },
+  actions: {
+    padding: 8,
+    justifyContent: 'space-between',
+    borderBottom: '2px solid #f2f4fb'
+  }
+});
+
 var PostDetail = function PostDetail() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -27110,35 +27130,41 @@ var PostDetail = function PostDetail() {
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      category = _useState6[0],
-      setCategory = _useState6[1];
+      text = _useState6[0],
+      setText = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      tagsList = _useState8[0],
-      setTagsList = _useState8[1];
+      category = _useState8[0],
+      setCategory = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      comments = _useState10[0],
-      setComments = _useState10[1];
+      tagsList = _useState10[0],
+      setTagsList = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      isLiked = _useState12[0],
-      setIsLiked = _useState12[1];
+      comments = _useState12[0],
+      setComments = _useState12[1];
 
   var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      likesCount = _useState14[0],
-      setLikesCount = _useState14[1];
+      isLiked = _useState14[0],
+      setIsLiked = _useState14[1];
 
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      likesCount = _useState16[0],
+      setLikesCount = _useState16[1];
+
+  var classes = useStyles();
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
   var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state;
   });
   var isSighedIn = (0,_reducks_users_selector__WEBPACK_IMPORTED_MODULE_6__.getIsSignedIn)(selector);
-  var param = (0,react_router__WEBPACK_IMPORTED_MODULE_8__.useParams)();
+  var param = (0,react_router__WEBPACK_IMPORTED_MODULE_10__.useParams)();
   var id = param.id;
   var getPost = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)( /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(id) {
@@ -27163,6 +27189,7 @@ var PostDetail = function PostDetail() {
               }).then(function (responseJson) {
                 setPost(responseJson);
                 setUser(responseJson.user);
+                setText(responseJson.text);
                 setCategory(responseJson.category);
                 setTagsList(responseJson.tags);
                 setComments(responseJson.comments);
@@ -27190,44 +27217,60 @@ var PostDetail = function PostDetail() {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getPost(id);
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     className: "large-section",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("section", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("section", {
       className: "large-section-flex",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
-        className: "flex-2cms",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
+        className: "flex-3cms-big",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           className: "image-thumb",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
             src: post.file_path,
             alt: "\u6295\u7A3F\u753B\u50CF"
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-        className: "flex-2cms",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.ShowLikes, {
-          likesCount: likesCount,
-          isLiked: isLiked,
-          id: id,
-          isSignedIn: isSighedIn
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
-          children: ["Posted By", user.name]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.ShowCategory, {
-          category: category
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.ShowTags, {
-          tags: tagsList
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.ShowComments, {
-          comments: comments
-        }), isSighedIn ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.InputCommentArea, {
-          id: id
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
-          children: "\u30B3\u30E1\u30F3\u30C8\u6295\u7A3F\u306F\u30ED\u30B0\u30A4\u30F3\u5F8C\u306B\u53EF\u80FD\u3067\u3059"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__.default, {
+        className: classes.card,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__.default, {
+          className: classes.actions,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_13__.default, {
+            avatar: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_14__.default, {
+              alt: "\u30E6\u30FC\u30B6\u30FC\u753B\u50CF",
+              src: _public_img_noimage_jpeg__WEBPACK_IMPORTED_MODULE_7__.default
+            }),
+            title: user.name,
+            subheader: post.updated_at
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.ShowLikes, {
+            likesCount: likesCount,
+            isLiked: isLiked,
+            id: id,
+            isSignedIn: isSighedIn
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_15__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+            children: text
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.ShowCategory, {
+            category: category
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.ShowTags, {
+            tags: tagsList
+          })]
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_5__.SharpEdgeButton, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.ShowComments, {
+        comments: comments
+      }), isSighedIn ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Posts__WEBPACK_IMPORTED_MODULE_4__.InputCommentArea, {
+        id: id
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+        children: "\u30B3\u30E1\u30F3\u30C8\u6295\u7A3F\u306F\u30ED\u30B0\u30A4\u30F3\u5F8C\u306B\u53EF\u80FD\u3067\u3059"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      className: "spacer-medium"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_5__.SharpEdgeButton, {
       label: '< Back To Home',
       onClick: function onClick() {
-        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/'));
+        return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_16__.push)('/'));
       }
     })]
   });
