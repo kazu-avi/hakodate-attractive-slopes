@@ -15,16 +15,19 @@ const UserEdit = () => {
         [file, setFile] = useState(''),
         [encodedFile, setEncodedFile] = useState('');
 
-    const getInitialState = useCallback(async (id) => {
-        const url = 'http://localhost:30080/api/v1/users/' + id;
-        await fetch(url)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                setUsername(responseJson.name);
-                setEncodedFile(responseJson.img);
-            })
-            .catch((error) => console.error(error));
-    });
+    const getInitialState = useCallback(
+        async (id) => {
+            const url = 'http://localhost:30080/api/v1/users/' + id;
+            await fetch(url)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    setUsername(responseJson.name);
+                    setEncodedFile(responseJson.img);
+                })
+                .catch((error) => console.error(error));
+        },
+        [getInitialState]
+    );
 
     useEffect(() => {
         getInitialState(uid);

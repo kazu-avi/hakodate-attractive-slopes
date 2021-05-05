@@ -23,7 +23,7 @@ const HeaderNavAuth = () => {
             <Button onClick={() => dispatch(push('/'))}>Top</Button>
             <Button onClick={() => dispatch(push('/about'))}>About</Button>
             <Button onClick={() => dispatch(push('/mypage'))}>マイページ</Button>
-            <Button onClick={() => dispatch(push('/edit'))}>投稿する</Button>
+            <Button onClick={() => dispatch(push('/create'))}>投稿する</Button>
             <Button onClick={() => dispatch(logout())}>ログアウト</Button>
         </div>
     );

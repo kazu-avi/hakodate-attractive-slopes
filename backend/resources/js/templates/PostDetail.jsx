@@ -4,10 +4,12 @@ import { Avatar, Card, CardActions, CardContent, CardHeader } from '@material-ui
 import { makeStyles } from '@material-ui/styles';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { PrimaryButton, OutlinedButton } from '../components/UIKit';
 import { ShowCategory, ShowComments, ShowTags, InputCommentArea, ShowLikes } from '../components/Posts';
+import { postEdit, postDelete } from '../components/Posts/postRegister';
 import { SharpEdgeButton } from '../components/UIKit';
 import { push } from 'connected-react-router';
-import { getIsSignedIn } from '../reducks/users/selector';
+import { getIsSignedIn, getUserId } from '../reducks/users/selector';
 import noimage from '../../../public/img/noimage.jpeg';
 
 const useStyles = makeStyles({
@@ -27,19 +29,21 @@ const useStyles = makeStyles({
 });
 
 const PostDetail = () => {
-    const [post, setPost] = useState([]);
-    const [user, setUser] = useState([]);
-    const [text, setText] = useState('');
-    const [category, setCategory] = useState('');
-    const [tagsList, setTagsList] = useState([]);
-    const [comments, setComments] = useState([]);
-    const [isLiked, setIsLiked] = useState('');
-    const [likesCount, setLikesCount] = useState('');
+    const [post, setPost] = useState([]),
+        [user, setUser] = useState([]),
+        [text, setText] = useState(''),
+        [category, setCategory] = useState(''),
+        [tagsList, setTagsList] = useState([]),
+        [comments, setComments] = useState([]),
+        [isLiked, setIsLiked] = useState(''),
+        [likesCount, setLikesCount] = useState(''),
+        [postedUser, setPostedUser] = useState('');
 
     const classes = useStyles();
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const isSighedIn = getIsSignedIn(selector);
+    const uid = getUserId(selector);
     const param = useParams();
     const id = param.id;
 
@@ -61,6 +65,7 @@ const PostDetail = () => {
                 setPost(responseJson);
                 setUser(responseJson.user);
                 setText(responseJson.text);
+                setPostedUser(responseJson.user_id);
                 setCategory(responseJson.category);
                 setTagsList(responseJson.tags);
                 setComments(responseJson.comments);
@@ -99,6 +104,18 @@ const PostDetail = () => {
                         <ShowLikes likesCount={likesCount} isLiked={isLiked} id={id} isSignedIn={isSighedIn} />
                     </CardActions>
                     <CardContent>
+                        {uid === postedUser ? (
+                            <div className="center">
+                                <PrimaryButton label={'投稿を編集する'} onClick={() => dispatch(push('/edit/' + id))} />
+                                <span className="margin-20" />
+                                <OutlinedButton
+                                    label={'投稿を削除する'}
+                                    onClick={() => dispatch(postDelete(uid, id, postedUser))}
+                                />
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                         <p className={classes.text}>{text}</p>
                         <ShowCategory category={category} />
                         <ShowTags tags={tagsList} />

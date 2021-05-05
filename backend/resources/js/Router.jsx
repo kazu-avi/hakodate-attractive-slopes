@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import { Login, Register, MyPage, PostEdit, PostDetail, PostList, UserEdit } from './templates';
+import { Login, Register, MyPage, PostDetail, PostList, UserEdit, PostCreate, PostEdit } from './templates';
 import Auth from './Auth';
 
 const Router = () => {
@@ -15,7 +15,8 @@ const Router = () => {
             <Auth>
                 <Switch>
                     <Route exact path="/mypage" component={MyPage} />
-                    <Route exact path="/edit" component={PostEdit} />
+                    <Route exact path="/create" component={PostCreate} />
+                    <Route exact path="/edit/:id" component={PostEdit} />
                     <Route exact path="/useredit" component={UserEdit} />
                 </Switch>
             </Auth>
