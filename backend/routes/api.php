@@ -66,6 +66,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('/v1/users/{id}', [UserController::class, 'update'])->name('userUpdate');
     // ユーザーを削除する
     Route::delete('/v1/users/{id}', [UserController::class, 'delete'])->name('userDelete');
+    // 投稿を編集する
+    Route::put('/v1/posts/{id}', [PostController::class, 'edit'])->name('postEdit');
     // 投稿を削除する
     Route::delete('v1/posts/{id}', [PostController::class, 'delete'])->name('postDelete');
     // 自分が「行きたい」した投稿一覧
