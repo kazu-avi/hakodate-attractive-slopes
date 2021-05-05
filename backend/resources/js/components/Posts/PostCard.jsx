@@ -84,7 +84,13 @@ const PostCard = (props) => {
                     <ShareIcon />
                 </IconButton>
                 <CardHeader
-                    avatar={<Avatar alt="ユーザー画像" src={noimage} />}
+                    avatar={
+                        props.userImg ? (
+                            <Avatar alt="ユーザー画像" src={props.userImg} />
+                        ) : (
+                            <Avatar alt="noimage" src={noimage} />
+                        )
+                    }
                     title={props.name}
                     subheader={props.date}
                 />

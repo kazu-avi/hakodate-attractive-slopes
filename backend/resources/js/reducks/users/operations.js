@@ -39,6 +39,7 @@ export const checkAuth = () => {
                                     isSignedIn: 'true',
                                     uid: responseJson['uid'],
                                     username: responseJson['username'],
+                                    img: responseJson['img'],
                                 })
                             );
                         });
@@ -84,6 +85,7 @@ export const checkAuthAtHome = () => {
                                     isSignedIn: 'true',
                                     uid: responseJson['uid'],
                                     username: responseJson['username'],
+                                    img: responseJson['img'],
                                 })
                             );
                         });
@@ -97,7 +99,7 @@ export const checkAuthAtHome = () => {
     };
 };
 
-export const register = (username, email, password, confirmPassword) => {
+export const register = (username, email, password, confirmPassword, file) => {
     return async (dispatch) => {
         //バリデーション
         if (username === '' || email === '' || password === '' || confirmPassword === '') {
@@ -111,20 +113,21 @@ export const register = (username, email, password, confirmPassword) => {
         }
 
         const url = 'http://localhost:30080/api/v1/users';
-        const data = {
-            name: username,
-            email: email,
-            password: password,
-        };
+
+        const data = new FormData();
+        if (file) {
+            data.append('img', file);
+        }
+        data.append('name', username);
+        data.append('email', email);
+        data.append('password', password);
 
         const option = {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
+            body: data,
         };
 
+        console.log(data);
         console.log(option);
 
         await fetch(url, option)
@@ -143,6 +146,66 @@ export const register = (username, email, password, confirmPassword) => {
             .catch((error) => {
                 dispatch(hideLoadingAction());
                 console.error(error);
+                return null;
+            });
+    };
+};
+
+export const update = (username, file, id) => {
+    return async (dispatch) => {
+        //バリデーション
+        if (username === '') {
+            alert('必須項目が未入力です。再度入力してください。');
+            return false;
+        }
+
+        const url = 'http://localhost:30080/api/v1/users/' + id;
+        const token = localStorage.getItem('access_token');
+
+        const data = new FormData();
+        if (file) {
+            data.append('img', file);
+        }
+        data.append('name', username);
+        data.append('_method', 'put');
+
+        const option = {
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
+            body: data,
+        };
+
+        console.log(data);
+        console.log(option);
+        console.log(...data.entries());
+
+        await fetch(url, option)
+            .then((response) => {
+                dispatch(showLoadingAction('登録しています・・・'));
+                if (!response.ok) {
+                    console.log('登録に失敗しました');
+                }
+                return response.json();
+            })
+            .then((responseJson) => {
+                console.log(responseJson);
+                dispatch(
+                    loginAction({
+                        isSignedIn: 'true',
+                        uid: responseJson['id'],
+                        username: responseJson['name'],
+                        img: responseJson['img'],
+                    })
+                );
+                dispatch(hideLoadingAction());
+                dispatch(push('/mypage'));
+            })
+            .catch((error) => {
+                dispatch(hideLoadingAction());
+                console.error(error);
+                console.log('登録に失敗しました');
                 return null;
             });
     };
@@ -190,6 +253,7 @@ export const login = (email, password) => {
                                 isSignedIn: 'true',
                                 uid: responseJson['uid'],
                                 username: responseJson['username'],
+                                img: responseJson['img'],
                             })
                         );
 

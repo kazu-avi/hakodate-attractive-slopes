@@ -28,6 +28,8 @@ const postRegister = (uid, category, file, text, tags) => {
 
         console.log(data);
 
+        console.log(...data.entries());
+
         await fetch(url, option)
             .then((response) => {
                 dispatch(showLoadingAction('投稿しています・・・'));

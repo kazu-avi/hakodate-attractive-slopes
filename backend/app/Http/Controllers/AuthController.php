@@ -39,6 +39,7 @@ class AuthController extends Controller
         return response()->json([
             'uid' => Auth::user()->id,
             'username' => Auth::user()->name,
+            'img' => Auth::user()->img,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => 3600

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterPostRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class RegisterPostRequest extends FormRequest
     public function rules()
     {
         return [
-            "email" => "required|regex:/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/",
-            "password" => "required",
+            // "name" => 'required',
             'img' => 'file|mimes:jpg,jpeg,png,gif',
         ];
     }

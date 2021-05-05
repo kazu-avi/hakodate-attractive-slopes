@@ -11,11 +11,15 @@ const useStyles = makeStyles({
     },
 });
 
-const MyPageAvater = () => {
+const MyPageAvater = (props) => {
     const classes = useStyles();
     return (
         <>
-            <Avatar className={classes.img} alt="Remy Sharp" src={NoImage} />
+            {props.img ? (
+                <Avatar className={classes.img} alt="ユーザー画像" src={props.img} />
+            ) : (
+                <Avatar className={classes.img} alt="noimage" src={NoImage} />
+            )}
         </>
     );
 };

@@ -21,6 +21,9 @@ const useStyles = makeStyles({
         justifyContent: 'space-between',
         borderBottom: '2px solid #f2f4fb',
     },
+    text: {
+        whiteSpace: 'pre-wrap',
+    },
 });
 
 const PostDetail = () => {
@@ -83,14 +86,20 @@ const PostDetail = () => {
                 <Card className={classes.card}>
                     <CardActions className={classes.actions}>
                         <CardHeader
-                            avatar={<Avatar alt="ユーザー画像" src={noimage} />}
+                            avatar={
+                                user.img ? (
+                                    <Avatar alt="ユーザー画像" src={user.img} />
+                                ) : (
+                                    <Avatar alt="noimage" src={noimage} />
+                                )
+                            }
                             title={user.name}
                             subheader={post.updated_at}
                         />
                         <ShowLikes likesCount={likesCount} isLiked={isLiked} id={id} isSignedIn={isSighedIn} />
                     </CardActions>
                     <CardContent>
-                        <p>{text}</p>
+                        <p className={classes.text}>{text}</p>
                         <ShowCategory category={category} />
                         <ShowTags tags={tagsList} />
                     </CardContent>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import CommentIcon from '@material-ui/icons/Comment';
-import { Divider, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
+import { Avatar, Divider, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
+import noimage from '../../../../public/img/noimage.jpeg';
 
 const useStyles = makeStyles({
     comment: {
@@ -15,7 +15,7 @@ const ItemLists = (props) => {
         <>
             <ListItem className={classes.comment}>
                 <ListItemAvatar>
-                    <CommentIcon />
+                    {props.img ? <Avatar alt="ユーザー画像" src={props.img} /> : <Avatar alt="noimage" src={noimage} />}
                 </ListItemAvatar>
                 <ListItemText primary={props.name} secondary={props.comment} />
             </ListItem>
