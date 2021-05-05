@@ -27,7 +27,7 @@ class PostController extends Controller
         $tags = [];
         $tags_id = [];
 
-        if ($inputTags !== []) {
+        if ($inputTags) {
             DB::beginTransaction();
             try {
                 foreach ($inputTags as $tag) {

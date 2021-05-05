@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserId, getUsername } from '../reducks/users/selector';
+import { getUserId, getUsername, getUserImage } from '../reducks/users/selector';
 import { userDelete } from '../reducks/users/operations';
 import { MyPageAvater, MyPageTabs } from '../components/MyPage';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
 import { PrimaryButton } from '../components/UIKit';
+import { push } from 'connected-react-router';
 
 const MyPage = () => {
     const [myPostList, setMyPostList] = useState([]);
@@ -13,9 +14,9 @@ const MyPage = () => {
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
-    console.log(selector);
     const uid = getUserId(selector);
     const username = getUsername(selector);
+    const userImage = getUserImage(selector);
 
     const getMyPosts = useCallback(async (id) => {
         dispatch(showLoadingAction());
@@ -80,9 +81,9 @@ const MyPage = () => {
     return (
         <>
             <section className="small-section center">
-                <MyPageAvater />
+                <MyPageAvater img={userImage} />
                 <h2>{username}さんのマイページ</h2>
-                <PrimaryButton onClick={console.log('clicked')} label={'ユーザー情報を編集する'} />
+                <PrimaryButton onClick={() => dispatch(push('/useredit'))} label={'ユーザー情報を編集する'} />
                 <span className="margin-20" />
                 <PrimaryButton onClick={() => dispatch(userDelete(uid))} label={'アカウントを削除する'} />
             </section>

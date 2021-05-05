@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { TextInput, PrimaryButton, OutlinedButton } from '../components/UIKit';
 import { push } from 'connected-react-router';
 import { register } from '../reducks/users/operations';
+import { ImageArea } from '../components/Posts';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -10,9 +11,9 @@ const Register = () => {
     const [username, setUsername] = useState(''),
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
-        [confirmPassword, setconfirmPassword] = useState('');
-
-    console.log(username);
+        [confirmPassword, setConfirmPassword] = useState(''),
+        [file, setFile] = useState(''),
+        [encodedFile, setEncodedFile] = useState('');
 
     const inputUsername = useCallback(
         (event) => {
@@ -37,13 +38,18 @@ const Register = () => {
 
     const inputConfirmPassword = useCallback(
         (event) => {
-            setconfirmPassword(event.target.value);
+            setConfirmPassword(event.target.value);
         },
         [inputConfirmPassword]
     );
+
+    console.log(file);
     return (
         <div className={'small-section'}>
             <h2 className={'center'}>新規登録</h2>
+            <div className="register-img-area">
+                <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
+            </div>
             <TextInput
                 fullWidth={true}
                 label={'ユーザー名（必須）'}
@@ -90,7 +96,7 @@ const Register = () => {
                 <span className={'margin-20'}></span>
                 <PrimaryButton
                     label={'登録する'}
-                    onClick={() => dispatch(register(username, email, password, confirmPassword))}
+                    onClick={() => dispatch(register(username, email, password, confirmPassword, file))}
                 />
             </div>
         </div>

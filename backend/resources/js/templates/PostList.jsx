@@ -147,6 +147,7 @@ const PostList = () => {
                             text={post.text}
                             category={post.category.name}
                             name={post.user.name}
+                            userImg={post.user.img}
                             date={post.updated_at}
                             tags={post.tags}
                             chipClick={() => categoryClickHandler(post.category_id)}

@@ -14,7 +14,12 @@ const ShowComments = (props) => {
             </h3>
             <List>
                 {props.comments.map((comment) => (
-                    <ItemLists name={comment.user.name} comment={comment.comment} key={comment.id} />
+                    <ItemLists
+                        name={comment.user.name}
+                        img={comment.user.img}
+                        comment={comment.comment}
+                        key={comment.id}
+                    />
                 ))}
             </List>
         </div>

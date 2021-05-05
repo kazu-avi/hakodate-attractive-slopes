@@ -8,6 +8,7 @@ export const loginAction = (userState) => {
             isSignedIn: true,
             uid: userState.uid,
             username: userState.username,
+            img: userState.img,
         },
     };
 };
@@ -21,6 +22,7 @@ export const logoutAction = () => {
             isSignedIn: false,
             uid: '',
             username: '',
+            img: '',
         },
     };
 };
@@ -34,6 +36,7 @@ export const deleteAction = () => {
             isSignedIn: false,
             uid: '',
             username: '',
+            img: '',
         },
     };
 };

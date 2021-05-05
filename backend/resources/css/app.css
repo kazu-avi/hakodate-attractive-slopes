@@ -136,6 +136,29 @@ body {
     width: calc(35% - 1rem);
 }
 
+/* Register */
+.register-img-area img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.register-img-area .image-thumb::before {
+    content: none;
+    display: block;
+    padding-top: 100%;
+}
+
+.register-img-area .image-thumb > img {
+    position: static;
+    object-fit: cover;
+    object-position: center bottom;
+}
+
+
+
 /* .react-tag-input */
 .react-tag-input {
     box-sizing: border-box;
