@@ -10,11 +10,11 @@ import {
     Typography,
     CardHeader,
 } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import ShareIcon from '@material-ui/icons/Share';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { makeStyles } from '@material-ui/styles';
+import { DisplayLikes } from '../PostCard';
 import noimage from '../../../../public/img/noimage.jpeg';
 
 const useStyles = makeStyles({
@@ -77,9 +77,7 @@ const PostCard = (props) => {
                 ))}
             </CardContent>
             <CardActions>
-                <IconButton>
-                    <FavoriteIcon />
-                </IconButton>
+                <DisplayLikes isLiked={props.isLiked} postId={props.postId} />
                 <IconButton>
                     <ShareIcon />
                 </IconButton>

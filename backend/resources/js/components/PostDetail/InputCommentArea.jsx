@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import commentRegister from './commentRegister';
+import commentRegister from '../Posts/commentRegister';
 import { PrimaryButton, TextInput } from '../UIKit';
 
 const InputCommentArea = (props) => {
