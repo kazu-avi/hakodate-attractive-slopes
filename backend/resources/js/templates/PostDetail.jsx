@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton, OutlinedButton } from '../components/UIKit';
-import { ShowCategory, ShowComments, ShowTags, InputCommentArea, ShowLikes } from '../components/Posts';
+import { ShowCategory, ShowComments, ShowTags, InputCommentArea, ShowLikes } from '../components/PostDetail';
 import { postDelete } from '../components/Posts/postRegister';
 import { SharpEdgeButton } from '../components/UIKit';
 import { push } from 'connected-react-router';

@@ -28,7 +28,13 @@ const PostList = () => {
                 dispatch(showLoadingAction());
                 setPage(page);
                 const url = 'http://localhost:30080/api/v1/tags/' + tag + '?page=' + page;
-                await fetch(url)
+                const token = localStorage.getItem('access_token');
+                const option = {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                };
+                await fetch(url, option)
                     .then((response) => response.json())
                     .then((responseJson) => {
                         setPostList(responseJson.data);
@@ -43,7 +49,13 @@ const PostList = () => {
                 dispatch(showLoadingAction());
                 setPage(page);
                 const url = 'http://localhost:30080/api/v1/categories/' + category + '?page=' + page;
-                await fetch(url)
+                const token = localStorage.getItem('access_token');
+                const option = {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                };
+                await fetch(url, option)
                     .then((response) => response.json())
                     .then((responseJson) => {
                         setPostList(responseJson.data);
@@ -58,7 +70,13 @@ const PostList = () => {
                 dispatch(showLoadingAction());
                 setPage(page);
                 const url = 'http://localhost:30080/api/v1/posts?page=' + page;
-                await fetch(url)
+                const token = localStorage.getItem('access_token');
+                const option = {
+                    headers: {
+                        Authorization: 'Bearer ' + token,
+                    },
+                };
+                await fetch(url, option)
                     .then((response) => {
                         return response.json();
                     })
@@ -82,7 +100,13 @@ const PostList = () => {
             dispatch(push('/?category=' + id));
             setPage(page);
             const url = 'http://localhost:30080/api/v1/categories/' + id + '?page=' + page;
-            await fetch(url)
+            const token = localStorage.getItem('access_token');
+            const option = {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+            };
+            await fetch(url, option)
                 .then((response) => response.json())
                 .then((responseJson) => {
                     setPostList(responseJson.data);
@@ -103,7 +127,13 @@ const PostList = () => {
             dispatch(push('/?tag=' + id));
             setPage(page);
             const url = 'http://localhost:30080/api/v1/tags/' + id + '?page=' + page;
-            await fetch(url)
+            const token = localStorage.getItem('access_token');
+            const option = {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+            };
+            await fetch(url, option)
                 .then((response) => response.json())
                 .then((responseJson) => {
                     setPostList(responseJson.data);
@@ -120,6 +150,7 @@ const PostList = () => {
 
     //  初期値のセット
     useEffect(() => {
+        console.log('effect');
         getPostList(page);
         dispatch(getAllCategories());
         dispatch(getAllTags());
@@ -143,6 +174,7 @@ const PostList = () => {
                     {postList.map((post) => (
                         <PostCard
                             key={post.id}
+                            postId={post.id}
                             image={post.file_path}
                             text={post.text}
                             category={post.category.name}
@@ -150,6 +182,7 @@ const PostList = () => {
                             userImg={post.user.img}
                             date={post.updated_at}
                             tags={post.tags}
+                            isLiked={post.liked_by_user}
                             chipClick={() => categoryClickHandler(post.category_id)}
                             tagClick={tagClickHandler}
                             onClick={() => dispatch(push('/posts/' + post.id))}
