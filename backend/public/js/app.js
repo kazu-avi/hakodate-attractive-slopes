@@ -25658,6 +25658,46 @@ var PrimaryButton = function PrimaryButton(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/UIKit/ScrollToTop.jsx":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/UIKit/ScrollToTop.jsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+
+var ScrollToTop = function ScrollToTop() {
+  var selector = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state;
+  });
+  var pathname = selector.router.location.pathname;
+  var search = selector.router.location.search;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    try {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    } catch (error) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, search]);
+  return null;
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScrollToTop);
+
+/***/ }),
+
 /***/ "./resources/js/components/UIKit/SelectBox.jsx":
 /*!*****************************************************!*\
   !*** ./resources/js/components/UIKit/SelectBox.jsx ***!
@@ -25816,7 +25856,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Loading": () => (/* reexport safe */ _Loading__WEBPACK_IMPORTED_MODULE_6__.default),
 /* harmony export */   "InputTags": () => (/* reexport safe */ _InputTags__WEBPACK_IMPORTED_MODULE_7__.default),
 /* harmony export */   "SharpEdgeButton": () => (/* reexport safe */ _SharpEdgeButton__WEBPACK_IMPORTED_MODULE_8__.default),
-/* harmony export */   "ItemLists": () => (/* reexport safe */ _ItemLists__WEBPACK_IMPORTED_MODULE_9__.default)
+/* harmony export */   "ItemLists": () => (/* reexport safe */ _ItemLists__WEBPACK_IMPORTED_MODULE_9__.default),
+/* harmony export */   "ScrollToTop": () => (/* reexport safe */ _ScrollToTop__WEBPACK_IMPORTED_MODULE_10__.default)
 /* harmony export */ });
 /* harmony import */ var _TextInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextInput */ "./resources/js/components/UIKit/TextInput.jsx");
 /* harmony import */ var _PrimaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PrimaryButton */ "./resources/js/components/UIKit/PrimaryButton.jsx");
@@ -25828,6 +25869,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _InputTags__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! .//InputTags */ "./resources/js/components/UIKit/InputTags.jsx");
 /* harmony import */ var _SharpEdgeButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SharpEdgeButton */ "./resources/js/components/UIKit/SharpEdgeButton.jsx");
 /* harmony import */ var _ItemLists__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ItemLists */ "./resources/js/components/UIKit/ItemLists.jsx");
+/* harmony import */ var _ScrollToTop__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ScrollToTop */ "./resources/js/components/UIKit/ScrollToTop.jsx");
+
 
 
 
@@ -28626,7 +28669,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var App = function App() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Header__WEBPACK_IMPORTED_MODULE_2__.NavBar, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Header_Header__WEBPACK_IMPORTED_MODULE_1__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_4__.Loading, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_4__.ScrollToTop, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Header__WEBPACK_IMPORTED_MODULE_2__.NavBar, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Header_Header__WEBPACK_IMPORTED_MODULE_1__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_4__.Loading, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("main", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Router__WEBPACK_IMPORTED_MODULE_3__.default, {})
       })
