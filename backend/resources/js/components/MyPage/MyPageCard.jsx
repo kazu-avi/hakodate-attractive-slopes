@@ -1,4 +1,5 @@
 import React from 'react';
+import { DisplayLikes } from '../PostCard';
 import {
     Avatar,
     Card,
@@ -81,14 +82,18 @@ const MyPageCard = (props) => {
                 ))}
             </CardContent>
             <CardActions>
-                <IconButton>
-                    <FavoriteIcon />
-                </IconButton>
+                <DisplayLikes isLiked={props.isLiked} postId={props.postId} />
                 <IconButton>
                     <ShareIcon />
                 </IconButton>
                 <CardHeader
-                    avatar={<Avatar alt="ユーザー画像" src={noimage} />}
+                    avatar={
+                        props.userImg ? (
+                            <Avatar alt="ユーザー画像" src={props.userImg} />
+                        ) : (
+                            <Avatar alt="noimage" src={noimage} />
+                        )
+                    }
                     title={props.name}
                     subheader={props.date}
                 />
