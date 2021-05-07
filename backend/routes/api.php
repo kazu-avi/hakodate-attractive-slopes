@@ -43,6 +43,10 @@ Route::get('/v1/tags', [TagController::class, 'getAllTags'])->name('getAllTags')
 //　投稿一覧の取得
 Route::get('/v1/posts', [PostController::class, 'getAllPosts'])->name('getAllPosts');
 
+// 投稿一覧をランダムで取得
+Route::get('/v1/posts/r', [PostController::class, 'getRandomPosts'])->name('getRandomPosts');
+
+
 // 個別投稿の取得
 Route::get('/v1/posts/{id}', [PostController::class, 'getPost'])->name('getPost');
 

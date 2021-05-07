@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { PrimaryButton } from '../UIKit';
 import { AppBar, Box, Chip, Container, Tab, Tabs } from '@material-ui/core';
-
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -58,11 +59,17 @@ const PostListTabs = (props) => {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab label="坂の名前ごとに見る" icon={<FilterHdrIcon />} {...a11yProps(0)} />
-                    <Tab label="タグごとに見る" icon={<LocalOfferIcon />} {...a11yProps(1)} />
+                    <Tab label="全ての投稿を見る" icon={<PhotoCameraIcon />} {...a11yProps(0)} />
+                    <Tab label="坂の名前ごとに見る" icon={<FilterHdrIcon />} {...a11yProps(1)} />
+                    <Tab label="タグごとに見る" icon={<LocalOfferIcon />} {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
+            <TabPanel className="center" value={value} index={0}>
+                <PrimaryButton label={'新着順に見る'} onClick={() => props.newestClick()} />
+                <span className="margin-20" />
+                <PrimaryButton label={'ランダムに見る'} onClick={() => props.randomClick()} />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
                 {props.categories.map((category) => (
                     <Chip
                         variant="outlined"
@@ -74,7 +81,7 @@ const PostListTabs = (props) => {
                     />
                 ))}
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={value} index={2}>
                 {props.tags.map((tag) => (
                     <Chip
                         variant="outlined"
