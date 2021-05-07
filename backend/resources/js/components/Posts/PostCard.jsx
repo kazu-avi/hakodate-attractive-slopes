@@ -53,7 +53,7 @@ const PostCard = (props) => {
     const classes = useStyles();
     return (
         <Card className={classes.root}>
-            <div className="image-thumb">
+            <div className="image-thumb hover">
                 <CardMedia className={classes.media} image={props.image} onClick={() => props.onClick()} />
                 <Chip
                     className={classes.chip}
@@ -63,6 +63,9 @@ const PostCard = (props) => {
                     label={props.category}
                     onClick={() => props.chipClick()}
                 />
+                <div className="hover-text" onClick={() => props.onClick()}>
+                    <p>詳細を見る</p>
+                </div>
             </div>
             <CardContent className={classes.content}>
                 <Typography>{props.text}</Typography>

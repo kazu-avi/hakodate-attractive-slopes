@@ -25468,7 +25468,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var useStyles = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_5__.default)({
   root: {
     width: '32%',
@@ -25506,7 +25505,7 @@ var MyPageCard = function MyPageCard(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
     className: classes.root,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "image-thumb",
+      className: "image-thumb hover",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
         className: classes.media,
         image: props.image,
@@ -25522,6 +25521,14 @@ var MyPageCard = function MyPageCard(props) {
         onClick: function onClick() {
           return props.chipClick();
         }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "hover-text",
+        onClick: function onClick() {
+          return props.onClick();
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+          children: "\u8A73\u7D30\u3092\u898B\u308B"
+        })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
       className: classes.content,
@@ -26633,7 +26640,7 @@ var PostCard = function PostCard(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
     className: classes.root,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      className: "image-thumb",
+      className: "image-thumb hover",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
         className: classes.media,
         image: props.image,
@@ -26649,6 +26656,14 @@ var PostCard = function PostCard(props) {
         onClick: function onClick() {
           return props.chipClick();
         }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "hover-text",
+        onClick: function onClick() {
+          return props.onClick();
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          children: "\u8A73\u7D30\u3092\u898B\u308B"
+        })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
       className: classes.content,

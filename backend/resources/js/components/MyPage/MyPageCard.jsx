@@ -11,7 +11,6 @@ import {
     Typography,
     CardHeader,
 } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import ShareIcon from '@material-ui/icons/Share';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
@@ -57,7 +56,7 @@ const MyPageCard = (props) => {
 
     return (
         <Card className={classes.root}>
-            <div className="image-thumb">
+            <div className="image-thumb hover">
                 <CardMedia className={classes.media} image={props.image} onClick={() => props.onClick()} />
                 <Chip
                     className={classes.chip}
@@ -67,6 +66,9 @@ const MyPageCard = (props) => {
                     label={props.category}
                     onClick={() => props.chipClick()}
                 />
+                <div className="hover-text" onClick={() => props.onClick()}>
+                    <p>詳細を見る</p>
+                </div>
             </div>
             <CardContent className={classes.content}>
                 <Typography>{props.text}</Typography>
