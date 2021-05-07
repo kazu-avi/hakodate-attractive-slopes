@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
 import { AppBar, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { HeaderDrawer } from './NavBar/index';
 import HeaderLogo from '../../../../public/img/header-logo.png';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -26,8 +29,10 @@ const useStyles = makeStyles({
     },
 });
 
-const NavBar = () => {
+const NavBar = (props) => {
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const $bar = document.getElementById('nav-bar');
@@ -36,15 +41,35 @@ const NavBar = () => {
         });
     }, []);
 
+    const toggleDrawer = useCallback(
+        (open) => {
+            console.log('close...');
+            setDrawerOpen(open);
+        },
+        [toggleDrawer]
+    );
+
     return (
         <div id="nav-bar" className="header-scroll">
             <AppBar className={classes.bar}>
                 <Toolbar className={classes.tool}>
-                    <img src={HeaderLogo} height="40px" />
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    <img src={HeaderLogo} height="40px" onClick={() => dispatch(push('/'))} />
+                    <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="menu"
+                        onClick={() => toggleDrawer(true)}
+                    >
                         <MenuIcon />
                     </IconButton>
                 </Toolbar>
+                <HeaderDrawer
+                    open={drawerOpen}
+                    onClose={toggleDrawer}
+                    isSignedIn={props.isSignedIn}
+                    username={props.username}
+                />
             </AppBar>
         </div>
     );
