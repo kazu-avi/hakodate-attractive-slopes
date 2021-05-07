@@ -41,7 +41,7 @@ class PostController extends Controller
                 foreach ($tags as $tag) {
                     array_push($tags_id, $tag->id);
                 }
-            } catch(Throwable $e) {
+            } catch(\Exception $e) {
                 DB::rollBack();
                 return response()->json([$e],401);
             }
@@ -63,7 +63,7 @@ class PostController extends Controller
             $post->save();
             $post->tags()->attach($tags_id);
             DB::commit();
-        } catch (Throwable $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             // エラーがあった場合、DBと一致しないことを防ぐため、ストレージから画像を削除
             Storage::disk('s3')->delete($path);
@@ -97,7 +97,7 @@ class PostController extends Controller
                 foreach ($tags as $tag) {
                     array_push($tags_id, $tag->id);
                 }
-            } catch(Throwable $e) {
+            } catch(\Exception $e) {
                 DB::rollBack();
                 return response()->json([$e],401);
             }
@@ -124,7 +124,7 @@ class PostController extends Controller
             $post->tags()->detach();
             $post->tags()->attach($tags_id);
             DB::commit();
-        } catch (Throwable $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             // エラーがあった場合、DBと一致しないことを防ぐため、ストレージから画像を削除
             if (isset($input['file'])) {
@@ -150,6 +150,15 @@ class PostController extends Controller
     public function getAllPosts() {
         $posts = Post::with('user', 'category', 'tags', 'likes')
             ->orderBy('updated_at','desc')
+            ->paginate(9);
+
+        return response()->json($posts);
+    }
+
+    // 投稿一覧をランダムで取得
+    public function getRandomPosts() {
+        $posts = Post::with('user', 'category', 'tags', 'likes')
+            ->inRandomOrder()
             ->paginate(9);
 
         return response()->json($posts);
