@@ -81,6 +81,34 @@ body {
     line-height: 40px;
 }
 
+.hover {
+    position: relative;
+    text-align: right;
+}
+
+.hover-text {
+    position: absolute;
+    padding: 10px;
+    height: 7%;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .7);
+    color: #fff;
+    z-index: 10;
+    cursor: pointer;
+    opacity: 0;
+    transition: ease .5s;
+}
+
+.hover-text > p {
+    margin: 0;
+}
+
+.hover:hover .hover-text {
+    opacity: 1;
+}
+
 /* SECTION系 */
 .small-section {
     max-width: 480px;
