@@ -71,6 +71,9 @@ const MyPageTabs = (props) => {
                     {props.myPostList.map((post) => (
                         <MyPageCard
                             key={post.id}
+                            postId={post.id}
+                            isLiked={post.liked_by_user}
+                            userImg={post.user.img}
                             image={post.file_path}
                             text={post.text}
                             category={post.category.name}
@@ -88,6 +91,9 @@ const MyPageTabs = (props) => {
                     {props.myLikesList.map((post) => (
                         <MyPageCard
                             key={post.id}
+                            postId={post.id}
+                            isLiked={post.liked_by_user}
+                            userImg={post.user.img}
                             image={post.file_path}
                             text={post.text}
                             category={post.category.name}
