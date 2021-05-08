@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIsSignedIn } from '../../reducks/users/selector';
 import { showLoadingAction, hideLoadingAction } from '../../reducks/loading/actions';
+import { hideAlertAction, showAlertAction, showMessageAction } from '../../reducks/alert/actions';
 import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -23,7 +24,10 @@ const DisplayLikes = (props) => {
     const likesClickHandler = useCallback(
         async (id) => {
             if (!isSignedIn) {
-                alert('ログインが必要です');
+                dispatch(showAlertAction('ログインが必要です'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 2000);
                 return false;
             }
 
@@ -44,6 +48,10 @@ const DisplayLikes = (props) => {
                 .then(() => {
                     setIsLiked(true);
                     dispatch(hideLoadingAction());
+                    dispatch(showMessageAction('「行きたい！」に追加しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -56,7 +64,10 @@ const DisplayLikes = (props) => {
     const unlikeClickHandler = useCallback(
         async (id) => {
             if (!isSignedIn) {
-                alert('ログインが必要です');
+                dispatch(showAlertAction('ログインが必要です'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 2000);
                 return false;
             }
 
@@ -76,6 +87,10 @@ const DisplayLikes = (props) => {
             await fetch(url, unlike)
                 .then(() => {
                     setIsLiked(false);
+                    dispatch(showMessageAction('「行きたい！」から削除しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                     dispatch(hideLoadingAction());
                 })
                 .catch((error) => {

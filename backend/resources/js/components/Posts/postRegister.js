@@ -1,10 +1,14 @@
 import { push } from 'connected-react-router';
+import { hideAlertAction, showAlertAction, showMessageAction } from '../../reducks/alert/actions';
 import { showLoadingAction, hideLoadingAction } from '../../reducks/loading/actions';
 
 export const postRegister = (uid, category, file, text, tags) => {
     return async (dispatch) => {
         if (uid === '' || category === '' || file === '' || text === '') {
-            alert('必須項目が未入力です');
+            dispatch(showAlertAction('必須項目が未入力です'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
@@ -34,7 +38,10 @@ export const postRegister = (uid, category, file, text, tags) => {
             .then((response) => {
                 dispatch(showLoadingAction('投稿しています・・・'));
                 if (!response.ok) {
-                    alert('投稿に失敗しました');
+                    dispatch(showAlertAction('投稿に失敗しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                     throw new Error(`${response.status} ${response.statusText}`);
                 } else {
                     return response.json();
@@ -42,14 +49,20 @@ export const postRegister = (uid, category, file, text, tags) => {
             })
             .then((responseJson) => {
                 console.log(responseJson);
-                alert('写真を投稿しました！');
                 dispatch(hideLoadingAction());
                 dispatch(push('/'));
+                dispatch(showMessageAction('写真を投稿しました'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 5000);
             })
             .catch((error) => {
                 console.error(error);
                 dispatch(hideLoadingAction());
-                alert('投稿に失敗しました');
+                dispatch(showAlertAction('投稿に失敗しました'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 2000);
                 return null;
             });
     };
@@ -58,12 +71,18 @@ export const postRegister = (uid, category, file, text, tags) => {
 export const postEdit = (uid, postId, postedUser, category, file, text, tags) => {
     return async (dispatch) => {
         if (uid === '' || category === '' || text === '') {
-            alert('必須項目が未入力です');
+            dispatch(showAlertAction('必須項目が未入力です'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
         if (uid !== postedUser) {
-            alert('投稿編集は投稿したユーザーのみ可能です');
+            dispatch(showAlertAction('投稿編集は投稿したユーザーのみ可能です'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
@@ -96,7 +115,10 @@ export const postEdit = (uid, postId, postedUser, category, file, text, tags) =>
             .then((response) => {
                 dispatch(showLoadingAction('投稿しています・・・'));
                 if (!response.ok) {
-                    alert('投稿に失敗しました');
+                    dispatch(showAlertAction('投稿に失敗しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                     throw new Error(`${response.status} ${response.statusText}`);
                 } else {
                     return response.json();
@@ -104,14 +126,20 @@ export const postEdit = (uid, postId, postedUser, category, file, text, tags) =>
             })
             .then((responseJson) => {
                 console.log(responseJson);
-                alert('投稿を編集しました！');
+                dispatch(showMessageAction('投稿を編集しました'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 4000);
                 dispatch(hideLoadingAction());
                 dispatch(push('/'));
             })
             .catch((error) => {
                 console.error(error);
                 dispatch(hideLoadingAction());
-                alert('投稿に失敗しました');
+                dispatch(showAlertAction('投稿に失敗しました'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 2000);
                 return null;
             });
     };
@@ -120,7 +148,10 @@ export const postEdit = (uid, postId, postedUser, category, file, text, tags) =>
 export const postDelete = (uid, postId, postedUser) => {
     return async (dispatch) => {
         if (uid !== postedUser) {
-            alert('投稿削除は投稿したユーザーのみ可能です');
+            dispatch(showAlertAction('投稿削除は投稿したユーザーのみ可能です'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
@@ -139,7 +170,10 @@ export const postDelete = (uid, postId, postedUser) => {
                 .then((response) => {
                     dispatch(showLoadingAction('削除しています・・・'));
                     if (!response.ok) {
-                        alert('投稿削除に失敗しました');
+                        dispatch(showAlertAction('投稿削除に失敗しました'));
+                        setTimeout(() => {
+                            dispatch(hideAlertAction());
+                        }, 2000);
                         throw new Error(`${response.status} ${response.statusText}`);
                     } else {
                         return response.json();
@@ -147,14 +181,20 @@ export const postDelete = (uid, postId, postedUser) => {
                 })
                 .then((responseJson) => {
                     console.log(responseJson);
-                    alert('投稿を削除しました！');
+                    dispatch(showMessageAction('投稿を削除しました！'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 4000);
                     dispatch(hideLoadingAction());
                     dispatch(push('/mypage'));
                 })
                 .catch((error) => {
                     console.error(error);
                     dispatch(hideLoadingAction());
-                    alert('投稿削除に失敗しました');
+                    dispatch(showAlertAction('投稿削除に失敗しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                     return null;
                 });
         } else {

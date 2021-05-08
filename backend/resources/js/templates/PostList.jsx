@@ -18,30 +18,34 @@ const PostList = () => {
     const selector = useSelector((state) => state);
     const query = selector.router.location.search;
 
-    console.log(category);
+    console.log(page);
 
     // 取得したクエリが<?category=>の形と一致するか確認し、category_idを取得
     const category = /^\?category=/.test(query) ? query.split('?category=')[1] : '';
     const tag = /^\?tag=/.test(query) ? query.split('?tag=')[1] : '';
     const random = /^\?random=/.test(query) ? query.split('?random=')[1] : '';
 
-    const getPostList = useCallback(async () => {
-        if (tag) {
-            tagClickHandler(tag);
-        } else if (category) {
-            categoryClickHandler(category);
-        } else if (random) {
-            randomClickHandler();
-        } else {
-            newestClickHandler();
-        }
-    }, [getPostList]);
+    const getPostList = useCallback(
+        async (page) => {
+            setPage(page);
+            if (tag) {
+                tagClickHandler(tag, page);
+            } else if (category) {
+                categoryClickHandler(category, page);
+            } else if (random) {
+                randomClickHandler(page);
+            } else {
+                newestClickHandler(page);
+            }
+        },
+        [getPostList]
+    );
 
     const categoryClickHandler = useCallback(
-        async (id) => {
+        async (id, page) => {
             dispatch(showLoadingAction());
             dispatch(push('/?category=' + id));
-            setPage(page);
+            // setPage(page);
             const url = 'http://localhost:30080/api/v1/categories/' + id + '?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
@@ -65,10 +69,10 @@ const PostList = () => {
     );
 
     const tagClickHandler = useCallback(
-        async (id) => {
+        async (id, page) => {
             dispatch(showLoadingAction());
             dispatch(push('/?tag=' + id));
-            setPage(page);
+            // setPage(page);
             const url = 'http://localhost:30080/api/v1/tags/' + id + '?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
@@ -91,55 +95,61 @@ const PostList = () => {
         [tagClickHandler]
     );
 
-    const randomClickHandler = useCallback(async () => {
-        dispatch(showLoadingAction());
-        dispatch(push('/?random=1'));
-        setPage(page);
-        const url = 'http://localhost:30080/api/v1/posts/r?page=' + page;
-        const token = localStorage.getItem('access_token');
-        const option = {
-            headers: {
-                Authorization: 'Bearer ' + token,
-            },
-        };
-        await fetch(url, option)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                setPostList(responseJson.data);
-                setTotalPage(responseJson.last_page);
-                dispatch(hideLoadingAction());
-            })
-            .catch((error) => {
-                console.error(error);
-                dispatch(hideLoadingAction());
-            });
-    }, [randomClickHandler]);
+    const randomClickHandler = useCallback(
+        async (page) => {
+            dispatch(showLoadingAction());
+            dispatch(push('/?random=1'));
+            // setPage(page);
+            const url = 'http://localhost:30080/api/v1/posts/r?page=' + page;
+            const token = localStorage.getItem('access_token');
+            const option = {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+            };
+            await fetch(url, option)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    setPostList(responseJson.data);
+                    setTotalPage(responseJson.last_page);
+                    dispatch(hideLoadingAction());
+                })
+                .catch((error) => {
+                    console.error(error);
+                    dispatch(hideLoadingAction());
+                });
+        },
+        [randomClickHandler]
+    );
 
-    const newestClickHandler = useCallback(async () => {
-        dispatch(showLoadingAction());
-        dispatch(push('/'));
-        setPage(page);
-        const url = 'http://localhost:30080/api/v1/posts?page=' + page;
-        const token = localStorage.getItem('access_token');
-        const option = {
-            headers: {
-                Authorization: 'Bearer ' + token,
-            },
-        };
-        await fetch(url, option)
-            .then((response) => {
-                return response.json();
-            })
-            .then((responseJson) => {
-                setPostList(responseJson.data);
-                setTotalPage(responseJson.last_page);
-                dispatch(hideLoadingAction());
-            })
-            .catch((error) => {
-                console.error(error);
-                dispatch(hideLoadingAction());
-            });
-    }, [newestClickHandler]);
+    const newestClickHandler = useCallback(
+        async (page) => {
+            dispatch(showLoadingAction());
+            dispatch(push('/'));
+            // setPage(page);
+            const url = 'http://localhost:30080/api/v1/posts?page=' + page;
+            const token = localStorage.getItem('access_token');
+            const option = {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+            };
+            await fetch(url, option)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((responseJson) => {
+                    setPostList(responseJson.data);
+                    setTotalPage(responseJson.last_page);
+                    dispatch(hideLoadingAction());
+                })
+                .catch((error) => {
+                    console.error(error);
+                    dispatch(hideLoadingAction());
+                });
+        },
+        [newestClickHandler]
+    );
 
     //  初期値のセット
     useEffect(() => {

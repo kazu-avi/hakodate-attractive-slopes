@@ -3,6 +3,7 @@
 
 import { push } from 'connected-react-router';
 import { loginAction, logoutAction } from './actions';
+import { hideAlertAction, showAlertAction, showMessageAction } from '../alert/actions';
 import { showLoadingAction, hideLoadingAction } from '../loading/actions';
 
 // 認証のチェック(Authコンポーネント)
@@ -20,13 +21,19 @@ export const checkAuth = () => {
         };
 
         if (!token) {
-            alert('ログインが必要です。');
+            dispatch(showAlertAction('ログインが必要です'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             dispatch(push('/login'));
         } else {
             await fetch(url, option)
                 .then((response) => {
                     if (!response.ok) {
-                        alert('ログインが必要です。');
+                        dispatch(showAlertAction('ログインが必要です'));
+                        setTimeout(() => {
+                            dispatch(hideAlertAction());
+                        }, 2000);
                         dispatch(push('/login'));
                     } else {
                         return response.json().then((responseJson) => {
@@ -103,11 +110,18 @@ export const register = (username, email, password, confirmPassword, file) => {
     return async (dispatch) => {
         //バリデーション
         if (username === '' || email === '' || password === '' || confirmPassword === '') {
-            alert('必須項目が未入力です。再度入力してください。');
+            dispatch(showAlertAction('必須項目が未入力です。再度入力してください。'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
         if (password !== confirmPassword) {
+            dispatch(showAlertAction('確認用パスワードが一致しません。再度入力してください。'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             alert('確認用パスワードが一致しません。再度入力してください。');
             return false;
         }
@@ -135,6 +149,10 @@ export const register = (username, email, password, confirmPassword, file) => {
                 dispatch(showLoadingAction('登録しています・・・'));
                 if (!response.ok) {
                     console.log('登録に失敗しました');
+                    dispatch(showAlertAction('登録に失敗しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                 }
                 return response.json();
             })
@@ -142,6 +160,10 @@ export const register = (username, email, password, confirmPassword, file) => {
                 console.log(responseJson);
                 dispatch(hideLoadingAction());
                 dispatch(push('/login'));
+                dispatch(showMessageAction('ユーザー登録が完了しました。ログインしてください。'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 4000);
             })
             .catch((error) => {
                 dispatch(hideLoadingAction());
@@ -155,7 +177,10 @@ export const update = (username, file, id) => {
     return async (dispatch) => {
         //バリデーション
         if (username === '') {
-            alert('必須項目が未入力です。再度入力してください。');
+            dispatch(showAlertAction('必須項目が未入力です。再度入力してください。'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
@@ -185,7 +210,10 @@ export const update = (username, file, id) => {
             .then((response) => {
                 dispatch(showLoadingAction('登録しています・・・'));
                 if (!response.ok) {
-                    console.log('登録に失敗しました');
+                    dispatch(showAlertAction('登録に失敗しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                 }
                 return response.json();
             })
@@ -201,11 +229,19 @@ export const update = (username, file, id) => {
                 );
                 dispatch(hideLoadingAction());
                 dispatch(push('/mypage'));
+                dispatch(showMessageAction('ユーザー情報を編集しました！'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 4000);
             })
             .catch((error) => {
                 dispatch(hideLoadingAction());
                 console.error(error);
                 console.log('登録に失敗しました');
+                dispatch(showAlertAction('登録に失敗しました'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 2000);
                 return null;
             });
     };
@@ -215,7 +251,10 @@ export const login = (email, password) => {
     return async (dispatch) => {
         //バリデーション
         if (email === '' || password === '') {
-            alert('必須項目が未入力です。再度入力してください。');
+            dispatch(showAlertAction('必須項目が未入力です。再度入力してください。'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
@@ -240,7 +279,10 @@ export const login = (email, password) => {
                 if (!response.ok) {
                     dispatch(hideLoadingAction());
                     console.log('認証に失敗しました');
-                    alert('ログインに失敗しました。新規登録するか、再度入力してお試しください。');
+                    dispatch(showAlertAction('ログインに失敗しました。新規登録するか、再度入力してお試しください。'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                 } else {
                     return response.json().then((responseJson) => {
                         // 発行されたトークンをローカルストレージに保存
@@ -259,6 +301,10 @@ export const login = (email, password) => {
 
                         dispatch(hideLoadingAction());
                         dispatch(push('/'));
+                        dispatch(showMessageAction('ログインしました！'));
+                        setTimeout(() => {
+                            dispatch(hideAlertAction());
+                        }, 4000);
                     });
                 }
             })
@@ -285,8 +331,11 @@ export const logout = () => {
         await fetch(url, option).then(() => {
             localStorage.removeItem('access_token');
             dispatch(logoutAction());
-            alert('ログアウトしました');
             dispatch(push('/'));
+            dispatch(showMessageAction('ログアウトしました！'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 4000);
         });
     };
 };
@@ -308,8 +357,11 @@ export const userDelete = (id) => {
             .then(() => {
                 localStorage.removeItem('access_token');
                 dispatch(logoutAction());
-                alert('アカウントを削除しました');
                 dispatch(push('/'));
+                dispatch(showMessageAction('アカウントを削除しました'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 4000);
             })
             .catch((error) => console.error(error));
     };
