@@ -17,6 +17,11 @@ const initialState = {
     tags: {
         list: [],
     },
+    alert: {
+        displayAlert: false,
+        displayMessage: false,
+        text: '',
+    },
 };
 
 export default initialState;

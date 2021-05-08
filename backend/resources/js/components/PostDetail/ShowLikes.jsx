@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { makeStyles } from '@material-ui/styles';
 import { Chip } from '@material-ui/core';
 import { showLoadingAction, hideLoadingAction } from '../../reducks/loading/actions';
+import { hideAlertAction, showAlertAction, showMessageAction } from '../../reducks/alert/actions';
 
 const useStyles = makeStyles({
     icon: {
@@ -50,7 +51,10 @@ const ShowLikes = (props) => {
     const likesClickHandler = useCallback(
         async (id) => {
             if (!props.isSignedIn) {
-                alert('ログインが必要です');
+                dispatch(showAlertAction('ログインが必要です'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 2000);
                 return false;
             }
 
@@ -70,6 +74,10 @@ const ShowLikes = (props) => {
             await fetch(url, like)
                 .then(() => {
                     dispatch(hideLoadingAction());
+                    dispatch(showMessageAction('「行きたい！」に追加しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                     getCount(props.id);
                 })
                 .catch((error) => {
@@ -83,7 +91,10 @@ const ShowLikes = (props) => {
     const unlikeClickHandler = useCallback(
         async (id) => {
             if (!props.isSignedIn) {
-                alert('ログインが必要です');
+                dispatch(showAlertAction('ログインが必要です'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 2000);
                 return false;
             }
 
@@ -103,6 +114,10 @@ const ShowLikes = (props) => {
             await fetch(url, unlike)
                 .then(() => {
                     dispatch(hideLoadingAction());
+                    dispatch(showMessageAction('「行きたい！」から削除しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                     getCount(props.id);
                 })
                 .catch((error) => {

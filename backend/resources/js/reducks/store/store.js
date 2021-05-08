@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import { LoadingReducer } from '../loading/reducers';
 import { CategoriesReducer } from '../categories/reducers';
 import { TagsReducer } from '../tags/reducers';
+import { AlertReducer } from '../alert/reducers';
 
 //引数：history(pathの履歴の情報を持つ)
 const createStore = (history) => {
@@ -15,6 +16,7 @@ const createStore = (history) => {
             loading: LoadingReducer,
             categories: CategoriesReducer,
             tags: TagsReducer,
+            alert: AlertReducer,
         }),
         applyMiddleware(routerMiddleware(history), thunk)
     );
