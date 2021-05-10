@@ -1,3 +1,4 @@
+import { hideAlertAction, showAlertAction, showMessageAction } from '../../reducks/alert/actions';
 import { showLoadingAction, hideLoadingAction } from '../../reducks/loading/actions';
 import { push } from 'connected-react-router';
 
@@ -5,12 +6,18 @@ const commentRegister = (id, comment) => {
     return async (dispatch) => {
         console.log(comment.length);
         if (id === '' || comment === '') {
-            alert('必須項目が未入力です');
+            dispatch(showAlertAction('必須項目が未入力です'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
         if (comment.length > 300) {
-            alert('コメントの文字数は300文字以内で入力してください。');
+            dispatch(showAlertAction('コメントの文字数は300文字以内で入力してください。'));
+            setTimeout(() => {
+                dispatch(hideAlertAction());
+            }, 2000);
             return false;
         }
 
@@ -38,21 +45,30 @@ const commentRegister = (id, comment) => {
             .then((response) => {
                 dispatch(showLoadingAction('投稿しています・・・'));
                 if (!response.ok) {
-                    alert('投稿に失敗しました');
+                    dispatch(showAlertAction('投稿に失敗しました。'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
                     throw new Error(`${response.status} ${response.statusText}`);
                 } else {
                     return response.json();
                 }
             })
             .then(() => {
-                alert('コメントを投稿しました！');
+                dispatch(showMessageAction('写真を投稿しました'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 5000);
                 dispatch(hideLoadingAction());
                 dispatch(push('/posts/' + id));
             })
             .catch((error) => {
                 console.error(error);
                 dispatch(hideLoadingAction());
-                alert('投稿に失敗しました');
+                dispatch(showAlertAction('投稿に失敗しました。'));
+                setTimeout(() => {
+                    dispatch(hideAlertAction());
+                }, 2000);
                 return false;
             });
     };

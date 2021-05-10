@@ -1,6 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import { Login, Register, MyPage, PostDetail, PostList, UserEdit, PostCreate, PostEdit } from './templates';
+import {
+    Login,
+    Register,
+    MyPage,
+    PostDetail,
+    PostList,
+    UserEdit,
+    PostCreate,
+    PostEdit,
+    CategoryDetail,
+} from './templates';
 import Auth from './Auth';
 
 const Router = () => {
@@ -12,6 +22,7 @@ const Router = () => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route path="/posts/:id" component={PostDetail} />
+            <Route path="/categories/:id" component={CategoryDetail} />
             <Auth>
                 <Switch>
                     <Route exact path="/mypage" component={MyPage} />

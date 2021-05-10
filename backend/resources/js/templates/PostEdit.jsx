@@ -7,7 +7,6 @@ import { push } from 'connected-react-router';
 import { OutlinedButton, PrimaryButton } from '../components/UIKit';
 import { postEdit } from '../components/Posts/postRegister';
 import { getUserId } from '../reducks/users/selector';
-import { getAllCategories } from '../reducks/categories/operations';
 import { getCategoriesList } from '../reducks/categories/selectors';
 
 const PostEdit = () => {
@@ -61,10 +60,8 @@ const PostEdit = () => {
 
     // mount時にDB(API)よりカテゴリー一覧を取得しセット
     useEffect(() => {
-        dispatch(getAllCategories());
         getInitialState(postId);
         return () => {
-            dispatch(getAllCategories());
             getInitialState(postId);
         };
     }, []);
