@@ -1,9 +1,8 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { PostCard, PostListTabs } from '../components/Posts';
+import { PostCard, PostListTabs, DisplayCategoriesArea } from '../components/Posts';
 import { Pagination } from '../components/UIKit';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
-import { getAllCategories } from '../reducks/categories/operations';
 import { getCategoriesList } from '../reducks/categories/selectors';
 import { getAllTags } from '../reducks/tags/operations';
 import { getTagsList } from '../reducks/tags/selectors';
@@ -155,7 +154,6 @@ const PostList = () => {
     useEffect(() => {
         console.log('effect');
         getPostList(page);
-        dispatch(getAllCategories());
         dispatch(getAllTags());
     }, []);
 
@@ -164,6 +162,10 @@ const PostList = () => {
 
     return (
         <>
+            <section className="large-section">
+                <h2>坂道を知る</h2>
+                <DisplayCategoriesArea categories={categoriesList} />
+            </section>
             <section className="small-section">
                 <PostListTabs
                     categories={categoriesList}

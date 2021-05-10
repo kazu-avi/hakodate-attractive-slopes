@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     // カテゴリー一覧を取得
     public function getAllCategories () {
-        $categoriesList = Category::get(['id', 'name']);
+        $categoriesList = Category::get(['id', 'name', 'img', 'address', 'description']);
         return response()->json($categoriesList);
     }
 }
