@@ -29408,6 +29408,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "register": () => (/* binding */ register),
 /* harmony export */   "update": () => (/* binding */ update),
 /* harmony export */   "login": () => (/* binding */ login),
+/* harmony export */   "guestLogin": () => (/* binding */ guestLogin),
 /* harmony export */   "logout": () => (/* binding */ logout),
 /* harmony export */   "userDelete": () => (/* binding */ userDelete)
 /* harmony export */ });
@@ -29808,7 +29809,6 @@ var login = function login(email, password) {
                     // 発行されたトークンをローカルストレージに保存
                     var token = responseJson['access_token'];
                     localStorage.setItem('access_token', token);
-                    console.log(responseJson);
                     dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.loginAction)({
                       isSignedIn: 'true',
                       uid: responseJson['uid'],
@@ -29841,32 +29841,59 @@ var login = function login(email, password) {
     };
   }();
 };
-var logout = function logout() {
+var guestLogin = function guestLogin() {
   return /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(dispatch) {
-      var url, token, option;
+      var url, data, option;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/logout';
-              token = localStorage.getItem('access_token');
+              url = 'http://localhost:30080/api/v1/login';
+              data = {
+                email: 'test@test.com',
+                password: 'password'
+              };
               option = {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + token
-                }
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
               };
               _context6.next = 5;
-              return fetch(url, option).then(function () {
-                localStorage.removeItem('access_token');
-                dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.logoutAction)());
-                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_4__.push)('/'));
-                dispatch((0,_alert_actions__WEBPACK_IMPORTED_MODULE_2__.showMessageAction)('ログアウトしました！'));
-                setTimeout(function () {
-                  dispatch((0,_alert_actions__WEBPACK_IMPORTED_MODULE_2__.hideAlertAction)());
-                }, 4000);
+              return fetch(url, option).then(function (response) {
+                dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_3__.showLoadingAction)('ログインしています・・・'));
+
+                if (!response.ok) {
+                  dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_3__.hideLoadingAction)());
+                  console.log('認証に失敗しました');
+                  dispatch((0,_alert_actions__WEBPACK_IMPORTED_MODULE_2__.showAlertAction)('ログインに失敗しました。お手数ですが再度お試しください。'));
+                  setTimeout(function () {
+                    dispatch((0,_alert_actions__WEBPACK_IMPORTED_MODULE_2__.hideAlertAction)());
+                  }, 2000);
+                } else {
+                  return response.json().then(function (responseJson) {
+                    // 発行されたトークンをローカルストレージに保存
+                    var token = responseJson['access_token'];
+                    localStorage.setItem('access_token', token);
+                    dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.loginAction)({
+                      isSignedIn: 'true',
+                      uid: responseJson['uid'],
+                      username: responseJson['username'],
+                      img: responseJson['img']
+                    }));
+                    dispatch((0,_loading_actions__WEBPACK_IMPORTED_MODULE_3__.hideLoadingAction)());
+                    dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_4__.push)('/'));
+                    dispatch((0,_alert_actions__WEBPACK_IMPORTED_MODULE_2__.showMessageAction)('ゲストログインしました！'));
+                    setTimeout(function () {
+                      dispatch((0,_alert_actions__WEBPACK_IMPORTED_MODULE_2__.hideAlertAction)());
+                    }, 4000);
+                  });
+                }
+              })["catch"](function (error) {
+                console.error(error);
+                return null;
               });
 
             case 5:
@@ -29882,13 +29909,54 @@ var logout = function logout() {
     };
   }();
 };
-var userDelete = function userDelete(id) {
+var logout = function logout() {
   return /*#__PURE__*/function () {
     var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(dispatch) {
       var url, token, option;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
+            case 0:
+              url = 'http://localhost:30080/api/v1/logout';
+              token = localStorage.getItem('access_token');
+              option = {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: 'Bearer ' + token
+                }
+              };
+              _context7.next = 5;
+              return fetch(url, option).then(function () {
+                localStorage.removeItem('access_token');
+                dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.logoutAction)());
+                dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_4__.push)('/'));
+                dispatch((0,_alert_actions__WEBPACK_IMPORTED_MODULE_2__.showMessageAction)('ログアウトしました！'));
+                setTimeout(function () {
+                  dispatch((0,_alert_actions__WEBPACK_IMPORTED_MODULE_2__.hideAlertAction)());
+                }, 4000);
+              });
+
+            case 5:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+
+    return function (_x7) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+};
+var userDelete = function userDelete(id) {
+  return /*#__PURE__*/function () {
+    var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(dispatch) {
+      var url, token, option;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               url = 'http://localhost:30080/api/v1/users/' + id;
               token = localStorage.getItem('access_token');
@@ -29899,7 +29967,7 @@ var userDelete = function userDelete(id) {
                   Authorization: 'Bearer ' + token
                 }
               };
-              _context7.next = 5;
+              _context8.next = 5;
               return fetch(url, option).then(function () {
                 localStorage.removeItem('access_token');
                 dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_1__.logoutAction)());
@@ -29914,14 +29982,14 @@ var userDelete = function userDelete(id) {
 
             case 5:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
         }
-      }, _callee7);
+      }, _callee8);
     }));
 
-    return function (_x7) {
-      return _ref7.apply(this, arguments);
+    return function (_x8) {
+      return _ref8.apply(this, arguments);
     };
   }();
 };
@@ -30444,7 +30512,7 @@ var Login = function Login() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: 'spacer-medium'
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "center",
+      className: "center br-label",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_2__.OutlinedButton, {
         label: 'キャンセル',
         onClick: function onClick() {
@@ -30456,6 +30524,13 @@ var Login = function Login() {
         label: 'ログインする',
         onClick: function onClick() {
           return dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_3__.login)(email, password));
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: 'spacer-medium'
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_2__.PrimaryButton, {
+        label: 'ゲストユーザーとしてログインする \n（メールアドレス・パスワード不要）',
+        onClick: function onClick() {
+          return dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_3__.guestLogin)());
         }
       })]
     })]
@@ -30642,14 +30717,16 @@ var MyPage = function MyPage() {
         img: userImage
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h2", {
         children: [username, "\u3055\u3093\u306E\u30DE\u30A4\u30DA\u30FC\u30B8"]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_7__.PrimaryButton, {
+      }), uid !== 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_7__.PrimaryButton, {
         onClick: function onClick() {
           return dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_9__.push)('/useredit'));
         },
         label: 'ユーザー情報を編集する'
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+        children: "\u30B2\u30B9\u30C8\u30E6\u30FC\u30B6\u30FC\u30ED\u30B0\u30A4\u30F3\u3067\u306F\u3001\u30A2\u30AB\u30A6\u30F3\u30C8\u306E\u7DE8\u96C6\u30FB\u524A\u9664\u306F\u3067\u304D\u307E\u305B\u3093\u3002"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
         className: "margin-20"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_7__.PrimaryButton, {
+      }), uid !== 1 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_UIKit__WEBPACK_IMPORTED_MODULE_7__.PrimaryButton, {
         onClick: function onClick() {
           return dispatch((0,_reducks_users_operations__WEBPACK_IMPORTED_MODULE_4__.userDelete)(uid));
         },

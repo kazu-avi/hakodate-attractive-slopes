@@ -83,9 +83,15 @@ const MyPage = () => {
             <section className="small-section center">
                 <MyPageAvater img={userImage} />
                 <h2>{username}さんのマイページ</h2>
-                <PrimaryButton onClick={() => dispatch(push('/useredit'))} label={'ユーザー情報を編集する'} />
+                {uid !== 1 ? (
+                    <PrimaryButton onClick={() => dispatch(push('/useredit'))} label={'ユーザー情報を編集する'} />
+                ) : (
+                    <p>ゲストユーザーログインでは、アカウントの編集・削除はできません。</p>
+                )}
                 <span className="margin-20" />
-                <PrimaryButton onClick={() => dispatch(userDelete(uid))} label={'アカウントを削除する'} />
+                {uid !== 1 && (
+                    <PrimaryButton onClick={() => dispatch(userDelete(uid))} label={'アカウントを削除する'} />
+                )}
             </section>
             <section className="large-section">
                 <MyPageTabs myPostList={myPostList} myLikesList={myLikesList} />
