@@ -288,7 +288,6 @@ export const login = (email, password) => {
                         // 発行されたトークンをローカルストレージに保存
                         const token = responseJson['access_token'];
                         localStorage.setItem('access_token', token);
-                        console.log(responseJson);
 
                         dispatch(
                             loginAction({
@@ -302,6 +301,64 @@ export const login = (email, password) => {
                         dispatch(hideLoadingAction());
                         dispatch(push('/'));
                         dispatch(showMessageAction('ログインしました！'));
+                        setTimeout(() => {
+                            dispatch(hideAlertAction());
+                        }, 4000);
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                return null;
+            });
+    };
+};
+
+export const guestLogin = () => {
+    return async (dispatch) => {
+        const url = 'http://localhost:30080/api/v1/login';
+
+        const data = {
+            email: 'test@test.com',
+            password: 'password',
+        };
+
+        const option = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
+
+        await fetch(url, option)
+            .then((response) => {
+                dispatch(showLoadingAction('ログインしています・・・'));
+                if (!response.ok) {
+                    dispatch(hideLoadingAction());
+                    console.log('認証に失敗しました');
+                    dispatch(showAlertAction('ログインに失敗しました。お手数ですが再度お試しください。'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 2000);
+                } else {
+                    return response.json().then((responseJson) => {
+                        // 発行されたトークンをローカルストレージに保存
+                        const token = responseJson['access_token'];
+                        localStorage.setItem('access_token', token);
+
+                        dispatch(
+                            loginAction({
+                                isSignedIn: 'true',
+                                uid: responseJson['uid'],
+                                username: responseJson['username'],
+                                img: responseJson['img'],
+                            })
+                        );
+
+                        dispatch(hideLoadingAction());
+                        dispatch(push('/'));
+                        dispatch(showMessageAction('ゲストログインしました！'));
                         setTimeout(() => {
                             dispatch(hideAlertAction());
                         }, 4000);

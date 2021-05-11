@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { TextInput, PrimaryButton, OutlinedButton } from '../components/UIKit';
-import { login } from '../reducks/users/operations';
+import { login, guestLogin } from '../reducks/users/operations';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -50,10 +50,15 @@ const Login = () => {
                 onChange={inputPassword}
             />
             <div className={'spacer-medium'}></div>
-            <div className="center">
+            <div className="center br-label">
                 <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />
                 <span className={'margin-20'}></span>
                 <PrimaryButton label={'ログインする'} onClick={() => dispatch(login(email, password))} />
+                <div className={'spacer-medium'}></div>
+                <PrimaryButton
+                    label={'ゲストユーザーとしてログインする \n（メールアドレス・パスワード不要）'}
+                    onClick={() => dispatch(guestLogin())}
+                />
             </div>
         </div>
     );

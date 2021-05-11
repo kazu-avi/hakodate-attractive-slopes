@@ -58,7 +58,11 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id) {
         //データを受け取る
         $inputs = $request->all();
-        DebugBar::info($inputs);
+
+        // ゲストユーザー変更不可
+        if($id == 1) {
+            return response()->json('ゲストユーザーのため変更できません', 401);
+        }
 
         // 画像をs3に保存
         if(isset($inputs['img'])) {
@@ -89,6 +93,11 @@ class UserController extends Controller
 
     // ユーザー削除
     public function delete($id) {
+        // ゲストユーザー削除不可
+        if($id == 1) {
+            return response()->json('ゲストユーザーのため削除できません', 401);
+        }
+
         try {
             $user = User::find($id);
             $user->delete();
