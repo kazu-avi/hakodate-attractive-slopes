@@ -48,7 +48,7 @@ const PostDetail = () => {
     const id = param.id;
 
     const getPost = useCallback(async (id) => {
-        const url = 'https://localhost:443/api/v1/posts/' + id;
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/' + id;
         const token = localStorage.getItem('access_token');
 
         const option = {
