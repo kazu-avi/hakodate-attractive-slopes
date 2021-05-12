@@ -9,7 +9,7 @@ import { showLoadingAction, hideLoadingAction } from '../loading/actions';
 // 認証のチェック(Authコンポーネント)
 export const checkAuth = () => {
     return async (dispatch) => {
-        const url = 'https://localhost:443/api/v1/refresh';
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/refresh';
         const token = localStorage.getItem('access_token');
 
         const option = {
@@ -63,7 +63,7 @@ export const checkAuth = () => {
 // 認証のチェック(Home)
 export const checkAuthAtHome = () => {
     return async (dispatch) => {
-        const url = 'https://localhost:443/api/v1/refresh';
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/refresh';
         const token = localStorage.getItem('access_token');
 
         const option = {
@@ -126,7 +126,7 @@ export const register = (username, email, password, confirmPassword, file) => {
             return false;
         }
 
-        const url = 'https://localhost:443/api/v1/users';
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/users';
 
         const data = new FormData();
         if (file) {
@@ -184,7 +184,7 @@ export const update = (username, file, id) => {
             return false;
         }
 
-        const url = 'https://localhost:443/api/v1/users/' + id;
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/users/' + id;
         const token = localStorage.getItem('access_token');
 
         const data = new FormData();
@@ -258,7 +258,7 @@ export const login = (email, password) => {
             return false;
         }
 
-        const url = 'hhttps://localhost:443/api/v1/login';
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/login';
 
         const data = {
             email: email,
@@ -316,7 +316,7 @@ export const login = (email, password) => {
 
 export const guestLogin = () => {
     return async (dispatch) => {
-        const url = 'https://localhost:443/api/v1/login';
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/login';
 
         const data = {
             email: 'test@test.com',
@@ -374,7 +374,7 @@ export const guestLogin = () => {
 
 export const logout = () => {
     return async (dispatch) => {
-        const url = 'https://localhost:443/api/v1/logout';
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/logout';
         const token = localStorage.getItem('access_token');
 
         const option = {
@@ -399,7 +399,7 @@ export const logout = () => {
 
 export const userDelete = (id) => {
     return async (dispatch) => {
-        const url = 'https://localhost:443/api/v1/users/' + id;
+        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/users/' + id;
         const token = localStorage.getItem('access_token');
 
         const option = {

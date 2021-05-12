@@ -31,7 +31,7 @@ const DisplayLikes = (props) => {
                 return false;
             }
 
-            const url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
+            const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/' + id + '/likes';
             const token = localStorage.getItem('access_token');
 
             const like = {
@@ -71,7 +71,7 @@ const DisplayLikes = (props) => {
                 return false;
             }
 
-            const url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
+            const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/' + id + '/likes';
             const token = localStorage.getItem('access_token');
 
             const unlike = {
