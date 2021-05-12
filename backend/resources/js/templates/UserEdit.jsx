@@ -17,7 +17,7 @@ const UserEdit = () => {
 
     const getInitialState = useCallback(
         async (id) => {
-            const url = 'http://localhost:30080/api/v1/users/' + id;
+            const url = 'https://localhost:443/api/v1/users/' + id;
             await fetch(url)
                 .then((response) => response.json())
                 .then((responseJson) => {

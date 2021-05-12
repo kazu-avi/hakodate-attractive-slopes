@@ -18,7 +18,7 @@ const ShowLikes = (props) => {
     const [likesCount, setLikesCount] = useState('');
 
     const getCount = useCallback(async (id) => {
-        const url = 'http://localhost:30080/api/v1/posts/' + id;
+        const url = 'https://localhost:443/api/v1/posts/' + id;
         const token = localStorage.getItem('access_token');
 
         const option = {
@@ -58,7 +58,7 @@ const ShowLikes = (props) => {
                 return false;
             }
 
-            const url = 'http://localhost:30080/api/v1/posts/' + id + '/likes';
+            const url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
             const token = localStorage.getItem('access_token');
 
             const like = {
@@ -98,7 +98,7 @@ const ShowLikes = (props) => {
                 return false;
             }
 
-            const url = 'http://localhost:30080/api/v1/posts/' + id + '/likes';
+            const url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
             const token = localStorage.getItem('access_token');
 
             const unlike = {

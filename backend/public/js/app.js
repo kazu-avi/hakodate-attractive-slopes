@@ -26351,7 +26351,7 @@ var DisplayLikes = function DisplayLikes(props) {
               return _context.abrupt("return", false);
 
             case 4:
-              url = 'http://localhost:30080/api/v1/posts/' + id + '/likes';
+              url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
               token = localStorage.getItem('access_token');
               like = {
                 method: 'PUT',
@@ -26405,7 +26405,7 @@ var DisplayLikes = function DisplayLikes(props) {
               return _context2.abrupt("return", false);
 
             case 4:
-              url = 'http://localhost:30080/api/v1/posts/' + id + '/likes';
+              url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
               token = localStorage.getItem('access_token');
               unlike = {
                 method: 'DELETE',
@@ -26716,7 +26716,7 @@ var ShowLikes = function ShowLikes(props) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/posts/' + id;
+              url = 'https://localhost:443/api/v1/posts/' + id;
               token = localStorage.getItem('access_token');
               option = {
                 method: 'GET',
@@ -26775,7 +26775,7 @@ var ShowLikes = function ShowLikes(props) {
               return _context2.abrupt("return", false);
 
             case 4:
-              url = 'http://localhost:30080/api/v1/posts/' + id + '/likes';
+              url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
               token = localStorage.getItem('access_token');
               like = {
                 method: 'PUT',
@@ -26829,7 +26829,7 @@ var ShowLikes = function ShowLikes(props) {
               return _context3.abrupt("return", false);
 
             case 4:
-              url = 'http://localhost:30080/api/v1/posts/' + id + '/likes';
+              url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
               token = localStorage.getItem('access_token');
               unlike = {
                 method: 'DELETE',
@@ -27598,7 +27598,7 @@ var commentRegister = function commentRegister(id, comment) {
               return _context.abrupt("return", false);
 
             case 9:
-              url = 'http://localhost:30080/api/v1/posts/' + id + '/comments';
+              url = 'https://localhost:443/api/v1/posts/' + id + '/comments';
               token = localStorage.getItem('access_token');
               data = {
                 comment: comment
@@ -27751,7 +27751,7 @@ var postRegister = function postRegister(uid, category, file, text, tags) {
               return _context.abrupt("return", false);
 
             case 4:
-              url = 'http://localhost:30080/api/v1/posts';
+              url = 'https://localhost:443/api/v1/posts';
               token = localStorage.getItem('access_token');
               data = new FormData();
               data.append('user_id', uid);
@@ -27850,7 +27850,7 @@ var postEdit = function postEdit(uid, postId, postedUser, category, file, text, 
               return _context2.abrupt("return", false);
 
             case 8:
-              url = 'http://localhost:30080/api/v1/posts/' + postId;
+              url = 'https://localhost:443/api/v1/posts/' + postId;
               token = localStorage.getItem('access_token');
               data = new FormData();
 
@@ -27945,7 +27945,7 @@ var postDelete = function postDelete(uid, postId, postedUser) {
                 break;
               }
 
-              url = 'http://localhost:30080/api/v1/posts/' + postId;
+              url = 'https://localhost:443/api/v1/posts/' + postId;
               token = localStorage.getItem('access_token');
               option = {
                 method: 'DELETE',
@@ -28801,7 +28801,7 @@ var getAllCategories = function getAllCategories() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/categories/';
+              url = 'https://localhost:443/api/v1/categories/';
               _context.next = 3;
               return fetch(url).then(function (response) {
                 if (!response.ok) {
@@ -29248,7 +29248,7 @@ var getAllTags = function getAllTags() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/tags/';
+              url = 'https://localhost:443/api/v1/tags/';
               _context.next = 3;
               return fetch(url).then(function (response) {
                 if (!response.ok) {
@@ -29451,7 +29451,7 @@ var checkAuth = function checkAuth() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/refresh';
+              url = 'https://localhost:443/api/v1/refresh';
               token = localStorage.getItem('access_token');
               option = {
                 method: 'POST',
@@ -29523,7 +29523,7 @@ var checkAuthAtHome = function checkAuthAtHome() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/refresh';
+              url = 'https://localhost:443/api/v1/refresh';
               token = localStorage.getItem('access_token');
               option = {
                 method: 'POST',
@@ -29611,7 +29611,7 @@ var register = function register(username, email, password, confirmPassword, fil
               return _context3.abrupt("return", false);
 
             case 9:
-              url = 'http://localhost:30080/api/v1/users';
+              url = 'https://localhost:443/api/v1/users';
               data = new FormData();
 
               if (file) {
@@ -29689,7 +29689,7 @@ var update = function update(username, file, id) {
               return _context4.abrupt("return", false);
 
             case 4:
-              url = 'http://localhost:30080/api/v1/users/' + id;
+              url = 'https://localhost:443/api/v1/users/' + id;
               token = localStorage.getItem('access_token');
               data = new FormData();
 
@@ -29781,7 +29781,7 @@ var login = function login(email, password) {
               return _context5.abrupt("return", false);
 
             case 4:
-              url = 'http://localhost:30080/api/v1/login';
+              url = 'hhttps://localhost:443/api/v1/login';
               data = {
                 email: email,
                 password: password
@@ -29849,7 +29849,7 @@ var guestLogin = function guestLogin() {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/login';
+              url = 'https://localhost:443/api/v1/login';
               data = {
                 email: 'test@test.com',
                 password: 'password'
@@ -29917,7 +29917,7 @@ var logout = function logout() {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/logout';
+              url = 'https://localhost:443/api/v1/logout';
               token = localStorage.getItem('access_token');
               option = {
                 method: 'POST',
@@ -29958,7 +29958,7 @@ var userDelete = function userDelete(id) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/users/' + id;
+              url = 'https://localhost:443/api/v1/users/' + id;
               token = localStorage.getItem('access_token');
               option = {
                 method: 'DELETE',
@@ -30195,7 +30195,7 @@ var CategoryDetail = function CategoryDetail() {
             case 0:
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_4__.showLoadingAction)());
               setPage(page);
-              url = 'http://localhost:30080/api/v1/categories/' + id + '?page=' + page;
+              url = 'https://localhost:443/api/v1/categories/' + id + '?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
@@ -30630,7 +30630,7 @@ var MyPage = function MyPage() {
             case 0:
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_6__.showLoadingAction)());
               setPage(page);
-              url = 'http://localhost:30080/api/v1/posts/users/' + id + '?page=' + page;
+              url = 'https://localhost:443/api/v1/posts/users/' + id + '?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 method: 'GET',
@@ -30672,7 +30672,7 @@ var MyPage = function MyPage() {
             case 0:
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_6__.showLoadingAction)());
               setPage(page);
-              url = 'http://localhost:30080/api/v1/posts/' + id + '/likes/?page=' + page;
+              url = 'https://localhost:443/api/v1/posts/' + id + '/likes/?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 method: 'GET',
@@ -31024,7 +31024,7 @@ var PostDetail = function PostDetail() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/posts/' + id;
+              url = 'https://localhost:443/api/v1/posts/' + id;
               token = localStorage.getItem('access_token');
               option = {
                 method: 'GET',
@@ -31246,7 +31246,7 @@ var PostEdit = function PostEdit() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/posts/' + id;
+              url = 'https://localhost:443/api/v1/posts/' + id;
               _context.next = 3;
               return fetch(url).then(function (response) {
                 return response.json();
@@ -31464,7 +31464,7 @@ var PostList = function PostList() {
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_8__.showLoadingAction)());
               dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/?category=' + id)); // setPage(page);
 
-              url = 'http://localhost:30080/api/v1/categories/' + id + '?page=' + page;
+              url = 'https://localhost:443/api/v1/categories/' + id + '?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
@@ -31505,7 +31505,7 @@ var PostList = function PostList() {
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_8__.showLoadingAction)());
               dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/?tag=' + id)); // setPage(page);
 
-              url = 'http://localhost:30080/api/v1/tags/' + id + '?page=' + page;
+              url = 'https://localhost:443/api/v1/tags/' + id + '?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
@@ -31546,7 +31546,7 @@ var PostList = function PostList() {
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_8__.showLoadingAction)());
               dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/?random=1')); // setPage(page);
 
-              url = 'http://localhost:30080/api/v1/posts/r?page=' + page;
+              url = 'https://localhost:443/api/v1/posts/r?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
@@ -31587,7 +31587,7 @@ var PostList = function PostList() {
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_8__.showLoadingAction)());
               dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/')); // setPage(page);
 
-              url = 'http://localhost:30080/api/v1/posts?page=' + page;
+              url = 'https://localhost:443/api/v1/posts?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
@@ -31918,7 +31918,7 @@ var UserEdit = function UserEdit() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = 'http://localhost:30080/api/v1/users/' + id;
+              url = 'https://localhost:443/api/v1/users/' + id;
               _context.next = 3;
               return fetch(url).then(function (response) {
                 return response.json();

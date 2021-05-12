@@ -48,7 +48,7 @@ const PostDetail = () => {
     const id = param.id;
 
     const getPost = useCallback(async (id) => {
-        const url = 'http://localhost:30080/api/v1/posts/' + id;
+        const url = 'https://localhost:443/api/v1/posts/' + id;
         const token = localStorage.getItem('access_token');
 
         const option = {
