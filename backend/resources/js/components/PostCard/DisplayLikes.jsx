@@ -31,7 +31,7 @@ const DisplayLikes = (props) => {
                 return false;
             }
 
-            const url = 'http://localhost:30080/api/v1/posts/' + id + '/likes';
+            const url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
             const token = localStorage.getItem('access_token');
 
             const like = {
@@ -71,7 +71,7 @@ const DisplayLikes = (props) => {
                 return false;
             }
 
-            const url = 'http://localhost:30080/api/v1/posts/' + id + '/likes';
+            const url = 'https://localhost:443/api/v1/posts/' + id + '/likes';
             const token = localStorage.getItem('access_token');
 
             const unlike = {

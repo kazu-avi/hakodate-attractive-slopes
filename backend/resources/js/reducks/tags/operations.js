@@ -2,7 +2,7 @@ import { setTags } from './actions';
 
 export const getAllTags = () => {
     return async (dispatch) => {
-        const url = 'http://localhost:30080/api/v1/tags/';
+        const url = 'https://localhost:443/api/v1/tags/';
 
         await fetch(url)
             .then((response) => {

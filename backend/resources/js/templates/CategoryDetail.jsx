@@ -52,7 +52,7 @@ const CategoryDetail = () => {
         async (id, page) => {
             dispatch(showLoadingAction());
             setPage(page);
-            const url = 'http://localhost:30080/api/v1/categories/' + id + '?page=' + page;
+            const url = 'https://localhost:443/api/v1/categories/' + id + '?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
                 headers: {

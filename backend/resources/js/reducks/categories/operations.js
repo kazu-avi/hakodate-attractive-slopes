@@ -2,7 +2,7 @@ import { setCategoriesAction } from './actions';
 
 export const getAllCategories = () => {
     return async (dispatch) => {
-        const url = 'http://localhost:30080/api/v1/categories/';
+        const url = 'https://localhost:443/api/v1/categories/';
 
         await fetch(url)
             .then((response) => {

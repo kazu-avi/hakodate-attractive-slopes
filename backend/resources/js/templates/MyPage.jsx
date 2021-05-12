@@ -21,7 +21,7 @@ const MyPage = () => {
     const getMyPosts = useCallback(async (id) => {
         dispatch(showLoadingAction());
         setPage(page);
-        const url = 'http://localhost:30080/api/v1/posts/users/' + id + '?page=' + page;
+        const url = 'https://localhost:443/api/v1/posts/users/' + id + '?page=' + page;
         const token = localStorage.getItem('access_token');
 
         const option = {
@@ -48,7 +48,7 @@ const MyPage = () => {
     const getMyLikes = useCallback(async (id) => {
         dispatch(showLoadingAction());
         setPage(page);
-        const url = 'http://localhost:30080/api/v1/posts/' + id + '/likes/?page=' + page;
+        const url = 'https://localhost:443/api/v1/posts/' + id + '/likes/?page=' + page;
         const token = localStorage.getItem('access_token');
 
         const option = {
