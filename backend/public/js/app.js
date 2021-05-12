@@ -28801,7 +28801,7 @@ var getAllCategories = function getAllCategories() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = 'https://localhost:443/api/v1/categories/';
+              url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/categories/';
               _context.next = 3;
               return fetch(url).then(function (response) {
                 if (!response.ok) {
@@ -31464,7 +31464,7 @@ var PostList = function PostList() {
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_8__.showLoadingAction)());
               dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/?category=' + id)); // setPage(page);
 
-              url = 'https://localhost:443/api/v1/categories/' + id + '?page=' + page;
+              url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/categories/' + id + '?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
@@ -31505,7 +31505,7 @@ var PostList = function PostList() {
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_8__.showLoadingAction)());
               dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/?tag=' + id)); // setPage(page);
 
-              url = 'https://localhost:443/api/v1/tags/' + id + '?page=' + page;
+              url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/tags/' + id + '?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
@@ -31546,7 +31546,7 @@ var PostList = function PostList() {
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_8__.showLoadingAction)());
               dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/?random=1')); // setPage(page);
 
-              url = 'https://localhost:443/api/v1/posts/r?page=' + page;
+              url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/r?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
@@ -31587,7 +31587,7 @@ var PostList = function PostList() {
               dispatch((0,_reducks_loading_actions__WEBPACK_IMPORTED_MODULE_8__.showLoadingAction)());
               dispatch((0,connected_react_router__WEBPACK_IMPORTED_MODULE_10__.push)('/')); // setPage(page);
 
-              url = 'https://localhost:443/api/v1/posts?page=' + page;
+              url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts?page=' + page;
               token = localStorage.getItem('access_token');
               option = {
                 headers: {
