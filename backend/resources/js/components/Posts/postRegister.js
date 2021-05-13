@@ -20,6 +20,7 @@ export const postRegister = (uid, category, file, text, tags) => {
         data.append('category_id', category);
         data.append('file', file);
         data.append('text', text);
+        data.append('_method', 'post');
         tags.forEach((tag) => data.append('tags[]', tag));
 
         const option = {
