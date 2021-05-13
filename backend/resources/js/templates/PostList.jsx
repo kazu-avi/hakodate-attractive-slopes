@@ -45,11 +45,7 @@ const PostList = () => {
             dispatch(showLoadingAction());
             dispatch(push('/?category=' + id));
             // setPage(page);
-            const url =
-                'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/categories/' +
-                id +
-                '?page=' +
-                page;
+            const url = 'https://hakodate-slopes.com/api/v1/categories/' + id + '?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
                 headers: {
@@ -76,8 +72,7 @@ const PostList = () => {
             dispatch(showLoadingAction());
             dispatch(push('/?tag=' + id));
             // setPage(page);
-            const url =
-                'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/tags/' + id + '?page=' + page;
+            const url = 'https://hakodate-slopes.com/api/v1/tags/' + id + '?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
                 headers: {
@@ -104,7 +99,7 @@ const PostList = () => {
             dispatch(showLoadingAction());
             dispatch(push('/?random=1'));
             // setPage(page);
-            const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/r?page=' + page;
+            const url = 'https://hakodate-slopes.com/api/v1/posts/r?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
                 headers: {
@@ -131,7 +126,7 @@ const PostList = () => {
             dispatch(showLoadingAction());
             dispatch(push('/'));
             // setPage(page);
-            const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts?page=' + page;
+            const url = 'https://hakodate-slopes.com/api/v1/posts?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
                 headers: {

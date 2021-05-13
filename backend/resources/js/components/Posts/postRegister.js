@@ -12,7 +12,7 @@ export const postRegister = (uid, category, file, text, tags) => {
             return false;
         }
 
-        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts';
+        const url = 'https://hakodate-slopes.com/api/v1/posts';
         const token = localStorage.getItem('access_token');
 
         const data = new FormData();
@@ -86,7 +86,7 @@ export const postEdit = (uid, postId, postedUser, category, file, text, tags) =>
             return false;
         }
 
-        const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/' + postId;
+        const url = 'https://hakodate-slopes.com/api/v1/posts/' + postId;
         const token = localStorage.getItem('access_token');
 
         const data = new FormData();
@@ -156,7 +156,7 @@ export const postDelete = (uid, postId, postedUser) => {
         }
 
         if (confirm('投稿を削除しますか？')) {
-            const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/' + postId;
+            const url = 'https://hakodate-slopes.com/api/v1/posts/' + postId;
             const token = localStorage.getItem('access_token');
 
             const option = {
