@@ -69,6 +69,7 @@ const NavBar = (props) => {
                     onClose={toggleDrawer}
                     isSignedIn={props.isSignedIn}
                     username={props.username}
+                    toggleDialog={props.toggleDialog}
                 />
             </AppBar>
         </div>

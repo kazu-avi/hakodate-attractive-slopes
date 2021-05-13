@@ -9,12 +9,12 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import MonochromePhotosIcon from '@material-ui/icons/MonochromePhotos';
 import SchoolIcon from '@material-ui/icons/School';
 
-const NotAuthList = () => {
+const NotAuthList = (props) => {
     const dispatch = useDispatch();
     return (
         <List>
             <Divider />
-            <ListItem button onClick={() => dispatch(push('/'))}>
+            <ListItem button onClick={() => props.toggleDialog(true)}>
                 <ListItemIcon>
                     <InfoIcon />
                 </ListItemIcon>

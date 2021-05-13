@@ -29,7 +29,11 @@ const HeaderDrawer = (props) => {
                     <CloseIcon />
                 </IconButton>
                 <div className={classes.drawer} onClick={() => props.onClose(false)}>
-                    {props.isSignedIn ? <AuthList /> : <NotAuthList />}
+                    {props.isSignedIn ? (
+                        <AuthList toggleDialog={props.toggleDialog} />
+                    ) : (
+                        <NotAuthList toggleDialog={props.toggleDialog} />
+                    )}
                 </div>
                 <img className={classes.logo} alt="logo" src={logo} width="150px" />
             </Drawer>
