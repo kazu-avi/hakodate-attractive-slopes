@@ -12,7 +12,7 @@ export const postRegister = (uid, category, file, text, tags) => {
             return false;
         }
 
-        const url = 'https://hakodate-slopes.com/api/v1/posts/';
+        const url = 'https://hakodate-slopes.com/api/v1/posts';
         const token = localStorage.getItem('access_token');
 
         const data = new FormData();

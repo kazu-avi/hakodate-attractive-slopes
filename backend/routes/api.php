@@ -63,7 +63,7 @@ Route::middleware(['auth:api'])->group(function () {
     // ログアウト
     Route::post('/v1/logout', [AuthController::class, 'logout'])->name('logout');
     // 投稿する
-    Route::post('/v1/posts', [PostController::class, 'post'])->name('post');
+    Route::post('/v1/posts/', [PostController::class, 'post'])->name('post');
     // コメントを投稿する
     Route::post('/v1/posts/{id}/comments', [CommentController::class, 'postComment'])->name('postComment');
     // ユーザー情報を編集する
