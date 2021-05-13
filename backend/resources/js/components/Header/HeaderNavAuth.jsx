@@ -14,14 +14,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const HeaderNavAuth = () => {
+const HeaderNavAuth = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
     return (
         <div className={classes.root}>
             <Button onClick={() => dispatch(push('/'))}>Top</Button>
-            <Button onClick={() => dispatch(push('/about'))}>About</Button>
+            <Button onClick={() => props.toggleDialog(true)}>About</Button>
             <Button onClick={() => dispatch(push('/mypage'))}>マイページ</Button>
             <Button onClick={() => dispatch(push('/create'))}>投稿する</Button>
             <Button onClick={() => dispatch(logout())}>ログアウト</Button>

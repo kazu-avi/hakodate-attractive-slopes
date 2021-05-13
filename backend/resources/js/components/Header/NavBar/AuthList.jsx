@@ -9,7 +9,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import MonochromePhotosIcon from '@material-ui/icons/MonochromePhotos';
 import SchoolIcon from '@material-ui/icons/School';
 
-const AuthList = () => {
+const AuthList = (props) => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const username = getUsername(selector);
@@ -25,7 +25,7 @@ const AuthList = () => {
                 <ListItemText primary={username + 'さん'} secondary={'マイページへ'} />
             </ListItem>
             <Divider />
-            <ListItem button onClick={() => dispatch(push('/'))}>
+            <ListItem button onClick={() => props.toggleDialog(true)}>
                 <ListItemIcon>
                     <InfoIcon />
                 </ListItemIcon>
