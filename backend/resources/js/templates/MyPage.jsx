@@ -21,8 +21,7 @@ const MyPage = () => {
     const getMyPosts = useCallback(async (id) => {
         dispatch(showLoadingAction());
         setPage(page);
-        const url =
-            'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/users/' + id + '?page=' + page;
+        const url = 'https://hakodate-slopes.com/api/v1/posts/users/' + id + '?page=' + page;
         const token = localStorage.getItem('access_token');
 
         const option = {
@@ -49,8 +48,7 @@ const MyPage = () => {
     const getMyLikes = useCallback(async (id) => {
         dispatch(showLoadingAction());
         setPage(page);
-        const url =
-            'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/' + id + '/likes/?page=' + page;
+        const url = 'https://hakodate-slopes.com/api/v1/posts/' + id + '/likes/?page=' + page;
         const token = localStorage.getItem('access_token');
 
         const option = {

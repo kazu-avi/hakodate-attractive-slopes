@@ -26,7 +26,7 @@ const PostEdit = () => {
 
     const getInitialState = useCallback(
         async (id) => {
-            const url = 'http://ec2-54-95-156-93.ap-northeast-1.compute.amazonaws.com/api/v1/posts/' + id;
+            const url = 'https://hakodate-slopes.com/api/v1/posts/' + id;
             await fetch(url)
                 .then((response) => response.json())
                 .then((responseJson) => {
