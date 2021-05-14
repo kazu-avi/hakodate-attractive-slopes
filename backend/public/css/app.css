@@ -155,12 +155,14 @@ body {
 /* SECTION系 */
 .small-section {
     max-width: 480px;
+    box-sizing: border-box;
     margin: 0 auto;
     padding: 1rem;
 }
 
 .large-section {
     max-width: 1080px;
+    box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
     padding: 1rem;
@@ -168,6 +170,7 @@ body {
 
 .large-section-flex {
     max-width: 1080px;
+    box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
     padding: 1rem;
@@ -204,7 +207,7 @@ body {
 .grid-row {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .flex-2cms {
@@ -257,7 +260,7 @@ body {
     flex-wrap: wrap;
     align-items: center;
     font-size: 1rem;
-    background: #fff;
+    background: #f2f4fb;
     color: #333;
     border: 1px solid #e1e1e1;
     border-radius: 3px
@@ -361,4 +364,32 @@ body {
     width: 0;
 }
 
+/* Responsive */
+@media(max-width: 950px) {
+
+}
+
+@media(max-width: 650px) {
+    .header {
+        height: 150px;
+    }
+
+    .large-section-flex  {
+        flex-direction: column;
+
+    }
+
+    .flex-2cms {
+        width: calc(100% - 1rem);
+        margin: 0 auto;
+    }
+
+    .spacer-small {
+        height: 15px;
+    }
+
+    .spacer-medium {
+        height: 30px;
+    }
+}
 

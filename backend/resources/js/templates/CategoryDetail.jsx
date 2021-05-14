@@ -7,13 +7,9 @@ import { makeStyles } from '@material-ui/styles';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
 import { showAlertAction, hideAlertAction } from '../reducks/alert/actions';
 import { useDispatch, useSelector } from 'react-redux';
-// import { PrimaryButton, OutlinedButton } from '../components/UIKit';
-// import { ShowCategory, ShowComments, ShowTags, InputCommentArea, ShowLikes } from '../components/PostDetail';
-// import { postDelete } from '../components/Posts/postRegister';
-import { PrimaryButton, SharpEdgeButton } from '../components/UIKit';
+import { PrimaryButton, SharpEdgeButton, Pagination } from '../components/UIKit';
 import { push } from 'connected-react-router';
 import { DisplayCategoriesArea } from '../components/Posts';
-// import { getIsSignedIn, getUserId } from '../reducks/users/selector';
 import map from '../../../public/img/map.gif';
 
 const useStyles = makeStyles({
@@ -49,7 +45,7 @@ const CategoryDetail = () => {
     console.log(displayCard);
 
     const categoryClickHandler = useCallback(
-        async (id, page) => {
+        async (page) => {
             dispatch(showLoadingAction());
             setPage(page);
             const url = 'https://hakodate-slopes.com/api/v1/categories/' + id + '?page=' + page;
@@ -102,18 +98,10 @@ const CategoryDetail = () => {
                         <CardContent>{category.description}</CardContent>
                         <CardContent>住所：{category.address}</CardContent>
                     </Card>
-                    {/* <div className="large-section-flex">
-                        <Card className={classes.card} variant="outlined">
-                            投稿数：
-                        </Card>
-                        <Card className={classes.card} variant="outlined">
-                            「行きたい」数：
-                        </Card>
-                    </div> */}
                     <div className="spacer-medium" />
                     <img alt="坂道マップ" src={map} width="100%" />
                     <div className="spacer-medium" />
-                    <PrimaryButton label={'みんなの投稿を見る'} onClick={() => categoryClickHandler(id, page)} />
+                    <PrimaryButton label={'みんなの投稿を見る'} onClick={() => categoryClickHandler(page)} />
                 </div>
             </section>
             {displayCard && <h2>みんなの投稿</h2>}
@@ -134,6 +122,15 @@ const CategoryDetail = () => {
                     />
                 ))}
             </div>
+            {(() => {
+                if (totalPage === 0 || totalPage === 1) {
+                    return <></>;
+                } else {
+                    return (
+                        <Pagination count={totalPage} disabled={false} onChange={categoryClickHandler} page={page} />
+                    );
+                }
+            })()}
             <h2>他の坂道も知る</h2>
             <DisplayCategoriesArea categories={categories} onClick={() => setDisplayCard(false)} />
             <div className="spacer-medium" />

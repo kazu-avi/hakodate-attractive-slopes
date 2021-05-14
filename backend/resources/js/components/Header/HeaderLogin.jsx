@@ -5,10 +5,7 @@ const HeaderLogin = (props) => {
         <>
             {props.isSignedIn ? (
                 <div className="text-right">
-                    <p>
-                        こんにちは！{props.username}さん
-                        <span>/ログアウト</span>
-                    </p>
+                    <p>こんにちは！{props.username}さん</p>
                 </div>
             ) : (
                 <></>
