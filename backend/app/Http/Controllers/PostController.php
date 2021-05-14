@@ -20,7 +20,7 @@ class PostController extends Controller
     public function post(Request $request) {
         // $post = new Post();
         $input = $request->all();
-        Log::debug(dd($input));
+        Log::debug(print_r($input));
 
         // // タグ登録の処理
         // $inputTags = $request['tags'];
