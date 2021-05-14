@@ -26,6 +26,12 @@ const useStyles = makeStyles({
         marginBottom: '2rem',
         display: 'flex',
         flexDirection: 'column',
+        '@media(max-width: 950px)': {
+            width: '48%',
+        },
+        '@media(max-width: 650px)': {
+            width: '95%',
+        },
     },
     media: {
         position: 'absolute',
@@ -47,6 +53,9 @@ const useStyles = makeStyles({
     content: {
         whiteSpace: 'pre-wrap',
         flexGrow: 1,
+    },
+    actions: {
+        justifyContent: 'space-around',
     },
 });
 
@@ -83,7 +92,7 @@ const MyPageCard = (props) => {
                     />
                 ))}
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.actions}>
                 <DisplayLikes isLiked={props.isLiked} postId={props.postId} />
                 <IconButton>
                     <ShareIcon />

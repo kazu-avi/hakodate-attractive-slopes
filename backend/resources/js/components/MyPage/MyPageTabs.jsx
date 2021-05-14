@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Box, Container, Tab, Tabs } from '@material-ui/core';
-import { MyPageCard } from './index';
+import { makeStyles } from '@material-ui/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Pagination } from '../UIKit';
+import { MyPageCard } from './index';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 
+const useStyles = makeStyles({
+    root: {
+        padding: 0,
+    },
+});
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
+    const classes = useStyles();
 
     return (
         <div
@@ -19,7 +28,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Container>
+                <Container className={classes.root}>
                     <Box p={2}>{children}</Box>
                 </Container>
             )}
@@ -85,6 +94,20 @@ const MyPageTabs = (props) => {
                         />
                     ))}
                 </div>
+                {(() => {
+                    if (props.totalPage === 1) {
+                        return <></>;
+                    } else {
+                        return (
+                            <Pagination
+                                count={props.totalPage}
+                                disabled={false}
+                                onChange={props.getMyPosts}
+                                page={props.page}
+                            />
+                        );
+                    }
+                })()}
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div className="grid-row">
@@ -105,6 +128,20 @@ const MyPageTabs = (props) => {
                         />
                     ))}
                 </div>
+                {(() => {
+                    if (props.likesTotalPage === 1) {
+                        return <></>;
+                    } else {
+                        return (
+                            <Pagination
+                                count={props.likesTotalPage}
+                                disabled={false}
+                                onChange={props.getMyLikes}
+                                Page={props.likesPage}
+                            />
+                        );
+                    }
+                })()}
             </TabPanel>
         </div>
     );

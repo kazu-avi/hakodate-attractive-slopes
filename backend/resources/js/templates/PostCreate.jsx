@@ -66,7 +66,12 @@ const PostCreate = () => {
                 value={text}
                 onChange={inputText}
             />
-            <InputTags tags={tags} editable={true} onChange={inputTags} placeholder={'タグを入力してね！'} />
+            <InputTags
+                tags={tags}
+                editable={true}
+                onChange={inputTags}
+                placeholder={'タグを入力してね！（Enterで確定）'}
+            />
             <div className="spacer-medium"></div>
             <div className="center">
                 <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />

@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const DisplayCategoriesArea = (props) => {
     const settings = {
+        arrows: false,
         dots: true,
         infinite: true,
         swipe: true,
@@ -14,6 +15,15 @@ const DisplayCategoriesArea = (props) => {
         autoplaySpeed: 4000,
         slidesToShow: 4,
         slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 650,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+        ],
     };
     const categories = props.categories;
     return (

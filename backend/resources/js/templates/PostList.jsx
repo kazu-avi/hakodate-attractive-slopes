@@ -44,7 +44,6 @@ const PostList = () => {
         async (id, page) => {
             dispatch(showLoadingAction());
             dispatch(push('/?category=' + id));
-            // setPage(page);
             const url = 'https://hakodate-slopes.com/api/v1/categories/' + id + '?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
@@ -71,7 +70,6 @@ const PostList = () => {
         async (id, page) => {
             dispatch(showLoadingAction());
             dispatch(push('/?tag=' + id));
-            // setPage(page);
             const url = 'https://hakodate-slopes.com/api/v1/tags/' + id + '?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
@@ -98,7 +96,6 @@ const PostList = () => {
         async (page) => {
             dispatch(showLoadingAction());
             dispatch(push('/?random=1'));
-            // setPage(page);
             const url = 'https://hakodate-slopes.com/api/v1/posts/r?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
@@ -125,7 +122,6 @@ const PostList = () => {
         async (page) => {
             dispatch(showLoadingAction());
             dispatch(push('/'));
-            // setPage(page);
             const url = 'https://hakodate-slopes.com/api/v1/posts?page=' + page;
             const token = localStorage.getItem('access_token');
             const option = {
@@ -162,11 +158,13 @@ const PostList = () => {
 
     return (
         <>
-            <section className="large-section">
+            <section id="categories" className="large-section">
                 <h2>坂道を知る</h2>
                 <DisplayCategoriesArea categories={categoriesList} />
             </section>
-            <section className="small-section">
+            <div className="spacer-medium" />
+            <h2 className="large-section">みんなの投稿</h2>
+            <section id="posts" className="small-section">
                 <PostListTabs
                     categories={categoriesList}
                     categoriesClick={categoryClickHandler}
