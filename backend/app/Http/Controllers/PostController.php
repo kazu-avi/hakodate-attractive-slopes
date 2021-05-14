@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\PhotoPostRequest;
+use App\Http\Requests\PhotoPostReqest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Storage;
 use Throwable;
@@ -19,6 +20,7 @@ class PostController extends Controller
     public function post(Request $request) {
         $post = new Post();
         $input = $request->all();
+        Log::debug(dd($input));
 
         // タグ登録の処理
         $inputTags = $request['tags'];
