@@ -17,61 +17,58 @@ class PostController extends Controller
 {
     // 新規投稿を保存
     public function post(Request $request) {
+        $post = new Post();
         $input = $request->all();
-        return response()->json($input);
 
-        // $post = new Post();
-        // $input = $request->all();
-
-        // // タグ登録の処理
-        // $inputTags = $request['tags'];
+        // タグ登録の処理
+        $inputTags = $request['tags'];
 
 
-        // $tags = [];
-        // $tags_id = [];
+        $tags = [];
+        $tags_id = [];
 
-        // if ($inputTags) {
-        //     DB::beginTransaction();
-        //     try {
-        //         foreach ($inputTags as $tag) {
-        //             $record = Tag::firstOrCreate([
-        //                 'name' => $tag,
-        //             ]);
-        //             array_push($tags, $record);
-        //         }
-        //         DB::commit();
-        //         foreach ($tags as $tag) {
-        //             array_push($tags_id, $tag->id);
-        //         }
-        //     } catch(\Exception $e) {
-        //         DB::rollBack();
-        //         return response()->json([$e],401);
-        //     }
-        // }
+        if ($inputTags) {
+            DB::beginTransaction();
+            try {
+                foreach ($inputTags as $tag) {
+                    $record = Tag::firstOrCreate([
+                        'name' => $tag,
+                    ]);
+                    array_push($tags, $record);
+                }
+                DB::commit();
+                foreach ($tags as $tag) {
+                    array_push($tags_id, $tag->id);
+                }
+            } catch(\Exception $e) {
+                DB::rollBack();
+                return response()->json([$e],401);
+            }
+        }
 
-        // // 画像をs3に保存
-        // $image = $input['file'];
-        // $path = Storage::disk('s3')->put('images', $image, 'public');
+        // 画像をs3に保存
+        $image = $input['file'];
+        $path = Storage::disk('s3')->put('images', $image, 'public');
 
-        // // データセット
-        // $post->file_path = Storage::disk('s3')->url($path);
-        // $post->text = $input['text'];
-        // $post->user_id = $input['user_id'];
-        // $post->category_id = $input['category_id'];
+        // データセット
+        $post->file_path = Storage::disk('s3')->url($path);
+        $post->text = $input['text'];
+        $post->user_id = $input['user_id'];
+        $post->category_id = $input['category_id'];
 
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
-        // try {
-        //     $post->save();
-        //     $post->tags()->attach($tags_id);
-        //     DB::commit();
-        // } catch (\Exception $e) {
-        //     DB::rollBack();
-        //     // エラーがあった場合、DBと一致しないことを防ぐため、ストレージから画像を削除
-        //     Storage::disk('s3')->delete($path);
-        //     return response()->json([$e],401);
-        // }
-        // return response($post, 201);
+        try {
+            $post->save();
+            $post->tags()->attach($tags_id);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // エラーがあった場合、DBと一致しないことを防ぐため、ストレージから画像を削除
+            Storage::disk('s3')->delete($path);
+            return response()->json([$e],401);
+        }
+        return response($post, 201);
     }
 
     // 投稿を編集する
