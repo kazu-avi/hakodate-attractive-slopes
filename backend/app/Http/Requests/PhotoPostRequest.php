@@ -25,9 +25,9 @@ class PhotoPostRequest extends FormRequest
     {
         return [
             'user_id' => 'integer',
-            'category_id' => 'integer',
-            'file' => 'file|mimes:jpg,jpeg,png,gif',
-            'text' => 'string'
+            // 'category_id' => 'integer',
+            // 'file' => 'file|mimes:jpg,jpeg,png,gif',
+            // 'text' => 'string'
         ];
     }
 }
