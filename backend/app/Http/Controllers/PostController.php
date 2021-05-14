@@ -16,7 +16,7 @@ use Throwable;
 class PostController extends Controller
 {
     // 新規投稿を保存
-    public function post(PhotoPostRequest $request) {
+    public function post(Request $request) {
         $input = $request->all();
         return response()->json($input);
 
