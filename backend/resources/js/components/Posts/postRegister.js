@@ -18,7 +18,7 @@ export const postRegister = (uid, category, file, text, tags) => {
         const data = new FormData();
         data.append('user_id', uid);
         data.append('category_id', category);
-        data.append('file', file);
+        data.append('file', file, 'filename');
         data.append('text', text);
         data.append('_method', 'post');
         tags.forEach((tag) => data.append('tags[]', tag));
