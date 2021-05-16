@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { DisplayLikes } from '../PostCard';
 import {
     Avatar,
@@ -107,7 +107,7 @@ const MyPageCard = (props) => {
             </CardContent>
             <CardActions className={classes.actions}>
                 <DisplayLikes isLiked={props.isLiked} postId={props.postId} />
-                <IconButton>
+                <IconButton onClick={handleClick}>
                     <ShareIcon />
                 </IconButton>
                 <ShareMenu

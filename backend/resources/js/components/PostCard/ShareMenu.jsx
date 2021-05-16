@@ -8,7 +8,7 @@ const ShareMenu = (props) => {
     const makeTwitterUrl = () => {
         const baseUrl = 'https://twitter.com/intent/tweet?';
         const shareText =
-            '【函館の坂道をもっと楽しむための写真投稿サイト：HAKODATE ATTRACTIVE SLOPES】' +
+            '【函館の坂道をもっと楽しむための写真投稿サイト：HAKODATE ATTRACTIVE SLOPES<https://hakodate-slopes.com/>】' +
             props.postUser +
             'さんの投稿「' +
             props.postText +
