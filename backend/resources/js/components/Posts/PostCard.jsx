@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     Avatar,
     Card,
@@ -14,7 +14,7 @@ import FilterHdrIcon from '@material-ui/icons/FilterHdr';
 import ShareIcon from '@material-ui/icons/Share';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { makeStyles } from '@material-ui/styles';
-import { DisplayLikes } from '../PostCard';
+import { DisplayLikes, ShareMenu } from '../PostCard';
 import noimage from '../../../../public/img/noimage.jpeg';
 
 const useStyles = makeStyles({
@@ -59,7 +59,20 @@ const useStyles = makeStyles({
 });
 
 const PostCard = (props) => {
+    const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
+
+    const handleClick = useCallback(
+        (event) => {
+            setAnchorEl(event.currentTarget);
+        },
+        [handleClick]
+    );
+
+    const handleClose = useCallback(() => {
+        setAnchorEl(null);
+    }, [handleClose]);
+
     return (
         <Card className={classes.root}>
             <div className="image-thumb hover">
@@ -91,9 +104,18 @@ const PostCard = (props) => {
             </CardContent>
             <CardActions className={classes.actions}>
                 <DisplayLikes isLiked={props.isLiked} postId={props.postId} />
-                <IconButton>
+                <IconButton onClick={handleClick}>
                     <ShareIcon />
                 </IconButton>
+                <ShareMenu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClick={handleClick}
+                    onClose={handleClose}
+                    postId={props.postId}
+                    postUser={props.name}
+                    postText={props.text}
+                />
                 <CardHeader
                     avatar={
                         props.userImg ? (

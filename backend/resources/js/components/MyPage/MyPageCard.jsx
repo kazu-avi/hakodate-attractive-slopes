@@ -16,6 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { makeStyles } from '@material-ui/styles';
 import noimage from '../../../../public/img/noimage.jpeg';
+import { ShareMenu } from '../PostCard';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -60,8 +61,20 @@ const useStyles = makeStyles({
 });
 
 const MyPageCard = (props) => {
+    const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const dispatch = useDispatch();
+
+    const handleClick = useCallback(
+        (event) => {
+            setAnchorEl(event.currentTarget);
+        },
+        [handleClick]
+    );
+
+    const handleClose = useCallback(() => {
+        setAnchorEl(null);
+    }, [handleClose]);
 
     return (
         <Card className={classes.root}>
@@ -97,6 +110,15 @@ const MyPageCard = (props) => {
                 <IconButton>
                     <ShareIcon />
                 </IconButton>
+                <ShareMenu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClick={handleClick}
+                    onClose={handleClose}
+                    postId={props.postId}
+                    postUser={props.name}
+                    postText={props.text}
+                />
                 <CardHeader
                     avatar={
                         props.userImg ? (
