@@ -16,8 +16,7 @@ const PostList = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state) => state);
     const query = selector.router.location.search;
-
-    console.log(page);
+    const hash = selector.router.location.hash;
 
     // 取得したクエリが<?category=>の形と一致するか確認し、category_idを取得
     const category = /^\?category=/.test(query) ? query.split('?category=')[1] : '';
@@ -33,6 +32,8 @@ const PostList = () => {
                 categoryClickHandler(category, page);
             } else if (random) {
                 randomClickHandler(page);
+            } else if (hash) {
+                hashClickHandler(hash, page);
             } else {
                 newestClickHandler(page);
             }
@@ -146,12 +147,73 @@ const PostList = () => {
         [newestClickHandler]
     );
 
+    const hashClickHandler = useCallback(
+        async (hash, page) => {
+            dispatch(showLoadingAction());
+            dispatch(push('/' + hash));
+            const url = 'https://hakodate-slopes.com/api/v1/posts?page=' + page;
+            const token = localStorage.getItem('access_token');
+            const option = {
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+            };
+            await fetch(url, option)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((responseJson) => {
+                    setPostList(responseJson.data);
+                    setTotalPage(responseJson.last_page);
+                    scrollToHash(hash);
+                    dispatch(hideLoadingAction());
+                })
+                .catch((error) => {
+                    console.error(error);
+                    dispatch(hideLoadingAction());
+                });
+        },
+        [hashClickHandler]
+    );
+
+    const scrollToHash = (hash) => {
+        if (hash === '#categories') {
+            const target = document.getElementById('categories');
+            const length = window.pageYOffset + target.getBoundingClientRect().top;
+            try {
+                window.scroll({
+                    top: length - 64,
+                    behavior: 'smooth',
+                });
+            } catch (error) {
+                window.scrollTo(length - 64, 0);
+            }
+        } else if (hash === '#posts') {
+            const target = document.getElementById('posts');
+            const postLength = window.pageYOffset + target.getBoundingClientRect().top;
+            try {
+                window.scroll({
+                    top: postLength - 64,
+                    behavior: 'smooth',
+                });
+            } catch (error) {
+                window.scrollTo(postLength - 64, 0);
+            }
+        } else {
+            return null;
+        }
+    };
+
     //  初期値のセット
     useEffect(() => {
-        console.log('effect');
         getPostList(page);
         dispatch(getAllTags());
     }, []);
+
+    // ページ内リンク
+    useEffect(() => {
+        scrollToHash(hash);
+    }, [hash]);
 
     const categoriesList = getCategoriesList(selector);
     const tagsList = getTagsList(selector);
@@ -163,8 +225,10 @@ const PostList = () => {
                 <DisplayCategoriesArea categories={categoriesList} />
             </section>
             <div className="spacer-medium" />
-            <h2 className="large-section">みんなの投稿</h2>
-            <section id="posts" className="small-section">
+            <h2 id="posts" className="large-section">
+                みんなの投稿
+            </h2>
+            <section className="small-section">
                 <PostListTabs
                     categories={categoriesList}
                     categoriesClick={categoryClickHandler}
