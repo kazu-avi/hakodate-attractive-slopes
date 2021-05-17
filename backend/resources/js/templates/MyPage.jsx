@@ -91,6 +91,8 @@ const MyPage = () => {
 
     return (
         <>
+            <button onClick={() => dispatch(push('/#categories'))}>categories</button>
+            <button onClick={() => dispatch(push('/#posts'))}>posts</button>
             <section className="small-section center">
                 <MyPageAvater img={userImage} />
                 <h2>{username}さんのマイページ</h2>

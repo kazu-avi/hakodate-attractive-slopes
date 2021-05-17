@@ -39,14 +39,14 @@ const AuthList = (props) => {
                 <ListItemText primary={'投稿する'} />
             </ListItem>
             <Divider />
-            <ListItem button onClick={() => dispatch(push('/'))}>
+            <ListItem button onClick={() => dispatch(push('/#categories'))}>
                 <ListItemIcon>
                     <SchoolIcon />
                 </ListItemIcon>
                 <ListItemText primary={'坂道を知る'} />
             </ListItem>
             <Divider />
-            <ListItem button onClick={() => dispatch(push('/'))}>
+            <ListItem button onClick={() => dispatch(push('/#posts'))}>
                 <ListItemIcon>
                     <MonochromePhotosIcon />
                 </ListItemIcon>
