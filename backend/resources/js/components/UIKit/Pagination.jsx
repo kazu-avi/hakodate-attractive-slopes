@@ -10,6 +10,18 @@ const useStyles = makeStyles({
 
 const Pagination = (props) => {
     const classes = useStyles();
+    const scrollToTop = () => {
+        try {
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+            });
+        } catch (error) {
+            window.scrollTo(0, 0);
+        }
+    };
+
     return (
         <div className="center">
             <ReactPagination
@@ -18,7 +30,10 @@ const Pagination = (props) => {
                 variant="outlined"
                 shape="rounded"
                 disabled={props.disabled}
-                onChange={(event, page) => props.onChange(page)}
+                onChange={(event, page) => {
+                    props.onChange(page);
+                    scrollToTop();
+                }}
                 page={props.page}
             />
         </div>

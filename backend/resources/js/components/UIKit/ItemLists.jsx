@@ -17,7 +17,16 @@ const ItemLists = (props) => {
                 <ListItemAvatar>
                     {props.img ? <Avatar alt="ユーザー画像" src={props.img} /> : <Avatar alt="noimage" src={noimage} />}
                 </ListItemAvatar>
-                <ListItemText primary={props.name} secondary={props.comment} />
+                <ListItemText
+                    primary={props.name}
+                    secondary={
+                        <>
+                            <span>{props.comment}</span>
+                            <br />
+                            &nbsp;--{props.date}
+                        </>
+                    }
+                />
             </ListItem>
             <Divider variant="inset" component="li" />
         </>

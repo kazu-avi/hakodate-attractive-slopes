@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/styles';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
 import { showAlertAction, hideAlertAction } from '../reducks/alert/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton, SharpEdgeButton, Pagination } from '../components/UIKit';
+import { PrimaryButton, SharpEdgeButton, Pagination, Breadcrumb } from '../components/UIKit';
 import { push } from 'connected-react-router';
 import { DisplayCategoriesArea } from '../components/Posts';
 import map from '../../../public/img/map.gif';
@@ -45,7 +45,7 @@ const CategoryDetail = () => {
     console.log(displayCard);
 
     const categoryClickHandler = useCallback(
-        async (page) => {
+        async (page, id) => {
             dispatch(showLoadingAction());
             setPage(page);
             const url = 'https://hakodate-slopes.com/api/v1/categories/' + id + '?page=' + page;
@@ -84,8 +84,11 @@ const CategoryDetail = () => {
         setDisplayCard(false);
     }, [pathname]);
 
+    console.log(id);
+
     return (
         <div className="large-section">
+            <Breadcrumb text={category.name + 'を知る'} />
             <h2>{category.name}</h2>
             <section className="large-section-flex">
                 <Card className="flex-2cms">
@@ -101,7 +104,10 @@ const CategoryDetail = () => {
                     <div className="spacer-medium" />
                     <img alt="坂道マップ" src={map} width="100%" />
                     <div className="spacer-medium" />
-                    <PrimaryButton label={'みんなの投稿を見る'} onClick={() => categoryClickHandler(page)} />
+                    <PrimaryButton
+                        label={category.name + 'の投稿を見る'}
+                        onClick={() => categoryClickHandler(page, id)}
+                    />
                 </div>
             </section>
             {displayCard && <h2>みんなの投稿</h2>}

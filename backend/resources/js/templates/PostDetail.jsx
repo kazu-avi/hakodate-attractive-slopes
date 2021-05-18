@@ -4,7 +4,7 @@ import { Avatar, Card, CardActions, CardContent, CardHeader } from '@material-ui
 import { makeStyles } from '@material-ui/styles';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton, OutlinedButton } from '../components/UIKit';
+import { PrimaryButton, OutlinedButton, Breadcrumb } from '../components/UIKit';
 import { ShowCategory, ShowComments, ShowTags, InputCommentArea, ShowLikes } from '../components/PostDetail';
 import { postDelete } from '../components/Posts/postRegister';
 import { SharpEdgeButton } from '../components/UIKit';
@@ -17,6 +17,14 @@ const useStyles = makeStyles({
         padding: 8,
         width: 'calc(35% - 1rem)',
         borderRadius: 0,
+        '@media (max-width: 950px)': {
+            width: 'calc(50% - 1rem)',
+        },
+        '@media (max-width: 650px)': {
+            width: 'calc(100% - 1rem)',
+            padding: 0,
+            margin: '10px auto',
+        },
     },
     actions: {
         padding: 8,
@@ -47,34 +55,37 @@ const PostDetail = () => {
     const param = useParams();
     const id = param.id;
 
-    const getPost = useCallback(async (id) => {
-        const url = 'https://hakodate-slopes.com/api/v1/posts/' + id;
-        const token = localStorage.getItem('access_token');
+    const getPost = useCallback(
+        async (id) => {
+            const url = 'https://hakodate-slopes.com/api/v1/posts/' + id;
+            const token = localStorage.getItem('access_token');
 
-        const option = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + token,
-            },
-        };
-        dispatch(showLoadingAction());
-        await fetch(url, option)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                setPost(responseJson);
-                setUser(responseJson.user);
-                setText(responseJson.text);
-                setPostedUser(responseJson.user_id);
-                setCategory(responseJson.category);
-                setTagsList(responseJson.tags);
-                setComments(responseJson.comments);
-                setIsLiked(responseJson.liked_by_user);
-                setLikesCount(responseJson.likes_count);
-            })
-            .catch((error) => console.error(error));
-        dispatch(hideLoadingAction());
-    });
+            const option = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + token,
+                },
+            };
+            dispatch(showLoadingAction());
+            await fetch(url, option)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    setPost(responseJson);
+                    setUser(responseJson.user);
+                    setText(responseJson.text);
+                    setPostedUser(responseJson.user_id);
+                    setCategory(responseJson.category);
+                    setTagsList(responseJson.tags);
+                    setComments(responseJson.comments);
+                    setIsLiked(responseJson.liked_by_user);
+                    setLikesCount(responseJson.likes_count);
+                })
+                .catch((error) => console.error(error));
+            dispatch(hideLoadingAction());
+        },
+        [getPost]
+    );
 
     useEffect(() => {
         getPost(id);
@@ -82,6 +93,7 @@ const PostDetail = () => {
 
     return (
         <div className="large-section">
+            <Breadcrumb text={user.name + 'さんの投稿'} />
             <section className="large-section-flex">
                 <Card className="flex-3cms-big">
                     <div className="image-thumb">
@@ -106,10 +118,10 @@ const PostDetail = () => {
                     <CardContent>
                         {uid === postedUser ? (
                             <div className="center">
-                                <PrimaryButton label={'投稿を編集する'} onClick={() => dispatch(push('/edit/' + id))} />
+                                <PrimaryButton label={'編集する'} onClick={() => dispatch(push('/edit/' + id))} />
                                 <span className="margin-20" />
                                 <OutlinedButton
-                                    label={'投稿を削除する'}
+                                    label={'削除する'}
                                     onClick={() => dispatch(postDelete(uid, id, postedUser))}
                                 />
                             </div>
@@ -124,7 +136,11 @@ const PostDetail = () => {
             </section>
             <div>
                 <ShowComments comments={comments} />
-                {isSighedIn ? <InputCommentArea id={id} /> : <p>コメント投稿はログイン後に可能です</p>}
+                {isSighedIn ? (
+                    <InputCommentArea id={id} getPost={getPost} />
+                ) : (
+                    <p>コメント投稿はログイン後に可能です</p>
+                )}
             </div>
             <div className="spacer-medium" />
             <SharpEdgeButton label={'< Back To Home'} onClick={() => dispatch(push('/'))} />

@@ -5,6 +5,18 @@ body {
     margin: 0;
 }
 
+h2 {
+    padding: 1rem 2rem;
+    border-top: 3px dotted #000;
+    border-bottom: 3px dotted #000;
+    text-align: center;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
 .alert {
     position: fixed;
     right: 10px;
@@ -154,7 +166,7 @@ body {
 
 /* SECTION系 */
 .small-section {
-    max-width: 480px;
+    max-width: 600px;
     box-sizing: border-box;
     margin: 0 auto;
     padding: 1rem;
@@ -366,7 +378,9 @@ body {
 
 /* Responsive */
 @media(max-width: 950px) {
-
+    .flex-3cms-big {
+        width: calc(50% - 1rem);
+    }
 }
 
 @media(max-width: 650px) {
@@ -376,10 +390,14 @@ body {
 
     .large-section-flex  {
         flex-direction: column;
-
     }
 
     .flex-2cms {
+        width: calc(100% - 1rem);
+        margin: 0 auto;
+    }
+
+    .flex-3cms-big {
         width: calc(100% - 1rem);
         margin: 0 auto;
     }

@@ -77,6 +77,7 @@ const MyPageTabs = (props) => {
             </AppBar>
             <TabPanel value={value} index={0}>
                 <div className="grid-row">
+                    {props.myPostList.length === 0 && <p className="center">関連する投稿はまだありません</p>}
                     {props.myPostList.map((post) => (
                         <MyPageCard
                             key={post.id}
@@ -89,7 +90,7 @@ const MyPageTabs = (props) => {
                             name={post.user.name}
                             date={post.updated_at}
                             tags={post.tags}
-                            chipClick={() => dispatch(push('/?category=' + post.category_id))}
+                            chipClick={() => dispatch(push('/categories/' + post.category_id))}
                             onClick={() => dispatch(push('/posts/' + post.id))}
                         />
                     ))}
@@ -111,6 +112,7 @@ const MyPageTabs = (props) => {
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div className="grid-row">
+                    {props.myLikesList.length === 0 && <p className="center">関連する投稿はまだありません</p>}
                     {props.myLikesList.map((post) => (
                         <MyPageCard
                             key={post.id}

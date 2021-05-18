@@ -217,6 +217,7 @@ const PostList = () => {
 
     const categoriesList = getCategoriesList(selector);
     const tagsList = getTagsList(selector);
+    console.log(postList);
 
     return (
         <>
@@ -225,10 +226,8 @@ const PostList = () => {
                 <DisplayCategoriesArea categories={categoriesList} />
             </section>
             <div className="spacer-medium" />
-            <h2 id="posts" className="large-section">
-                みんなの投稿
-            </h2>
-            <section className="small-section">
+            <section id="posts" className="small-section">
+                <h2>みんなの投稿</h2>
                 <PostListTabs
                     categories={categoriesList}
                     categoriesClick={categoryClickHandler}
@@ -239,6 +238,7 @@ const PostList = () => {
                 />
             </section>
             <section className="large-section">
+                {postList.length === 0 && <p className="center">関連する投稿はまだありません</p>}
                 <div className="grid-row">
                     {postList.map((post) => (
                         <PostCard
@@ -252,7 +252,7 @@ const PostList = () => {
                             date={post.updated_at}
                             tags={post.tags}
                             isLiked={post.liked_by_user}
-                            chipClick={() => categoryClickHandler(post.category_id)}
+                            chipClick={() => dispatch(push('/categories/' + post.category_id))}
                             tagClick={tagClickHandler}
                             onClick={() => dispatch(push('/posts/' + post.id))}
                         />

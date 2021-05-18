@@ -18,6 +18,7 @@ const ShowComments = (props) => {
                         name={comment.user.name}
                         img={comment.user.img}
                         comment={comment.comment}
+                        date={comment.updated_at}
                         key={comment.id}
                     />
                 ))}

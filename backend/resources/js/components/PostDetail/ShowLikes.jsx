@@ -8,8 +8,11 @@ import { showLoadingAction, hideLoadingAction } from '../../reducks/loading/acti
 import { hideAlertAction, showAlertAction, showMessageAction } from '../../reducks/alert/actions';
 
 const useStyles = makeStyles({
-    icon: {
+    like: {
         color: '#DA1725',
+    },
+    unlike: {
+        color: '#e0e0e0',
     },
 });
 
@@ -132,14 +135,14 @@ const ShowLikes = (props) => {
         <>
             {isLiked ? (
                 <Chip
-                    icon={<FavoriteIcon className={classes.icon} />}
+                    icon={<FavoriteIcon className={classes.like} />}
                     label={likesCount}
                     variant="outlined"
                     onClick={() => unlikeClickHandler(id)}
                 />
             ) : (
                 <Chip
-                    icon={<FavoriteBorderIcon className={classes.icon} />}
+                    icon={<FavoriteBorderIcon className={classes.unlike} />}
                     label={likesCount}
                     variant="outlined"
                     onClick={() => likesClickHandler(id)}

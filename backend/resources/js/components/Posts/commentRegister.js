@@ -55,7 +55,7 @@ const commentRegister = (id, comment) => {
                 }
             })
             .then(() => {
-                dispatch(showMessageAction('写真を投稿しました'));
+                dispatch(showMessageAction('コメントを投稿しました。'));
                 setTimeout(() => {
                     dispatch(hideAlertAction());
                 }, 5000);
@@ -65,7 +65,7 @@ const commentRegister = (id, comment) => {
             .catch((error) => {
                 console.error(error);
                 dispatch(hideLoadingAction());
-                dispatch(showAlertAction('投稿に失敗しました。'));
+                dispatch(showAlertAction('コメント投稿に失敗しました。'));
                 setTimeout(() => {
                     dispatch(hideAlertAction());
                 }, 2000);
