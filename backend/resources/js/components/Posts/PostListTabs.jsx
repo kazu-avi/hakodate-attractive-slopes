@@ -65,9 +65,9 @@ const PostListTabs = (props) => {
                 </Tabs>
             </AppBar>
             <TabPanel className="center" value={value} index={0}>
-                <PrimaryButton label={'新着順に見る'} onClick={() => props.newestClick()} />
+                <PrimaryButton label={'新着順'} onClick={() => props.newestClick()} />
                 <span className="margin-20" />
-                <PrimaryButton label={'ランダムに見る'} onClick={() => props.randomClick()} />
+                <PrimaryButton label={'ランダム'} onClick={() => props.randomClick()} />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {props.categories.map((category) => (
