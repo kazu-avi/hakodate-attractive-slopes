@@ -118,7 +118,9 @@ const MyPage = () => {
                 />
             </section>
             <div className="spacer-medium" />
-            <SharpEdgeButton label={'< Back To Home'} onClick={() => dispatch(push('/'))} />
+            <div className="large-section">
+                <SharpEdgeButton label={'< Back To Home'} onClick={() => dispatch(push('/'))} />
+            </div>
         </>
     );
 };
