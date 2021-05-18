@@ -10,3 +10,4 @@ export { default as InputTags } from './/InputTags';
 export { default as SharpEdgeButton } from './SharpEdgeButton';
 export { default as ItemLists } from './ItemLists';
 export { default as ScrollToTop } from './ScrollToTop';
+export { default as Breadcrumb } from './Breadcrumb';

@@ -4,7 +4,7 @@ import { getUserId, getUsername, getUserImage } from '../reducks/users/selector'
 import { userDelete } from '../reducks/users/operations';
 import { MyPageAvater, MyPageTabs } from '../components/MyPage';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
-import { PrimaryButton, SharpEdgeButton } from '../components/UIKit';
+import { PrimaryButton, SharpEdgeButton, Breadcrumb } from '../components/UIKit';
 import { push } from 'connected-react-router';
 
 const MyPage = () => {
@@ -91,20 +91,19 @@ const MyPage = () => {
 
     return (
         <>
-            <button onClick={() => dispatch(push('/#categories'))}>categories</button>
-            <button onClick={() => dispatch(push('/#posts'))}>posts</button>
+            <section className="large-section">
+                <Breadcrumb text={username + 'さんのマイページ'} />
+            </section>
             <section className="small-section center">
                 <MyPageAvater img={userImage} />
                 <h2>{username}さんのマイページ</h2>
                 {uid !== 1 ? (
-                    <PrimaryButton onClick={() => dispatch(push('/useredit'))} label={'ユーザー情報を編集する'} />
+                    <PrimaryButton onClick={() => dispatch(push('/useredit'))} label={'編集する'} />
                 ) : (
                     <p>ゲストユーザーログインでは、アカウントの編集・削除はできません。</p>
                 )}
                 <span className="margin-20" />
-                {uid !== 1 && (
-                    <PrimaryButton onClick={() => dispatch(userDelete(uid))} label={'アカウントを削除する'} />
-                )}
+                {uid !== 1 && <PrimaryButton onClick={() => dispatch(userDelete(uid))} label={'削除する'} />}
             </section>
             <section className="large-section">
                 <MyPageTabs

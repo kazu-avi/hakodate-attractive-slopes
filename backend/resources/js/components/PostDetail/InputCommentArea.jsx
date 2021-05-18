@@ -29,9 +29,10 @@ const InputCommentArea = (props) => {
             <div className="spacer-small" />
             <PrimaryButton
                 label={'コメントを送信する'}
-                onClick={() => {
-                    dispatch(commentRegister(props.id, comment));
+                onClick={async () => {
+                    await dispatch(commentRegister(props.id, comment));
                     setComment([]);
+                    props.getPost(props.id);
                 }}
             />
         </>

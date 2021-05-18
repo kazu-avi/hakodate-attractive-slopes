@@ -92,7 +92,7 @@ const PostEdit = () => {
                 tags={tags}
                 editable={true}
                 onChange={inputTags}
-                placeholder={'タグを入力してね！（Enterで確定）'}
+                placeholder={'タグを入力してね！（入力後、Enterで確定）'}
             />
             <div className="spacer-medium"></div>
             <div className="center">

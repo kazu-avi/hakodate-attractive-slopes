@@ -399,27 +399,31 @@ export const logout = () => {
 
 export const userDelete = (id) => {
     return async (dispatch) => {
-        const url = 'https://hakodate-slopes.com/api/v1/users/' + id;
-        const token = localStorage.getItem('access_token');
+        if (confirm('アカウントを削除しますか？')) {
+            const url = 'https://hakodate-slopes.com/api/v1/users/' + id;
+            const token = localStorage.getItem('access_token');
 
-        const option = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + token,
-            },
-        };
+            const option = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + token,
+                },
+            };
 
-        await fetch(url, option)
-            .then(() => {
-                localStorage.removeItem('access_token');
-                dispatch(logoutAction());
-                dispatch(push('/'));
-                dispatch(showMessageAction('アカウントを削除しました'));
-                setTimeout(() => {
-                    dispatch(hideAlertAction());
-                }, 4000);
-            })
-            .catch((error) => console.error(error));
+            await fetch(url, option)
+                .then(() => {
+                    localStorage.removeItem('access_token');
+                    dispatch(logoutAction());
+                    dispatch(push('/'));
+                    dispatch(showMessageAction('アカウントを削除しました'));
+                    setTimeout(() => {
+                        dispatch(hideAlertAction());
+                    }, 4000);
+                })
+                .catch((error) => console.error(error));
+        } else {
+            dispatch(push('/mypage'));
+        }
     };
 };

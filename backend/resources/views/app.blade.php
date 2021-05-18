@@ -14,6 +14,7 @@
     <meta property="og:site_name" content="HAKODATE ATTRACTIVE SLOPES" />
     <meta property="og:image" content="https://hakodate-slopes.com/images/logo.png?85478b41049f0c9f1ed73e85495b42a1" />
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <link rel=”shortcut icon” href=”https://hakodate-slopes.com/images/favicon.ico” />
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
