@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton, SharpEdgeButton, Pagination, Breadcrumb } from '../components/UIKit';
 import { push } from 'connected-react-router';
 import { DisplayCategoriesArea } from '../components/Posts';
-import map from '../../../public/img/map.gif';
+import map from '../../../public/img/map.png';
 
 const useStyles = makeStyles({
     card: {
@@ -102,14 +102,16 @@ const CategoryDetail = () => {
                         <CardContent>住所：{category.address}</CardContent>
                     </Card>
                     <div className="spacer-medium" />
-                    <img alt="坂道マップ" src={map} width="100%" />
-                    <div className="spacer-medium" />
                     <PrimaryButton
                         label={category.name + 'の投稿を見る'}
                         onClick={() => categoryClickHandler(page, id)}
                     />
                 </div>
             </section>
+            <div className="center">
+                <img alt="坂道マップ" src={map} width="85%" />
+            </div>
+            <div className="spacer-medium" />
             {displayCard && <h2>みんなの投稿</h2>}
             <div className="grid-row">
                 {postList.map((post) => (
