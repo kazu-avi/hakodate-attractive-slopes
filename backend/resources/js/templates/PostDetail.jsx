@@ -4,7 +4,7 @@ import { Avatar, Card, CardActions, CardContent, CardHeader } from '@material-ui
 import { makeStyles } from '@material-ui/styles';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton, OutlinedButton, Breadcrumb } from '../components/UIKit';
+import { PrimaryButton, OutlinedButton, Breadcrumb, Helmet } from '../components/UIKit';
 import { ShowCategory, ShowComments, ShowTags, InputCommentArea, ShowLikes } from '../components/PostDetail';
 import { postDelete } from '../components/Posts/postRegister';
 import { SharpEdgeButton } from '../components/UIKit';
@@ -93,6 +93,7 @@ const PostDetail = () => {
 
     return (
         <div className="large-section">
+            <Helmet title={user.name + 'さんの投稿 | HAKODATE ATTRACTIVE SLOPES'} />
             <Breadcrumb text={user.name + 'さんの投稿'} />
             <section className="large-section-flex">
                 <Card className="flex-3cms-big">

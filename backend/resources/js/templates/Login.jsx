@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
-import { TextInput, PrimaryButton, OutlinedButton } from '../components/UIKit';
+import { TextInput, PrimaryButton, OutlinedButton, Helmet } from '../components/UIKit';
 import { login, guestLogin } from '../reducks/users/operations';
 
 const Login = () => {
@@ -28,6 +28,7 @@ const Login = () => {
 
     return (
         <div className="small-section">
+            <Helmet title={'ログインフォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className={'center'}>ログイン</h2>
             <TextInput
                 fullWidth={true}

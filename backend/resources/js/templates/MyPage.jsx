@@ -4,7 +4,7 @@ import { getUserId, getUsername, getUserImage } from '../reducks/users/selector'
 import { userDelete } from '../reducks/users/operations';
 import { MyPageAvater, MyPageTabs } from '../components/MyPage';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
-import { PrimaryButton, SharpEdgeButton, Breadcrumb } from '../components/UIKit';
+import { PrimaryButton, SharpEdgeButton, Breadcrumb, Helmet } from '../components/UIKit';
 import { push } from 'connected-react-router';
 
 const MyPage = () => {
@@ -91,6 +91,7 @@ const MyPage = () => {
 
     return (
         <>
+            <Helmet title={username + 'さんのマイページ | HAKODATE ATTRACTIVE SLOPES'} />
             <section className="large-section">
                 <Breadcrumb text={username + 'さんのマイページ'} />
             </section>
