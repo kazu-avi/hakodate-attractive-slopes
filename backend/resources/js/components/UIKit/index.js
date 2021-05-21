@@ -11,3 +11,4 @@ export { default as SharpEdgeButton } from './SharpEdgeButton';
 export { default as ItemLists } from './ItemLists';
 export { default as ScrollToTop } from './ScrollToTop';
 export { default as Breadcrumb } from './Breadcrumb';
+export { default as Helmet } from './Helmet';

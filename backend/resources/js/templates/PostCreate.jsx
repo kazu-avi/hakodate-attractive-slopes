@@ -3,7 +3,7 @@ import { TextInput, SelectBox, InputTags } from '../components/UIKit';
 import { ImageArea } from '../components/Posts';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
-import { OutlinedButton, PrimaryButton } from '../components/UIKit';
+import { OutlinedButton, PrimaryButton, Helmet } from '../components/UIKit';
 import { postRegister } from '../components/Posts/postRegister';
 import { getUserId } from '../reducks/users/selector';
 import { getAllCategories } from '../reducks/categories/operations';
@@ -46,6 +46,7 @@ const PostCreate = () => {
 
     return (
         <div className="small-section">
+            <Helmet title={'投稿作成フォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className="center">投稿作成フォーム</h2>
             <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
             <div className="spacer-small"></div>

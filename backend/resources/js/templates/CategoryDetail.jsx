@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/styles';
 import { showLoadingAction, hideLoadingAction } from '../reducks/loading/actions';
 import { showAlertAction, hideAlertAction } from '../reducks/alert/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryButton, SharpEdgeButton, Pagination, Breadcrumb } from '../components/UIKit';
+import { PrimaryButton, SharpEdgeButton, Pagination, Breadcrumb, Helmet } from '../components/UIKit';
 import { push } from 'connected-react-router';
 import { DisplayCategoriesArea } from '../components/Posts';
 import map from '../../../public/img/map.png';
@@ -70,6 +70,7 @@ const CategoryDetail = () => {
                         setDisplayCard(true);
                     }
                     dispatch(hideLoadingAction());
+                    scrollToPosts();
                 })
                 .catch((error) => {
                     console.error(error);
@@ -78,6 +79,19 @@ const CategoryDetail = () => {
         },
         [categoryClickHandler]
     );
+
+    const scrollToPosts = () => {
+        const target = document.getElementById('posts');
+        const postLength = window.pageYOffset + target.getBoundingClientRect().top;
+        try {
+            window.scroll({
+                top: postLength - 64,
+                behavior: 'smooth',
+            });
+        } catch (error) {
+            window.scrollTo(postLength - 64, 0);
+        }
+    };
 
     useEffect(() => {
         setPostList([]);
@@ -88,6 +102,7 @@ const CategoryDetail = () => {
 
     return (
         <div className="large-section">
+            <Helmet title={category.name + 'を知る | HAKODATE ATTRACTIVE SLOPES'} />
             <Breadcrumb text={category.name + 'を知る'} />
             <h2>{category.name}</h2>
             <section className="large-section-flex">
@@ -112,7 +127,7 @@ const CategoryDetail = () => {
                 <img alt="坂道マップ" src={map} width="85%" />
             </div>
             <div className="spacer-medium" />
-            {displayCard && <h2>みんなの投稿</h2>}
+            {displayCard && <h2 id="posts">みんなの投稿</h2>}
             <div className="grid-row">
                 {postList.map((post) => (
                     <PostCard

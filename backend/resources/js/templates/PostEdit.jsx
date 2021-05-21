@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { TextInput, SelectBox, InputTags } from '../components/UIKit';
+import { TextInput, SelectBox, InputTags, Helmet } from '../components/UIKit';
 import { ImageArea } from '../components/Posts';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -68,6 +68,7 @@ const PostEdit = () => {
 
     return (
         <div className="small-section">
+            <Helmet title={'投稿編集フォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className="center">投稿編集フォーム</h2>
             <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
             <div className="spacer-small"></div>

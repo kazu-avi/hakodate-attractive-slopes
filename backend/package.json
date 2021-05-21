@@ -39,6 +39,7 @@
         "@pathofdev/react-tag-input": "^1.0.7",
         "connected-react-router": "^6.9.1",
         "history": "^4.10.1",
+        "react-helmet": "^6.1.0",
         "react-redux": "^7.2.3",
         "react-router": "^5.2.0",
         "react-slick": "^0.28.1",

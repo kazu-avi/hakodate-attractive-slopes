@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextInput, PrimaryButton, OutlinedButton } from '../components/UIKit';
+import { TextInput, PrimaryButton, OutlinedButton, Helmet } from '../components/UIKit';
 import { push } from 'connected-react-router';
 import { update } from '../reducks/users/operations';
 import { ImageArea } from '../components/Posts';
@@ -42,6 +42,7 @@ const UserEdit = () => {
 
     return (
         <div className={'small-section'}>
+            <Helmet title={'ユーザー情報編集フォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className={'center'}>ユーザー情報編集</h2>
             <div className="register-img-area">
                 <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />

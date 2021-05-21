@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { TextInput, PrimaryButton, OutlinedButton } from '../components/UIKit';
+import { TextInput, PrimaryButton, OutlinedButton, Helmet } from '../components/UIKit';
 import { push } from 'connected-react-router';
-import { register } from '../reducks/users/operations';
+import { register, guestLogin } from '../reducks/users/operations';
 import { ImageArea } from '../components/Posts';
 
 const Register = () => {
@@ -46,6 +46,7 @@ const Register = () => {
     console.log(file);
     return (
         <div className={'small-section'}>
+            <Helmet title={'新規登録フォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className={'center'}>新規登録</h2>
             <div className="register-img-area">
                 <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
@@ -91,12 +92,17 @@ const Register = () => {
                 onChange={inputConfirmPassword}
             />
             <div className={'spacer-medium'}></div>
-            <div className="center">
+            <div className="center br-label">
                 <OutlinedButton label={'キャンセル'} onClick={() => dispatch(push('/'))} />
                 <span className={'margin-20'}></span>
                 <PrimaryButton
                     label={'登録する'}
                     onClick={() => dispatch(register(username, email, password, confirmPassword, file))}
+                />
+                <div className={'spacer-medium'}></div>
+                <PrimaryButton
+                    label={'ゲストユーザーとしてログインする \n（メールアドレス・パスワード不要）'}
+                    onClick={() => dispatch(guestLogin())}
                 />
             </div>
         </div>
