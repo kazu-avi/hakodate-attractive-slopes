@@ -14,6 +14,7 @@ const PostCreate = () => {
         [encodedFile, setEncodedFile] = useState(''),
         [croppedFile, setCroppedFile] = useState(''),
         [croppedEncodedFile, setCroppedEncodedFile] = useState(''),
+        [previewFile, setPreviewFile] = useState(''),
         [category, setCategory] = useState(''),
         [text, setText] = useState(''),
         [tags, setTags] = useState([]);
@@ -58,6 +59,8 @@ const PostCreate = () => {
                 setCroppedFile={setCroppedFile}
                 croppedEncodedFile={croppedEncodedFile}
                 setCroppedEncodedFile={setCroppedEncodedFile}
+                previewFile={previewFile}
+                setPreviewFile={setPreviewFile}
             />
             <div className="spacer-small"></div>
             <SelectBox

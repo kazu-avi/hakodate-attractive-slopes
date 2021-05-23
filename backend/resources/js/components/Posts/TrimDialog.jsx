@@ -60,10 +60,17 @@ const TrimDialog = (props) => {
                         props.toggleDialog(false);
                         props.setCroppedFile('');
                         props.setCroppedEncodedFile('');
+                        props.setPreviewFile('');
                     }}
                 />
                 <span className="margin-20"></span>
-                <PrimaryButton label={'決定'} onClick={() => props.toggleDialog(false)} />
+                <PrimaryButton
+                    label={'決定'}
+                    onClick={() => {
+                        props.toggleDialog(false);
+                        props.setPreviewFile(props.croppedEncodedFile);
+                    }}
+                />
                 <p>投稿する画像の範囲を選択してください。</p>
                 <p>（正方形にトリミングされます）</p>
                 <ReactCrop

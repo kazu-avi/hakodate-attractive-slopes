@@ -62,8 +62,8 @@ const ImageArea = (props) => {
                     </label>
                 </IconButton>
             </div>
-            {props.croppedEncodedFile ? (
-                <ImagePreview encodedFile={props.croppedEncodedFile} />
+            {props.previewFile ? (
+                <ImagePreview encodedFile={props.previewFile} />
             ) : (
                 <img className="w100" alt="noimage" src={noimage} />
             )}
@@ -75,6 +75,7 @@ const ImageArea = (props) => {
                 setCroppedFile={props.setCroppedFile}
                 croppedEncodedFile={props.croppedEncodedFile}
                 setCroppedEncodedFile={props.setCroppedEncodedFile}
+                setPreviewFile={props.setPreviewFile}
             />
         </>
     );
