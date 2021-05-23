@@ -12,6 +12,8 @@ import { getCategoriesList } from '../reducks/categories/selectors';
 const PostCreate = () => {
     const [file, setFile] = useState(''),
         [encodedFile, setEncodedFile] = useState(''),
+        [croppedFile, setCroppedFile] = useState(''),
+        [croppedEncodedFile, setCroppedEncodedFile] = useState(''),
         [category, setCategory] = useState(''),
         [text, setText] = useState(''),
         [tags, setTags] = useState([]);
@@ -21,7 +23,6 @@ const PostCreate = () => {
     const uid = getUserId(selector);
     const categoriesList = getCategoriesList(selector);
     console.log(selector);
-    console.log(categoriesList);
 
     const inputText = useCallback(
         (event) => {
@@ -48,7 +49,16 @@ const PostCreate = () => {
         <div className="small-section">
             <Helmet title={'投稿作成フォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className="center">投稿作成フォーム</h2>
-            <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
+            <ImageArea
+                encodedFile={encodedFile}
+                select={setEncodedFile}
+                file={file}
+                setFile={setFile}
+                croppedFile={croppedFile}
+                setCroppedFile={setCroppedFile}
+                croppedEncodedFile={croppedEncodedFile}
+                setCroppedEncodedFile={setCroppedEncodedFile}
+            />
             <div className="spacer-small"></div>
             <SelectBox
                 label={'坂道名を選んでね！（必須）'}
@@ -79,7 +89,7 @@ const PostCreate = () => {
                 <span className="margin-20"></span>
                 <PrimaryButton
                     label={'投稿する'}
-                    onClick={() => dispatch(postRegister(uid, category, file, text, tags))}
+                    onClick={() => dispatch(postRegister(uid, category, croppedFile, text, tags))}
                 />
             </div>
         </div>

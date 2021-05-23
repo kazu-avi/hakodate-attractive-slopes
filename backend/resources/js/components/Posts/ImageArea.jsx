@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddAPhotoTwoToneIcon from '@material-ui/icons/AddAPhotoTwoTone';
 import ImagePreview from './ImagePreview';
+import TrimDialog from './TrimDialog';
 import noimage from '../../../../public/img/noimage.jpeg';
 
 const useStyles = makeStyles({
@@ -13,9 +14,10 @@ const useStyles = makeStyles({
 });
 
 const ImageArea = (props) => {
+    const [open, setOpen] = useState(false);
     const classes = useStyles();
 
-    // 投稿画像のプレビュー表示
+    // 選択されたファイルをトリミング用のライブラリに渡すためにbase64形式に変換する。
     const inputEncodedFile = useCallback(() => {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -34,6 +36,13 @@ const ImageArea = (props) => {
         }
     }, [inputEncodedFile]);
 
+    const toggleDialog = useCallback(
+        (open) => {
+            setOpen(open);
+        },
+        [toggleDialog]
+    );
+
     return (
         <>
             <div className="text-right">
@@ -47,16 +56,26 @@ const ImageArea = (props) => {
                             type="file"
                             onChange={(event) => {
                                 inputEncodedFile(event);
+                                toggleDialog(true);
                             }}
                         />
                     </label>
                 </IconButton>
             </div>
-            {props.encodedFile ? (
-                <ImagePreview encodedFile={props.encodedFile} />
+            {props.croppedEncodedFile ? (
+                <ImagePreview encodedFile={props.croppedEncodedFile} />
             ) : (
                 <img className="w100" alt="noimage" src={noimage} />
             )}
+            <TrimDialog
+                open={open}
+                toggleDialog={toggleDialog}
+                encodedFile={props.encodedFile}
+                croppedFile={props.croppedFile}
+                setCroppedFile={props.setCroppedFile}
+                croppedEncodedFile={props.croppedEncodedFile}
+                setCroppedEncodedFile={props.setCroppedEncodedFile}
+            />
         </>
     );
 };
