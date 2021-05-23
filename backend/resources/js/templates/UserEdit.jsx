@@ -13,7 +13,10 @@ const UserEdit = () => {
 
     const [username, setUsername] = useState(''),
         [file, setFile] = useState(''),
-        [encodedFile, setEncodedFile] = useState('');
+        [encodedFile, setEncodedFile] = useState(''),
+        [croppedFile, setCroppedFile] = useState(''),
+        [croppedEncodedFile, setCroppedEncodedFile] = useState(''),
+        [previewFile, setPreviewFile] = useState('');
 
     const getInitialState = useCallback(
         async (id) => {
@@ -22,7 +25,7 @@ const UserEdit = () => {
                 .then((response) => response.json())
                 .then((responseJson) => {
                     setUsername(responseJson.name);
-                    setEncodedFile(responseJson.img);
+                    setPreviewFile(responseJson.img);
                 })
                 .catch((error) => console.error(error));
         },
@@ -45,7 +48,18 @@ const UserEdit = () => {
             <Helmet title={'ユーザー情報編集フォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className={'center'}>ユーザー情報編集</h2>
             <div className="register-img-area">
-                <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
+                <ImageArea
+                    encodedFile={encodedFile}
+                    select={setEncodedFile}
+                    file={file}
+                    setFile={setFile}
+                    croppedFile={croppedFile}
+                    setCroppedFile={setCroppedFile}
+                    croppedEncodedFile={croppedEncodedFile}
+                    setCroppedEncodedFile={setCroppedEncodedFile}
+                    previewFile={previewFile}
+                    setPreviewFile={setPreviewFile}
+                />
             </div>
             <TextInput
                 fullWidth={true}

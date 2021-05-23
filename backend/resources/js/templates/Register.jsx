@@ -13,7 +13,10 @@ const Register = () => {
         [password, setPassword] = useState(''),
         [confirmPassword, setConfirmPassword] = useState(''),
         [file, setFile] = useState(''),
-        [encodedFile, setEncodedFile] = useState('');
+        [encodedFile, setEncodedFile] = useState(''),
+        [croppedFile, setCroppedFile] = useState(''),
+        [croppedEncodedFile, setCroppedEncodedFile] = useState(''),
+        [previewFile, setPreviewFile] = useState('');
 
     const inputUsername = useCallback(
         (event) => {
@@ -49,7 +52,18 @@ const Register = () => {
             <Helmet title={'新規登録フォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className={'center'}>新規登録</h2>
             <div className="register-img-area">
-                <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
+                <ImageArea
+                    encodedFile={encodedFile}
+                    select={setEncodedFile}
+                    file={file}
+                    setFile={setFile}
+                    croppedFile={croppedFile}
+                    setCroppedFile={setCroppedFile}
+                    croppedEncodedFile={croppedEncodedFile}
+                    setCroppedEncodedFile={setCroppedEncodedFile}
+                    previewFile={previewFile}
+                    setPreviewFile={setPreviewFile}
+                />
             </div>
             <TextInput
                 fullWidth={true}

@@ -12,6 +12,9 @@ import { getCategoriesList } from '../reducks/categories/selectors';
 const PostEdit = () => {
     const [file, setFile] = useState(''),
         [encodedFile, setEncodedFile] = useState(''),
+        [croppedFile, setCroppedFile] = useState(''),
+        [croppedEncodedFile, setCroppedEncodedFile] = useState(''),
+        [previewFile, setPreviewFile] = useState(''),
         [category, setCategory] = useState(''),
         [text, setText] = useState(''),
         [tags, setTags] = useState([]),
@@ -31,7 +34,7 @@ const PostEdit = () => {
                 .then((response) => response.json())
                 .then((responseJson) => {
                     setPostedUser(responseJson.user_id);
-                    setEncodedFile(responseJson.file_path);
+                    setPreviewFile(responseJson.file_path);
                     setCategory(responseJson.category_id);
                     setText(responseJson.text);
                     const initialTags = responseJson.tags.map((tag) => tag.name);
@@ -66,11 +69,24 @@ const PostEdit = () => {
         };
     }, []);
 
+    console.log(previewFile);
+
     return (
         <div className="small-section">
             <Helmet title={'投稿編集フォーム | HAKODATE ATTRACTIVE SLOPES'} />
             <h2 className="center">投稿編集フォーム</h2>
-            <ImageArea encodedFile={encodedFile} select={setEncodedFile} file={file} setFile={setFile} />
+            <ImageArea
+                encodedFile={encodedFile}
+                select={setEncodedFile}
+                file={file}
+                setFile={setFile}
+                croppedFile={croppedFile}
+                setCroppedFile={setCroppedFile}
+                croppedEncodedFile={croppedEncodedFile}
+                setCroppedEncodedFile={setCroppedEncodedFile}
+                previewFile={previewFile}
+                setPreviewFile={setPreviewFile}
+            />
             <div className="spacer-small"></div>
             <SelectBox
                 label={'坂道名を選んでね！（必須）'}
@@ -101,7 +117,7 @@ const PostEdit = () => {
                 <span className="margin-20"></span>
                 <PrimaryButton
                     label={'編集する'}
-                    onClick={() => dispatch(postEdit(uid, postId, postedUser, category, file, text, tags))}
+                    onClick={() => dispatch(postEdit(uid, postId, postedUser, category, croppedFile, text, tags))}
                 />
             </div>
         </div>
