@@ -115,14 +115,16 @@ const CategoryDetail = () => {
                 </Card>
                 <div className="flex-2cms">
                     <Card className={classes.card} variant="outlined">
-                        <CardContent>{category.description}</CardContent>
+                        <CardContent className={classes.text}>{category.description}</CardContent>
                         <CardContent>（出典／函館市公式観光情報サイト「はこぶら」）</CardContent>
+                        <CardContent className="center">
+                            <PrimaryButton
+                                label={category.name + 'の投稿を見る'}
+                                onClick={() => categoryClickHandler(page, id)}
+                            />
+                        </CardContent>
                     </Card>
                     <div className="spacer-medium" />
-                    <PrimaryButton
-                        label={category.name + 'の投稿を見る'}
-                        onClick={() => categoryClickHandler(page, id)}
-                    />
                 </div>
             </section>
             <div className="center">
