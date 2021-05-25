@@ -16,6 +16,8 @@ const useStyles = makeStyles({
     card: {
         padding: 8,
         borderRadius: 0,
+        whiteSpace: 'pre-wrap',
+        fontSize: '0.875rem',
     },
     actions: {
         padding: 8,
@@ -114,7 +116,7 @@ const CategoryDetail = () => {
                 <div className="flex-2cms">
                     <Card className={classes.card} variant="outlined">
                         <CardContent>{category.description}</CardContent>
-                        <CardContent>住所：{category.address}</CardContent>
+                        <CardContent>（出典／函館市公式観光情報サイト「はこぶら」）</CardContent>
                     </Card>
                     <div className="spacer-medium" />
                     <PrimaryButton
