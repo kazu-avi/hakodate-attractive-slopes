@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/portfolio', function() {
+    return view('portfolio');
+});
 
 Route::get('/{any}', function(){
     return view('app');
