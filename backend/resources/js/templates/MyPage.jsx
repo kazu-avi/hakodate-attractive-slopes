@@ -39,7 +39,6 @@ const MyPage = () => {
                 .then((response) => response.json())
                 .then((responseJson) => {
                     setMyPostList(responseJson.data);
-                    console.log(responseJson);
                     setTotalPage(responseJson.last_page);
                     dispatch(hideLoadingAction());
                 })
@@ -71,7 +70,6 @@ const MyPage = () => {
                 .then((responseJson) => {
                     setMyLikesList(responseJson.data);
                     setLikesTotalPage(responseJson.last_page);
-                    console.log(responseJson);
                     dispatch(hideLoadingAction());
                 })
                 .catch((error) => {
@@ -86,8 +84,6 @@ const MyPage = () => {
         getMyPosts();
         getMyLikes();
     }, []);
-
-    console.log(postsPage);
 
     return (
         <>

@@ -46,7 +46,6 @@ const Register = () => {
         [inputConfirmPassword]
     );
 
-    console.log(file);
     return (
         <div className={'small-section'}>
             <Helmet title={'新規登録フォーム | HAKODATE ATTRACTIVE SLOPES'} />

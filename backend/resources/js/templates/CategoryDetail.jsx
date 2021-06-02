@@ -43,8 +43,6 @@ const CategoryDetail = () => {
     const pathname = selector.router.location.pathname;
     const categories = getCategoriesList(selector);
     const category = categories[id - 1];
-    console.log(postList);
-    console.log(displayCard);
 
     const categoryClickHandler = useCallback(
         async (page, id) => {
@@ -99,8 +97,6 @@ const CategoryDetail = () => {
         setPostList([]);
         setDisplayCard(false);
     }, [pathname]);
-
-    console.log(id);
 
     return (
         <div className="large-section">

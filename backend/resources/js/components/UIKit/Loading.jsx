@@ -7,7 +7,6 @@ const Loading = ({ children }) => {
     const selector = useSelector((state) => state);
     const isBeingLoaded = getIsBeingLoaded(selector);
     const loadingText = getLoadingText(selector);
-    console.log(isBeingLoaded);
 
     return (
         <>

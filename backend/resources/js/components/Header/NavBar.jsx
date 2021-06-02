@@ -43,7 +43,6 @@ const NavBar = (props) => {
 
     const toggleDrawer = useCallback(
         (open) => {
-            console.log('close...');
             setDrawerOpen(open);
         },
         [toggleDrawer]

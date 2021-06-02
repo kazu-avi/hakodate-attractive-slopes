@@ -1,13 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { TextInput, PrimaryButton, OutlinedButton, Helmet } from '../components/UIKit';
 import { login, guestLogin } from '../reducks/users/operations';
 
 const Login = () => {
     const dispatch = useDispatch();
-    const selector = useSelector((state) => state);
-    console.log(selector);
 
     const [email, setEmail] = useState(''),
         [password, setPassword] = useState('');
