@@ -23,7 +23,6 @@ const PostCreate = () => {
     const selector = useSelector((state) => state);
     const uid = getUserId(selector);
     const categoriesList = getCategoriesList(selector);
-    console.log(selector);
 
     const inputText = useCallback(
         (event) => {
@@ -38,8 +37,6 @@ const PostCreate = () => {
         },
         [inputTags]
     );
-
-    console.log(tags);
 
     // mount時にDB(API)よりカテゴリー一覧を取得しセット
     useEffect(() => {

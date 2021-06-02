@@ -46,8 +46,6 @@ const PostListTabs = (props) => {
         setValue(newValue);
     };
 
-    console.log(props);
-
     return (
         <div>
             <AppBar position="static" color="default">

@@ -57,9 +57,6 @@ const MyPageTabs = (props) => {
         setValue(newValue);
     };
 
-    console.log(props);
-    console.log();
-
     return (
         <div>
             <AppBar position="static" color="default">

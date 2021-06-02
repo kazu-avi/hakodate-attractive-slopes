@@ -14,7 +14,6 @@ const TrimDialog = (props) => {
         height: 200,
     });
     const [imageRef, setImageRef] = useState('');
-    console.log(imageRef);
 
     const onImageLoaded = (image) => {
         setImageRef(image);

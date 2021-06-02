@@ -4,7 +4,6 @@ import { push } from 'connected-react-router';
 
 const commentRegister = (id, comment) => {
     return async (dispatch) => {
-        console.log(comment.length);
         if (id === '' || comment === '') {
             dispatch(showAlertAction('必須項目が未入力です'));
             setTimeout(() => {
@@ -36,10 +35,6 @@ const commentRegister = (id, comment) => {
             },
             body: JSON.stringify(data),
         };
-
-        console.log(data);
-        console.log(url);
-        console.log(option);
 
         await fetch(url, option)
             .then((response) => {

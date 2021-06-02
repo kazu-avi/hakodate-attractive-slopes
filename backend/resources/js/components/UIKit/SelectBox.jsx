@@ -15,7 +15,6 @@ const useStyles = makeStyles({
 
 const SelectBox = (props) => {
     const classes = useStyles();
-    console.log(props);
 
     return (
         <FormControl className={classes.formControl}>

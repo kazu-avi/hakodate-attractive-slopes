@@ -39,7 +39,6 @@ export const checkAuth = () => {
                         return response.json().then((responseJson) => {
                             const resToken = responseJson['access_token'];
                             localStorage.setItem('access_token', resToken);
-                            console.log(responseJson);
 
                             dispatch(
                                 loginAction({
@@ -85,7 +84,6 @@ export const checkAuthAtHome = () => {
                         return response.json().then((responseJson) => {
                             const resToken = responseJson['access_token'];
                             localStorage.setItem('access_token', resToken);
-                            console.log(responseJson);
 
                             dispatch(
                                 loginAction({
@@ -141,14 +139,10 @@ export const register = (username, email, password, confirmPassword, file) => {
             body: data,
         };
 
-        console.log(data);
-        console.log(option);
-
         await fetch(url, option)
             .then((response) => {
                 dispatch(showLoadingAction('登録しています・・・'));
                 if (!response.ok) {
-                    console.log('登録に失敗しました');
                     dispatch(showAlertAction('登録に失敗しました'));
                     setTimeout(() => {
                         dispatch(hideAlertAction());
@@ -156,8 +150,7 @@ export const register = (username, email, password, confirmPassword, file) => {
                 }
                 return response.json();
             })
-            .then((responseJson) => {
-                console.log(responseJson);
+            .then(() => {
                 dispatch(hideLoadingAction());
                 dispatch(push('/login'));
                 dispatch(showMessageAction('ユーザー登録が完了しました。ログインしてください。'));
@@ -202,10 +195,6 @@ export const update = (username, file, id) => {
             body: data,
         };
 
-        console.log(data);
-        console.log(option);
-        console.log(...data.entries());
-
         await fetch(url, option)
             .then((response) => {
                 dispatch(showLoadingAction('登録しています・・・'));
@@ -218,7 +207,6 @@ export const update = (username, file, id) => {
                 return response.json();
             })
             .then((responseJson) => {
-                console.log(responseJson);
                 dispatch(
                     loginAction({
                         isSignedIn: 'true',
@@ -237,7 +225,6 @@ export const update = (username, file, id) => {
             .catch((error) => {
                 dispatch(hideLoadingAction());
                 console.error(error);
-                console.log('登録に失敗しました');
                 dispatch(showAlertAction('登録に失敗しました'));
                 setTimeout(() => {
                     dispatch(hideAlertAction());
@@ -278,7 +265,6 @@ export const login = (email, password) => {
                 dispatch(showLoadingAction('ログインしています・・・'));
                 if (!response.ok) {
                     dispatch(hideLoadingAction());
-                    console.log('認証に失敗しました');
                     dispatch(showAlertAction('ログインに失敗しました。新規登録するか、再度入力してお試しください。'));
                     setTimeout(() => {
                         dispatch(hideAlertAction());
@@ -336,7 +322,6 @@ export const guestLogin = () => {
                 dispatch(showLoadingAction('ログインしています・・・'));
                 if (!response.ok) {
                     dispatch(hideLoadingAction());
-                    console.log('認証に失敗しました');
                     dispatch(showAlertAction('ログインに失敗しました。お手数ですが再度お試しください。'));
                     setTimeout(() => {
                         dispatch(hideAlertAction());

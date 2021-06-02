@@ -31,10 +31,6 @@ export const postRegister = (uid, category, file, text, tags) => {
             body: data,
         };
 
-        console.log(data);
-
-        console.log(...data.entries());
-
         await fetch(url, option)
             .then((response) => {
                 dispatch(showLoadingAction('投稿しています・・・'));
@@ -48,8 +44,7 @@ export const postRegister = (uid, category, file, text, tags) => {
                     return response.json();
                 }
             })
-            .then((responseJson) => {
-                console.log(responseJson);
+            .then(() => {
                 dispatch(hideLoadingAction());
                 dispatch(push('/'));
                 dispatch(showMessageAction('写真を投稿しました'));
@@ -108,10 +103,6 @@ export const postEdit = (uid, postId, postedUser, category, file, text, tags) =>
             body: data,
         };
 
-        console.log(data);
-
-        console.log(...data.entries());
-
         await fetch(url, option)
             .then((response) => {
                 dispatch(showLoadingAction('投稿しています・・・'));
@@ -125,8 +116,7 @@ export const postEdit = (uid, postId, postedUser, category, file, text, tags) =>
                     return response.json();
                 }
             })
-            .then((responseJson) => {
-                console.log(responseJson);
+            .then(() => {
                 dispatch(showMessageAction('投稿を編集しました'));
                 setTimeout(() => {
                     dispatch(hideAlertAction());
@@ -180,8 +170,7 @@ export const postDelete = (uid, postId, postedUser) => {
                         return response.json();
                     }
                 })
-                .then((responseJson) => {
-                    console.log(responseJson);
+                .then(() => {
                     dispatch(showMessageAction('投稿を削除しました！'));
                     setTimeout(() => {
                         dispatch(hideAlertAction());

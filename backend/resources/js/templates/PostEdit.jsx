@@ -59,8 +59,6 @@ const PostEdit = () => {
         [inputTags]
     );
 
-    console.log(tags);
-
     // mount時にDB(API)よりカテゴリー一覧を取得しセット
     useEffect(() => {
         getInitialState(postId);
@@ -68,8 +66,6 @@ const PostEdit = () => {
             getInitialState(postId);
         };
     }, []);
-
-    console.log(previewFile);
 
     return (
         <div className="small-section">

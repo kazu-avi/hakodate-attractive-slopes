@@ -44,7 +44,6 @@ const ShowLikes = (props) => {
 
     useEffect(() => {
         getCount(props.id);
-        console.log('initialState');
     }, []);
 
     const classes = useStyles();
