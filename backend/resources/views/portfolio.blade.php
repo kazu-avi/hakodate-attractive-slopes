@@ -153,15 +153,15 @@
         </section>
         <section id="service">
             <div class="service-container wrapper">
+                <div class="service-img">
+                    <img src="../../images/service.png" alt="サービス画像">
+                </div>
                 <div class="service-info">
                     <h3>Service</h3>
                     <p class="section-sub" >独学で勉強したことを生かし、Webサービスを作りました。</p>
                     <p class="section-text" >イチからWebサービス開発をすることでより成長したいため、そして必要とされるサービスを考え、作ることはエンジニアとして成長していくために不可欠と考え、サービス開発を行いました。函館の１９本ある坂道をもっと楽しむための画像投稿・紹介サービスです。函館西部地区の坂道は有名だけど、どんな魅力があって、どんな違いがあるか発信し切れていないと感じ、コロナ明けの函館が観光でより盛り上がるためにこのようなサービスが必要ではないかと考え、制作しました。せひご覧くださいませ。</p>
                     <a class="button" href="/portfolio#skills">使用技術など　＞</a>
                     <a class="button bg-blue" href="https://hakodate-slopes.com/" target="_blank">公開サイト　＞</a>
-                </div>
-                <div class="service-img">
-                    <img src="../../images/service.png" alt="サービス画像">
                 </div>
             </div>
         </section>
@@ -181,7 +181,7 @@
                         <li class="skills-box">
                             <h4>主な機能</h4>
                             <p class="icon"><i class="fas fa-running fa-6x"></i></p>
-                            <ul class="section-text">
+                            <ul class="section-text function">
                                 <li>ユーザー登録、ログイン機能、ゲストログイン機能</li>
                                 <li>ユーザー編集機能（名前、アバター画像）</li>
                                 <li>投稿作成、編集、削除機能（画像アップロード、コメント、タグ、カテゴリー）</li>
@@ -293,7 +293,7 @@
             <div class="footer-contents">
                 <p class="section-text white">ここまでご覧いただき、誠にありがとうございました。<br>
                     何卒よろしくお願いいたします。</p>
-                <a class="button bg-yellow" href="">Contact　＞</a>
+                <a class="button bg-yellow" href="mailto:g.kazuki0715@gmail.com">Contact　＞</a>
             </div>
             <div class="center">
                 <p class="section-text white">&copy;2021 Kazuki Goto</p>
