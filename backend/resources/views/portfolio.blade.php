@@ -211,7 +211,7 @@
                         <li class="skills-box">
                             <h4>インフラ・サーバー</h4>
                             <p class="icon"><i class="fab fa-aws fa-6x"></i></p>
-                            <p class="section-text">レスポンス速度の速さ、そして実務での使用も多いと考え、インフラはAWSを使用しデプロイまで行いました。EC2を使ってWEBサーバーを構築し、Route53で取得したドメインで公開しています。また、そのドメインを使用し。ACMで証明書を取得、ALBと紐付けてHTTPSかしています。投稿した画像は、S3にアップロード保存するように実装しました。</p>
+                            <p class="section-text">レスポンス速度の速さ、そして実務での使用も多いと考え、インフラはAWSを使用しデプロイまで行いました。EC2を使ってWEBサーバーを構築し、Route53で取得したドメインで公開しています。また、そのドメインを使用し。ACMで証明書を取得、ALBと紐付けてHTTPS化しています。投稿した画像は、S3にアップロード保存するように実装しました。</p>
                         </li>
                         <li class="skills-box">
                             <h4>開発環境</h4>
@@ -270,7 +270,7 @@
                             <h6>Portfolio</h6>
                             <p class="section-text">現在ご覧いただいているポートフォリオです。デザインはAdobe XDを使用して作成しました。HTML/CSS/JavaScriptを用いて制作いたしました。自分のこれまでと、転職に向け勉強してきたことがしっかりと伝わるよう意識しています。</p>
                             <a class="button" href="/portfolio#fv">サイトへ　＞</a>
-                            <a class="button bg-pink" href="" target="_blank">デザインカンプ　＞</a>
+                            <a class="button bg-pink" href="https://xd.adobe.com/view/f982b374-46d6-46eb-9de2-5fff5952822b-acd1/" target="_blank">デザインカンプ　＞</a>
                         </div>
                     </div>
                     <div class="others-img">
