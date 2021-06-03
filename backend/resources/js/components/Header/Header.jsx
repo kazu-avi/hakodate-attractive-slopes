@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsSignedIn, getUsername } from '../../reducks/users/selector';
 import { checkAuthAtHome } from '../../reducks/users/operations';
-import { HeaderLogo, HeaderLogin, HeaderNav, NavBar, AboutDialog } from './index';
+import { HeaderLogo, HeaderLogin, HeaderNav, NavBar, AboutDialog, Description } from './index';
 
 const Header = () => {
     const [open, setOpen] = useState(false);
@@ -30,6 +30,7 @@ const Header = () => {
                 <HeaderLogin isSignedIn={isSignedIn} username={username} />
                 <HeaderLogo />
                 <HeaderNav isSignedIn={isSignedIn} toggleDialog={toggleDialog} />
+                {!isSignedIn && <Description />}
             </div>
             <NavBar isSignedIn={isSignedIn} username={username} toggleDialog={toggleDialog} />
             <AboutDialog open={open} toggleDialog={toggleDialog} />
