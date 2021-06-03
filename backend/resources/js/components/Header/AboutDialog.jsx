@@ -158,7 +158,11 @@ const AboutDialog = (props) => {
                 <Typography className={classes.section}>
                     使用した技術や意識した点はこちらにまとめておりますのでご覧くださいませ。
                 </Typography>
-                <Button className={classes.button} href="https://techacademy.jp/magazine/" target="_blank">
+                <Button
+                    className={classes.button}
+                    href="https://github.com/kazu-avi/hakodate-attractive-slopes"
+                    target="_blank"
+                >
                     GitHubへ　＞
                 </Button>
                 <Button className={classes.button} href="https://hakodate-slopes.com/portfolio" target="_blank">
