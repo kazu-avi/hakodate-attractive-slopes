@@ -31,7 +31,7 @@
 ![AWS2 (1)](https://user-images.githubusercontent.com/80322369/120755880-8172c900-c549-11eb-8159-7035af1b2295.png)
 
 # APIのURL設計
-
+  
 | URL | メソッド |　要認証　|　内容　|
 |　--- |　--- |　--- |　--- |
 | /api/v1/users | GET |  | 登録済みユーザー取得 |
