@@ -1,8 +1,8 @@
-# 初心者開発中
+# HAKODATE ATTRACTUVE SLOPES
 函館の西部地区にある有名な坂道１９箇所の魅力をもっと発見、発信し、  
 魅力に思って訪問する人が増えるような写真＋コメントの投稿アプリ  
 
-# 機能
+## 機能
 写真の一覧を表示する（トップページ）  
 写真の詳細を表示する（詳細ページ）  
 会員登録する  
@@ -24,13 +24,13 @@
 自分が「行ったよ」を付けた写真を「行きたい」から外し、訪問済みとして表示する（マイページ）  
 投稿された写真をシェアする  
 
-# ER図
+## ER図
 ![Entity Relationship Diagram (3)](https://user-images.githubusercontent.com/80322369/120608975-b79e4300-c48c-11eb-89ae-5671c9ba1a12.png)
 
-# AWS構成図
+## AWS構成図
 ![AWS2 (1)](https://user-images.githubusercontent.com/80322369/120755880-8172c900-c549-11eb-8159-7035af1b2295.png)
 
-# APIのURL設計
+## APIのURL設計
   
 | URL | メソッド |　要認証　|　内容　|
 |---|---|---|---|
