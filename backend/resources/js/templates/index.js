@@ -1,0 +1,10 @@
+export { default as Register } from './Register';
+export { default as Login } from './Login';
+export { default as MyPage } from './MyPage';
+export { default as PostCreate } from './PostCreate';
+export { default as PostEdit } from './PostEdit';
+export { default as PostList } from './PostList';
+export { default as PostDetail } from './PostDetail';
+export { default as CategoryDetail } from './CategoryDetail';
+export { default as UserEdit } from './UserEdit';
+export { default as Footer } from './Footer';

@@ -14,4 +14,27 @@ RUN apt-get update && \
 
 COPY ./php.ini /usr/local/etc/php/php.ini
 
+RUN apt-get -y update
+RUN apt-get install -y \
+    curl \
+    gnupg
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install npm@latest -g
+
+RUN apt-get update
+
+RUN apt-get install -y wget libjpeg-dev libfreetype6-dev
+RUN apt-get install -y  libmagick++-dev \
+libmagickwand-dev \
+libpq-dev \
+libfreetype6-dev \
+libjpeg62-turbo-dev \
+libpng-dev \
+libwebp-dev \
+libxpm-dev
+
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
+RUN docker-php-ext-install -j$(nproc) gd
+
 WORKDIR /work

@@ -10,9 +10,45 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.0.0",
         "axios": "^0.21",
+        "babel-eslint": "^10.1.0",
+        "bootstrap": "^4.0.0",
+        "eslint": "^7.23.0",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-react": "^7.23.1",
+        "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "popper.js": "^1.12",
+        "postcss": "^8.1.14",
+        "prettier": "^2.2.1",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.15.2",
+        "sass-loader": "^8.0.0"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.11.3",
+        "@material-ui/icons": "^4.11.2",
+        "@material-ui/lab": "*",
+        "@material-ui/styles": "^4.11.3",
+        "@pathofdev/react-tag-input": "^1.0.7",
+        "connected-react-router": "^6.9.1",
+        "history": "^4.10.1",
+        "react-helmet": "^6.1.0",
+        "react-image-crop": "^8.6.9",
+        "react-redux": "^7.2.3",
+        "react-router": "^5.2.0",
+        "react-slick": "^0.28.1",
+        "redux": "^4.0.5",
+        "redux-actions": "^2.6.5",
+        "redux-logger": "^3.0.6",
+        "redux-thunk": "^2.3.0",
+        "reselect": "^4.0.0",
+        "slick-carousel": "^1.8.1"
     }
 }

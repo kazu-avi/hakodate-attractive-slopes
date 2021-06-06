@@ -2,3 +2,5 @@
 
 /backend/.env
 /backend/.env.example
+/infra/nginx/localhost-key.pem
+/infra/nginx/localhost.pem

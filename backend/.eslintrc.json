@@ -1,0 +1,34 @@
+{
+    "env": {
+        "es6": true,
+        "commonjs": true,
+        "browser": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "detect"
+        }
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "react/prop-types": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "printWidth": 120,
+                "tabWidth": 4,
+                "semi": true,
+                "singleQuote": true
+            }
+        ]
+    }
+}
