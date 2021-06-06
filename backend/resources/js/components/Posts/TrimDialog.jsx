@@ -25,8 +25,8 @@ const TrimDialog = (props) => {
         const scaleY = image.naturalHeight / image.height;
         const ctx = canvas.getContext('2d');
 
-        canvas.width = crop.width * scaleX;
-        canvas.height = crop.height * scaleY;
+        canvas.width = 1000;
+        canvas.height = 1000;
         ctx.imageSmoothingQuality = 'high';
 
         ctx.drawImage(
@@ -37,8 +37,8 @@ const TrimDialog = (props) => {
             crop.height * scaleY,
             0,
             0,
-            crop.width * scaleX,
-            crop.height * scaleY
+            1000,
+            1000
         );
 
         const newFile = canvas.toDataURL();

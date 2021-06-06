@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\PhotoPostReqest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Storage;
-use Throwable;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -21,6 +19,7 @@ class PostController extends Controller
         $post = new Post();
         $input = $request->all();
         Log::debug(print_r($input, true));
+        \DebugBar::info(var_dump(gd_info()));
 
         // タグ登録の処理
         $inputTags = $request['tags'];
@@ -35,22 +34,22 @@ class PostController extends Controller
                 foreach ($inputTags as $tag) {
                     $record = Tag::firstOrCreate([
                         'name' => $tag,
-                    ]);
-                    array_push($tags, $record);
+                        ]);
+                        array_push($tags, $record);
+                    }
+                    DB::commit();
+                    foreach ($tags as $tag) {
+                        array_push($tags_id, $tag->id);
+                    }
+                } catch(\Exception $e) {
+                    DB::rollBack();
+                    return response()->json([$e],401);
                 }
-                DB::commit();
-                foreach ($tags as $tag) {
-                    array_push($tags_id, $tag->id);
-                }
-            } catch(\Exception $e) {
-                DB::rollBack();
-                return response()->json([$e],401);
             }
-        }
 
-        // 画像をs3に保存
-        $image = $input['file'];
-        $path = Storage::disk('s3')->put('images', $image, 'public');
+            // 画像をs3に保存
+            $image = $input['file'];
+            $path = Storage::disk('s3')->put('images', $image, 'public');
 
         // データセット
         $post->file_path = Storage::disk('s3')->url($path);
