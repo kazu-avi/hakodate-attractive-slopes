@@ -12,6 +12,7 @@ export const postRegister = (uid, category, file, text, tags) => {
             return false;
         }
 
+        dispatch(showLoadingAction('投稿しています・・・'));
         const url = 'https://hakodate-slopes.com/api/v1/posts';
         const token = localStorage.getItem('access_token');
 
@@ -33,7 +34,6 @@ export const postRegister = (uid, category, file, text, tags) => {
 
         await fetch(url, option)
             .then((response) => {
-                dispatch(showLoadingAction('投稿しています・・・'));
                 if (!response.ok) {
                     dispatch(showAlertAction('投稿に失敗しました'));
                     setTimeout(() => {
