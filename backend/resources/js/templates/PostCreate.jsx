@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { TextInput, SelectBox, InputTags } from '../components/UIKit';
 import { ImageArea } from '../components/Posts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,6 @@ import { push } from 'connected-react-router';
 import { OutlinedButton, PrimaryButton, Helmet } from '../components/UIKit';
 import { postRegister } from '../components/Posts/postRegister';
 import { getUserId } from '../reducks/users/selector';
-import { getAllCategories } from '../reducks/categories/operations';
 import { getCategoriesList } from '../reducks/categories/selectors';
 
 const PostCreate = () => {
@@ -37,11 +36,6 @@ const PostCreate = () => {
         },
         [inputTags]
     );
-
-    // mount時にDB(API)よりカテゴリー一覧を取得しセット
-    useEffect(() => {
-        dispatch(getAllCategories());
-    }, []);
 
     return (
         <div className="small-section">
