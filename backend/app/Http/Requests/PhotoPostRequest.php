@@ -24,10 +24,10 @@ class PhotoPostRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'user_id' => 'integer',
-            // 'category_id' => 'integer',
-            // 'file' => 'file|mimes:jpg,jpeg,png,gif',
-            // 'text' => 'string'
+            'user_id' => 'integer',
+            'category_id' => 'integer',
+            'file' => 'file|mimes:jpg,jpeg,png,gif',
+            'text' => 'string'
         ];
     }
 }
